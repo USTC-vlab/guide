@@ -1,0 +1,28 @@
+I"�<h2 id="what-are-collections">What are collections</h2>
+<p>Collections are custom content types different from pages and posts. You might create a collection if you want to treat a specific set of articles in a unique way, such as with a custom layout or listing. For more detail on collections, see <a href="https://ben.balter.com/2015/02/20/jekyll-collections/">Ben Balter’s explanation of collections here</a>.</p>
+
+<h2 id="create-a-collection">Create a collection</h2>
+<p>To create a collection, add the following in your configuration file:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>collections:
+  tooltips:
+    output: true
+</code></pre></div></div>
+
+<p>In this example, “tooltips”” is the name of the collection.</p>
+
+<h2 id="interacting-with-collections">Interacting with collections</h2>
+
+<p>You can interact with collections by using the <code class="highlighter-rouge">site.collectionname</code> namespace, where <code class="highlighter-rouge">collectionname</code> is what you’ve configured. In this case, if I wanted to loop through all tooltips, I would use <code class="highlighter-rouge">site.tooltips</code> instead of <code class="highlighter-rouge">site.pages</code> or <code class="highlighter-rouge">site.posts</code>.</p>
+
+<p>See <a href="http://jekyllrb.com/docs/collections/">Collections in the Jekyll documentation</a> for more information.</p>
+
+<h2 id="how-to-use-collections">How to use collections</h2>
+
+<p>I haven’t found a huge use for collections in normal documentation. However, I did find a use for collections in generating a tooltip file that would be used for delivering tooltips to a user interface from text files in the documentation. See [Help APIs and UI tooltips][mydoc_help_api] for details.</p>
+
+<h2 id="video-tutorial-on-collections">Video tutorial on collections</h2>
+
+<p>See this <a href="http://jekyll.tips/jekyll-casts/introduction-to-collections/">video tutorial on Jekyll.tips</a> for more details on collections.</p>
+
+:ET

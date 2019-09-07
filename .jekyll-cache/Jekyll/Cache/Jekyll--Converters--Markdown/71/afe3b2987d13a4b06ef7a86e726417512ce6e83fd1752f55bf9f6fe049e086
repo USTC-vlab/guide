@@ -1,0 +1,13 @@
+I"<p>Theme updates:</p>
+
+<ul>
+  <li>Permalinks</li>
+  <li>Kramdown</li>
+  <li>URL specified in config file</li>
+  <li>removed PDF output</li>
+  <li>removed some of the alternative layouts</li>
+  <li>added blog feature</li>
+  <li>sidebars configurable per page</li>
+</ul>
+
+:ET

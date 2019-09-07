@@ -1,0 +1,119 @@
+I"<p>The following pages and posts are tagged with <button type="button" style="cursor: default" class="btn btn-default navbar-btn">news</button></p>
+<table><thead><tr><th>Title</th><th>Type</th><th>Excerpt</th></tr></thead>
+    <tbody>
+    
+  
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+
+        
+        
+        
+        
+
+        <tr><td><a href="samplepost.html">Sample post</a></td>
+            <td><span class="label label-primary">Post</span></td>
+            <td> This is some summary frontmatter for my sample post. </td>
+        </tr>
+        
+        
+        
+        
+        
+        
+        
+
+        <tr><td><a href="myupdate.html">Welcome to Jekyll!</a></td>
+            <td><span class="label label-primary">Post</span></td>
+            <td> Theme updates:
+
+
+  Permalinks
+  Kramdown
+  URL specified in config file
+  removed PDF output
+  removed some of the alternative layouts
+  added blog feature
+  sidebars configurable per page
+
+
+ </td>
+        </tr>
+        
+        
+        
+        
+        
+
+        <tr><td><a href="test-post-from-last-year.html">Test post from last year</a></td>
+            <td><span class="label label-primary">Post</span></td>
+            <td> This is just a test post from the previous year.
+
+ </td>
+        </tr>
+        
+        
+        
+
+   </tbody>
+</table>
+
+:ET
