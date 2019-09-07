@@ -93,6 +93,7 @@ folder: mydoc
 
 {% include image.html file="vivado/1563977433777.png" %} 
 
+
 {% include image.html file="vivado/1563977458759.png" %} 
 
 1.  将 sw [*]名称更改为 swt [*]，将 LED [*]更改为 led [*]，因为模型中的端口名称是 swt 和 led。
