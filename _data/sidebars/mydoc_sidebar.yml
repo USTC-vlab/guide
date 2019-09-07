@@ -41,11 +41,11 @@ entries:
       output: web, pdf
 
     - title: FPGA原理
-      url: /mydoc_about.html
+      url: /doc_fpga.html
       output: web, pdf
 
     - title: Nexys4DDR开发板
-      url: /mydoc_support.html
+      url: /doc_nexys.html
       output: web, pdf
 
     - title: Vivado介绍

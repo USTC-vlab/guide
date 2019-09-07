@@ -91,7 +91,7 @@ folder: mydoc
 
 {% include image.html file="vivado/1563977423656.png" %} 
 
-{% include image.html file="1563977433777.png" %} 
+{% include image.html file="vivado/1563977433777.png" %} 
 
 {% include image.html file="vivado/1563977458759.png" %} 
 
