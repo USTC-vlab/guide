@@ -34,7 +34,7 @@ pullup和 pulldown，只有一个输出（没有输入）。这些门的零延�
 	bufif0 | bufif1 | notif0 | notif1 [instance name] (outputA, inputB, controlC);  
 	pullup | pulldown [instance name] (output A);  
 你也可以在同一语句中，用逗号分隔，创建多个相同类型门的实例，比如：  
-	 
+
 
 Verilog HDL语言也允许在实例化门电路时加入延迟。 加入的延迟来自输入或输出。这些延迟可以表达为上升、下降或关断延迟；在一个实例中可以使用1、2或3种延迟。关断延迟可以用于输出能被关掉的门   (如 notif1).
 比如，  
@@ -98,17 +98,18 @@ Next。单击Finish。
 ### 参考代码和门级建模的设计
 我们可以使用门级建模的方式写，verilog的代码如下：
 
-	module lab1_1(
-	    input in1,in2,
-	    input select,
-	    output out
-	    );
-	    wire temp1,temp2,temp3;
-	    not (temp1,select);
-	    and (temp2,temp1,in1);
-	    and (temp3,select,in2);
-	    or (out,temp2,temp3);
-	endmodule
+    module lab1_1(
+        input in1,in2,
+        input select,
+        output out
+        );
+        wire temp1,temp2,temp3;
+        not (temp1,select);
+        and (temp2,temp1,in1);
+        and (temp3,select,in2);
+        or (out,temp2,temp3);
+    endmodule
+
 点击Schematic 查看门级建模的设计  
 {% include image.html file="basic_logic/schematic.png" %} 
 我们可以看到大致如下的电路：
@@ -124,97 +125,100 @@ Next。单击Finish。
 
 修改xdc文件对应段落：  
 
-	set_property -dict { PACKAGE_PIN J15   IOSTANDARD LVCMOS33 } [get_ports { in1 }]; #IO_L24N_T3_RS0_15 Sch=sw[0]
-	set_property -dict { PACKAGE_PIN L16   IOSTANDARD LVCMOS33 } [get_ports { in2 }]; #IO_L3N_T0_DQS_EMCCLK_14 Sch=sw[1]
-	#set_property -dict { PACKAGE_PIN M13   IOSTANDARD LVCMOS33 } [get_ports { sw[2] }]; #IO_L6N_T0_D08_VREF_14 Sch=sw[2]
-	#set_property -dict { PACKAGE_PIN R15   IOSTANDARD LVCMOS33 } [get_ports { sw[3] }]; #IO_L13N_T2_MRCC_14 Sch=sw[3]
-	#set_property -dict { PACKAGE_PIN R17   IOSTANDARD LVCMOS33 } [get_ports { sw[4] }]; #IO_L12N_T1_MRCC_14 Sch=sw[4]
-	#set_property -dict { PACKAGE_PIN T18   IOSTANDARD LVCMOS33 } [get_ports { sw[5] }]; #IO_L7N_T1_D10_14 Sch=sw[5]
-	#set_property -dict { PACKAGE_PIN U18   IOSTANDARD LVCMOS33 } [get_ports { sw[6] }]; #IO_L17N_T2_A13_D29_14 Sch=sw[6]
-	set_property -dict { PACKAGE_PIN R13   IOSTANDARD LVCMOS33 } [get_ports { select }]; #IO_L5N_T0_D07_14 Sch=sw[7]
-	#set_property -dict { PACKAGE_PIN T8    IOSTANDARD LVCMOS18 } [get_ports { sw[8] }]; #IO_L24N_T3_34 Sch=sw[8]
-	#set_property -dict { PACKAGE_PIN U8    IOSTANDARD LVCMOS18 } [get_ports { sw[9] }]; #IO_25_34 Sch=sw[9]
-	#set_property -dict { PACKAGE_PIN R16   IOSTANDARD LVCMOS33 } [get_ports { sw[10] }]; #IO_L15P_T2_DQS_RDWR_B_14 Sch=sw[10]
-	#set_property -dict { PACKAGE_PIN T13   IOSTANDARD LVCMOS33 } [get_ports { sw[11] }]; #IO_L23P_T3_A03_D19_14 Sch=sw[11]
-	#set_property -dict { PACKAGE_PIN H6    IOSTANDARD LVCMOS33 } [get_ports { sw[12] }]; #IO_L24P_T3_35 Sch=sw[12]
-	#set_property -dict { PACKAGE_PIN U12   IOSTANDARD LVCMOS33 } [get_ports { sw[13] }]; #IO_L20P_T3_A08_D24_14 Sch=sw[13]
-	#set_property -dict { PACKAGE_PIN U11   IOSTANDARD LVCMOS33 } [get_ports { sw[14] }]; #IO_L19N_T3_A09_D25_VREF_14 Sch=sw[14]
-	#set_property -dict { PACKAGE_PIN V10   IOSTANDARD LVCMOS33 } [get_ports { sw[15] }]; #IO_L21P_T3_DQS_14 Sch=sw[15]
+    set_property -dict { PACKAGE_PIN J15   IOSTANDARD LVCMOS33 } [get_ports { in1 }]; #IO_L24N_T3_RS0_15 Sch=sw[0]
+    set_property -dict { PACKAGE_PIN L16   IOSTANDARD LVCMOS33 } [get_ports { in2 }]; #IO_L3N_T0_DQS_EMCCLK_14 Sch=sw[1]
+    #set_property -dict { PACKAGE_PIN M13   IOSTANDARD LVCMOS33 } [get_ports { sw[2] }]; #IO_L6N_T0_D08_VREF_14 Sch=sw[2]
+    #set_property -dict { PACKAGE_PIN R15   IOSTANDARD LVCMOS33 } [get_ports { sw[3] }]; #IO_L13N_T2_MRCC_14 Sch=sw[3]
+    #set_property -dict { PACKAGE_PIN R17   IOSTANDARD LVCMOS33 } [get_ports { sw[4] }]; #IO_L12N_T1_MRCC_14 Sch=sw[4]
+    #set_property -dict { PACKAGE_PIN T18   IOSTANDARD LVCMOS33 } [get_ports { sw[5] }]; #IO_L7N_T1_D10_14 Sch=sw[5]
+    #set_property -dict { PACKAGE_PIN U18   IOSTANDARD LVCMOS33 } [get_ports { sw[6] }]; #IO_L17N_T2_A13_D29_14 Sch=sw[6]
+    set_property -dict { PACKAGE_PIN R13   IOSTANDARD LVCMOS33 } [get_ports { select }]; #IO_L5N_T0_D07_14 Sch=sw[7]
+    #set_property -dict { PACKAGE_PIN T8    IOSTANDARD LVCMOS18 } [get_ports { sw[8] }]; #IO_L24N_T3_34 Sch=sw[8]
+    #set_property -dict { PACKAGE_PIN U8    IOSTANDARD LVCMOS18 } [get_ports { sw[9] }]; #IO_25_34 Sch=sw[9]
+    #set_property -dict { PACKAGE_PIN R16   IOSTANDARD LVCMOS33 } [get_ports { sw[10] }]; #IO_L15P_T2_DQS_RDWR_B_14 Sch=sw[10]
+    #set_property -dict { PACKAGE_PIN T13   IOSTANDARD LVCMOS33 } [get_ports { sw[11] }]; #IO_L23P_T3_A03_D19_14 Sch=sw[11]
+    #set_property -dict { PACKAGE_PIN H6    IOSTANDARD LVCMOS33 } [get_ports { sw[12] }]; #IO_L24P_T3_35 Sch=sw[12]
+    #set_property -dict { PACKAGE_PIN U12   IOSTANDARD LVCMOS33 } [get_ports { sw[13] }]; #IO_L20P_T3_A08_D24_14 Sch=sw[13]
+    #set_property -dict { PACKAGE_PIN U11   IOSTANDARD LVCMOS33 } [get_ports { sw[14] }]; #IO_L19N_T3_A09_D25_VREF_14 Sch=sw[14]
+    #set_property -dict { PACKAGE_PIN V10   IOSTANDARD LVCMOS33 } [get_ports { sw[15] }]; #IO_L21P_T3_DQS_14 Sch=sw[15]
 
 
-	## LEDs
-	
-	 set_property -dict { PACKAGE_PIN H17   IOSTANDARD LVCMOS33 } [get_ports { out }]; #IO_L18P_T2_A24_15 Sch=led[0]
-	# set_property -dict { PACKAGE_PIN K15   IOSTANDARD LVCMOS33 } [get_ports { led[1] }]; #IO_L24P_T3_RS1_15 Sch=led[1]
-	# set_property -dict { PACKAGE_PIN J13   IOSTANDARD LVCMOS33 } [get_ports { led[2] }]; #IO_L17N_T2_A25_15 Sch=led[2]
-	# set_property -dict { PACKAGE_PIN N14   IOSTANDARD LVCMOS33 } [get_ports { led[3] }]; #IO_L8P_T1_D11_14 Sch=led[3]
-	# set_property -dict { PACKAGE_PIN R18   IOSTANDARD LVCMOS33 } [get_ports { led[4] }]; #IO_L7P_T1_D09_14 Sch=led[4]
-	# set_property -dict { PACKAGE_PIN V17   IOSTANDARD LVCMOS33 } [get_ports { led[5] }]; #IO_L18N_T2_A11_D27_14 Sch=led[5]
-	# set_property -dict { PACKAGE_PIN U17   IOSTANDARD LVCMOS33 } [get_ports { led[6] }]; #IO_L17P_T2_A14_D30_14 Sch=led[6]
-	# set_property -dict { PACKAGE_PIN U16   IOSTANDARD LVCMOS33 } [get_ports { led[7] }]; #IO_L18P_T2_A12_D28_14 Sch=led[7]
-	#set_property -dict { PACKAGE_PIN V16   IOSTANDARD LVCMOS33 } [get_ports { led[8] }]; #IO_L16N_T2_A15_D31_14 Sch=led[8]
-	#set_property -dict { PACKAGE_PIN T15   IOSTANDARD LVCMOS33 } [get_ports { led[9] }]; #IO_L14N_T2_SRCC_14 Sch=led[9]
-	#set_property -dict { PACKAGE_PIN U14   IOSTANDARD LVCMOS33 } [get_ports { led[10] }]; #IO_L22P_T3_A05_D21_14 Sch=led[10]
-	#set_property -dict { PACKAGE_PIN T16   IOSTANDARD LVCMOS33 } [get_ports { led[11] }]; #IO_L15N_T2_DQS_DOUT_CSO_B_14 Sch=led[11]
-	#set_property -dict { PACKAGE_PIN V15   IOSTANDARD LVCMOS33 } [get_ports { led[12] }]; #IO_L16P_T2_CSI_B_14 Sch=led[12]
-	#set_property -dict { PACKAGE_PIN V14   IOSTANDARD LVCMOS33 } [get_ports { led[13] }]; #IO_L22N_T3_A04_D20_14 Sch=led[13]
-	#set_property -dict { PACKAGE_PIN V12   IOSTANDARD LVCMOS33 } [get_ports { led[14] }]; #IO_L20N_T3_A07_D23_14 Sch=led[14]
-	#set_property -dict { PACKAGE_PIN V11   IOSTANDARD LVCMOS33 } [get_ports { led[15] }]; #IO_L21N_T3_DQS_A06_D22_14 Sch=led[15]
+    ## LEDs
+
+     set_property -dict { PACKAGE_PIN H17   IOSTANDARD LVCMOS33 } [get_ports { out }]; #IO_L18P_T2_A24_15 Sch=led[0]
+    # set_property -dict { PACKAGE_PIN K15   IOSTANDARD LVCMOS33 } [get_ports { led[1] }]; #IO_L24P_T3_RS1_15 Sch=led[1]
+    # set_property -dict { PACKAGE_PIN J13   IOSTANDARD LVCMOS33 } [get_ports { led[2] }]; #IO_L17N_T2_A25_15 Sch=led[2]
+    # set_property -dict { PACKAGE_PIN N14   IOSTANDARD LVCMOS33 } [get_ports { led[3] }]; #IO_L8P_T1_D11_14 Sch=led[3]
+    # set_property -dict { PACKAGE_PIN R18   IOSTANDARD LVCMOS33 } [get_ports { led[4] }]; #IO_L7P_T1_D09_14 Sch=led[4]
+    # set_property -dict { PACKAGE_PIN V17   IOSTANDARD LVCMOS33 } [get_ports { led[5] }]; #IO_L18N_T2_A11_D27_14 Sch=led[5]
+    # set_property -dict { PACKAGE_PIN U17   IOSTANDARD LVCMOS33 } [get_ports { led[6] }]; #IO_L17P_T2_A14_D30_14 Sch=led[6]
+    # set_property -dict { PACKAGE_PIN U16   IOSTANDARD LVCMOS33 } [get_ports { led[7] }]; #IO_L18P_T2_A12_D28_14 Sch=led[7]
+    #set_property -dict { PACKAGE_PIN V16   IOSTANDARD LVCMOS33 } [get_ports { led[8] }]; #IO_L16N_T2_A15_D31_14 Sch=led[8]
+    #set_property -dict { PACKAGE_PIN T15   IOSTANDARD LVCMOS33 } [get_ports { led[9] }]; #IO_L14N_T2_SRCC_14 Sch=led[9]
+    #set_property -dict { PACKAGE_PIN U14   IOSTANDARD LVCMOS33 } [get_ports { led[10] }]; #IO_L22P_T3_A05_D21_14 Sch=led[10]
+    #set_property -dict { PACKAGE_PIN T16   IOSTANDARD LVCMOS33 } [get_ports { led[11] }]; #IO_L15N_T2_DQS_DOUT_CSO_B_14 Sch=led[11]
+    #set_property -dict { PACKAGE_PIN V15   IOSTANDARD LVCMOS33 } [get_ports { led[12] }]; #IO_L16P_T2_CSI_B_14 Sch=led[12]
+    #set_property -dict { PACKAGE_PIN V14   IOSTANDARD LVCMOS33 } [get_ports { led[13] }]; #IO_L22N_T3_A04_D20_14 Sch=led[13]
+    #set_property -dict { PACKAGE_PIN V12   IOSTANDARD LVCMOS33 } [get_ports { led[14] }]; #IO_L20N_T3_A07_D23_14 Sch=led[14]
+    #set_property -dict { PACKAGE_PIN V11   IOSTANDARD LVCMOS33 } [get_ports { led[15] }]; #IO_L21N_T3_DQS_A06_D22_14 Sch=led[15]
 
 ## 数据流级建模
 数据流级建模风格主要用于描述组合逻辑电路。一种基本的手法就是使用持续赋值(continuous assignment)。 在持续赋值中，一个值被指派到一种叫做线网(net)的数据类型。  
 持续赋值的语法为：  
 
 	assign [delay] LHS_net = RHS_expression; 
+
 其中LHS_net是1bit或多bit的目标线网,而RHS_expression是一个包含各种运算符(operator)的表达式  (expression) 。该语句在任何时候都对源操作数值的任何更改进行运算，并将结果经过延迟单元后赋值给目标线网。在Part 1 中的门级建模风格的例子可以用数据流级建模风格的持续赋值表达。比如：   
 
 	assign out1 = in1 & in2; // perform and function on in1 and in2 and assign the result to out1
 	assign out2 = not in1;
 	assign #2 z[0] = ~(ABAR & BBAR & EN); // perform the desired function and assign the result after 2 units
+
 持续赋值语句中的目标可以是下面的一种:  
-1.标量线网scalar net (比如上面第1和2个例子)  
-2.向量线网Vector net  
-3.向量线网的常数位选定Constant bit-select of a vector (比如上面第3个例子)  
-4.向量线网的常数部分选定Constant part-select of a vector  
-5.以上任意的拼接    
+
+1. 标量线网scalar net (比如上面第1和2个例子)  
+2. 向量线网Vector net  
+3. 向量线网的常数位选定Constant bit-select of a vector (比如上面第3个例子)  
+4. 向量线网的常数部分选定Constant part-select of a vector  
+5. 以上任意的拼接    
+
 我们再举一些例子，其中用到了标量和向量线网：
 
-	wire COUNT, CIN;	// scalar net declaration
-	wire [3:0] SUM, A, B;	// vector nets declaration
-	assign {COUT,SUM} = A + B + CIN; // A and B vectors are added with CIN and the result is
-	// assigned to a concatenated vector of a scalar and vector nets
+    wire COUNT, CIN;    // scalar net declaration
+    wire [3:0] SUM, A, B;   // vector nets declaration
+    assign {COUT,SUM} = A + B + CIN; // A and B vectors are added with CIN and the result is
+    // assigned to a concatenated vector of a scalar and vector nets
+
 需要注意的是，多个持续赋值不能使用同一个目标线网。
 ## 使用数据流级建模风格设计2-to-1多路选择器并下载验证结果
 对应电路图：  
 {% include image.html file="basic_logic/2to1.png" %} 
+
 ### 实验步骤
 1. 打开Vivado并创建空白工程取名为 lab1.2。
-
-
-2.	使用数据流级建模风格，创建一个 Verilog module并增加2个2-bit 输入 (in1[1:0], in2[1:0])，1个1bit
+2. 使用数据流级建模风格，创建一个 Verilog module并增加2个2-bit 输入 (in1[1:0], in2[1:0])，1个1bit
 选择信号输入(select)和一个2-bit输出(out[1:0])。
-
 3. 添加XDC文件到工程。 编辑XDC文件，将SW0 和 SW1赋给in1[1:0], SW2 和 SW3赋给in2[1:0]， SW7 赋给 select， LED0和 LED1 赋给 out[1:0].
+4. 综合你的设计。
+5. 实现你的设计。
 
-4.   综合你的设计。
-
-5.  实现你的设计。
 ### 参考代码和数据流级建模的设计
 由于这里的选择信号select只有一位，在使用数据流级建模的时候，我们需要对简单的选择信号进行简单的位扩展，让选择器更加适合我们使用的情况。  
 我们可以编写如下的代码来表达：
 
-	module lab1_2(
-	    input [1:0]in1,in2,
-	    input select,
-	    output [1:0]out
-	    );
-	    wire [1:0]temp1,temp2,temp3,temp4;
-	   assign temp4={select,select};
-	   assign temp1={~select,~select};
-	   assign temp2=temp1&in1;
-	   assign temp3=temp4&in2;
-	   assign out=temp2|temp3;
-	endmodule
+    module lab1_2(
+        input [1:0]in1,in2,
+        input select,
+        output [1:0]out
+        );
+        wire [1:0]temp1,temp2,temp3,temp4;
+       assign temp4={select,select};
+       assign temp1={~select,~select};
+       assign temp2=temp1&in1;
+       assign temp3=temp4&in2;
+       assign out=temp2|temp3;
+    endmodule
+
 点击Schematic 查看门级建模的设计    
 我们可以看到大致如下的电路：  
 {% include image.html file="basic_logic/shuju.png" %} 
@@ -224,14 +228,15 @@ Next。单击Finish。
 ## 行为级建模
 行为级建模通常用于描述复杂的电路。行为级建模主要用于设计时序逻辑电路，但也可以用于设计纯组合逻辑电路。一个电路的行为级建模（语句）如下：  
 
-	initial Statements  
-	always Statements  
+    initial Statements  
+    always Statements  
+
 一个模块可以包含任意数量的initial和always语句，并且可以在其中包含一个或多个过程语句。这些initial和always语句会同时执行（换句话说，它们用于描述并行的过程，即它们在模块中出现的顺序没有关系），而过程语句是按序执行的（换句话说，它们出现的顺序有影响）。   
 
 initial和always语句都在time=0时刻执行，在其余时间只有always语句执行。语法如下：  
 
-	initial [timing_control] procedural_statements;  
-	always [timing_control] procedural_statements;  
+    initial [timing_control] procedural_statements;  
+    always [timing_control] procedural_statements;  
 
 **其中的过程语句procedural_statement是下面之一：**   
 过程赋值procedural assignment    
@@ -242,17 +247,18 @@ initial和always语句都在time=0时刻执行，在其余时间只有always语�
 
 **initial语句是不可综合的（non-synthesizable）通常用在测试中。always语句是可综合的(synthesizable）并且最终产生的电路可以是组合的也可以是时序的。为了生成组合逻辑电路， always块：(i)不能是对边沿敏感的 (ii)条件语句的每一个分支都需要定义好输出 (iii)case语句中的每个案例（case）需要定义所有输出且必须有一个默认情况（default case）。有关这个话题的更详细讨论在Lab 7中涉及。语句的目标(LHS)须为寄存器（reg）类型; 可以是标量或向量。**举个例子：  
 
-	reg m; // scalar reg type  
-	reg [7:0] switches; // vector reg type  
+    reg m; // scalar reg type  
+    reg [7:0] switches; // vector reg type  
+
 下面是一个2-to-1多路选择器模型的例子。
 
-	always @ 
-	(x or y or s)
-	if(s==0)
-	m=y;
-	end
-	else
-	m=x;
+    always @ (x or y or s)
+    if(s==0)
+    m=y;
+    end
+    else
+    m=x;
+
 ## 仿真（测试文件）
 要测试我们设计的模块功能是否正常，最直接的办法就是烧写到FPGA芯片中进行验证，但是这种方式往往结果并不直观，且出现问题后也不容易定位。为提高工作效率，我们可通过电脑仿真的方式进行功能验证，待仿真通过后，再烧写到FPGA中，这样可以快速排除电路中存在的绝大多数bug。在电脑上进行仿真，除了我们设计的功能模块之外，还需要另一模块——testbench，用于产生被测模块所需的激励信号。由于testbench只是用于电脑端的仿真，而不需要最终综合成电路，因此其写法更加灵活，可以使用verilog语法中的一些不可综合的语句，如initial、#、$display、$readmemb、forever等。  
 假设我们的被测模块完成以下功能  
@@ -289,14 +295,14 @@ initial：通过initial块构造输入信号的波形，同一initial块内部�
 在时钟的上升沿，将一个向量赋值给被测模块输入端，并在时钟的下降沿对被测模块输出与期望输出结果进行对比，如果不相同，则记录下该向量，至此向量全部测试完毕。  
 向量测试文件（example.tv）:包含a、b、c以及y_expected  
 
-	000_1
-	001_0
-	010_0
-	011_0
-	100_1
-	101_1
-	110_0
-	111_0
+    000_1
+    001_0
+    010_0
+    011_0
+    100_1
+    101_1
+    110_0
+    111_0
 
 测试文件
 
@@ -326,19 +332,19 @@ initial：通过initial块构造输入信号的波形，同一initial块内部�
 ### 参考代码和数据流级建模的设计 
 
 
-		module lab1_3(  
-		    input [1:0]in1,in2,
-		    input select,
-		    output reg [1:0]out
-		    );
-		   always@(*)
-		   begin
-		       if(select)
-		       out=in2;
-		       else 
-		       out=in1;
-		   end
-		endmodule
+    module lab1_3(  
+        input [1:0]in1,in2,
+        input select,
+        output reg [1:0]out
+        );
+       always@(*)
+       begin
+           if(select)
+           out=in2;
+           else 
+           out=in1;
+       end
+    endmodule
 
 点击Schematic 查看门级建模的设计    
 我们可以看到大致如下的电路： 
@@ -357,24 +363,24 @@ initial：通过initial块构造输入信号的波形，同一initial块内部�
 
 创建文件lab1.3.tb，把之前lab1.3中的代码中的输入定义为reg类型（可以直接赋值），输出定义为wire类型，之前的文件实例化进入仿真代码。
 
-	module lab1_3_tb(
-	    );
-	     reg [1:0]in1,in2;
-	     reg select;
-	     wire [1:0]out;
-	     lab1_3 dut(in1,in2,select,out);  //实例化模块
-	     initial begin
-	        in1=0; in2=0; select=0; #10;
-	        in1=1; #10;
-	        in2=2; #10;
-	        select=1; #10;
-	        in1=2; #10;
-	        in2=3; #10;
-	        select=0; #10;
-	        in1=0;   #10;
-	        select=1; #10;
-	     end
-	endmodule
+    module lab1_3_tb(
+        );
+         reg [1:0]in1,in2;
+         reg select;
+         wire [1:0]out;
+         lab1_3 dut(in1,in2,select,out);  //实例化模块
+         initial begin
+            in1=0; in2=0; select=0; #10;
+            in1=1; #10;
+            in2=2; #10;
+            select=1; #10;
+            in1=2; #10;
+            in2=3; #10;
+            select=0; #10;
+            in1=0;   #10;
+            select=1; #10;
+         end
+    endmodule
 
 把测试模块定义为顶层模块：
 
