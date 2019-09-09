@@ -1,4 +1,4 @@
-repository: tomjoht/documentation-theme-jekyll
+repository: vlab/guide
 
 output: web
 # this property is useful for conditional filtering of content that is separate from the PDF.
@@ -9,10 +9,10 @@ topnav_title: Home Page
 site_title: 教程
 # this appears in the html browser tab for the site title (seen mostly by search engines, not users)
 
-company_name: Your company
+company_name: USTC Vlab
 # this appears in the footer
 
-github_editme_path: tomjoht/documentation-theme-jekyll/blob/gh-pages/
+# github_editme_path: tomjoht/documentation-theme-jekyll/blob/gh-pages/
 # if you're using Github, provide the basepath to the branch you've created for reviews, following the sample here. if not, leave this value blank.
 
 # gitlab_editme_path: tomjoht/documentation-theme-jekyll/blob/gh-pages/
@@ -21,7 +21,7 @@ github_editme_path: tomjoht/documentation-theme-jekyll/blob/gh-pages/
 disqus_shortname: idratherbewriting
 # if you're using disqus for comments, add the shortname here. if not, leave this value blank.
 
-google_analytics: UA-66296557-1
+google_analytics: UA-115907213-3
 # if you have google-analytics ID, put it in. if not, edit this value to blank.
 
 host: 127.0.0.1
@@ -31,14 +31,17 @@ port: 4000
 # the port where the preview is rendered. You can leave this as is unless you have other Jekyll builds using this same port that might cause conflicts. in that case, use another port such as 4006.
 
 exclude:
-  - .idea/
-  - .gitignore
+  - '*.sh'
+  - '.*'
+  - createtag
+  - Gemfile
+  - Gemfile.lock
   - vendor
 # these are the files and directories that jekyll will exclude from the build
 
-feedback_subject_line: home
+feedback_subject_line: Vlab Guide
 
-feedback_email: tomjoht@gmail.com
+feedback_email: vlab@ustc.edu.cn
 # used as a contact email for the Feedback link in the top navigation bar
 
 # feedback_disable: true
@@ -55,10 +58,10 @@ highlighter: rouge
 
 markdown: kramdown
 kramdown:
- input: GFM
- auto_ids: true
- hard_wrap: false
- syntax_highlighter: rouge
+  input: GFM
+  auto_ids: true
+  hard_wrap: false
+  syntax_highlighter: rouge
 
 # filter used to process markdown. note that kramdown differs from github-flavored markdown in some subtle ways
 
@@ -112,8 +115,8 @@ description: "Intended as a documentation theme based on Jekyll for technical wr
 # the description is used in the feed.xml file
 
 # needed for sitemap.xml file only
-# url: http://idratherbewriting.com
-# baseurl: /documentation-theme-jekyll
+url: https://vlab.ustc.edu.cn
+baseurl: /guide
 
 
 github: [metadata]
