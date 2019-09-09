@@ -1,7 +1,6 @@
 ---
 title: 课程介绍
 sidebar: mydoc_sidebar
-permalink: index.html
 folder: mydoc
 ---
 # 欢迎来到实验课程主页
