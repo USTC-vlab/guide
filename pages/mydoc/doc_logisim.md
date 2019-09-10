@@ -11,8 +11,6 @@ Logisim是一种用于设计和模拟数字逻辑电路的教育工具。凭借�
 
 ## LogiSim下载
 可以通过Logisim的官网下载适合你机器的Logisim的软件，启动Logisim应用程序。[下载网址](http://www.cburch.com/logisim/download.html)  
-使用前需要配置java的环境。[下载地址](https://www.java.com/zh_CN/)   
-如果配置环境时遇到了问题，也可以参考[配置java环境变量](https://www.cnblogs.com/cnwutianhao/p/5487758.html) 
 
 ## LogiSim使用简介
 ### LogiSim初次启动 
@@ -25,36 +23,20 @@ Logisim是一种用于设计和模拟数字逻辑电路的教育工具。凭借�
 
 ### 示例（制作一个异或门）
 由数电课本上的知识我们可以得知，异或门的电路大致如下图：  
-{% include image.html file="logisim/logisim3.png" %} 
+{% include inline_image.html file="logisim/logisim3.png" %} 
 
-我建议首先将门插入一种骨架，然后再用线连接它们来建立一个电路。我们要做的第一件事就是添加两个AND门。单击工具栏中的AND工具
-{% include image.html file="logisim/logisim4.gif" %} 
-
-(列出倒数第二个工具）。然后在编辑区域中单击您想要第一个AND门的位置。一定要为左边的东西留出足够的空间。然后再次单击AND工具并将第二个AND门置于其下方。  
+我建议首先将门插入一种骨架，然后再用线连接它们来建立一个电路。我们要做的第一件事就是添加两个AND门。单击工具栏中的AND工具{% include image.html file="logisim/logisim4.gif" %} (列出倒数第二个工具）。然后在编辑区域中单击您想要第一个AND门的位置。一定要为左边的东西留出足够的空间。然后再次单击AND工具并将第二个AND门置于其下方。  
 {% include image.html file="logisim/logisim5.png" %} 
 注意AND门左侧的五个点。这些是可以连接电线的点。碰巧我们只将其中两个用于我们的XOR电路; 但对于其他电路，您可能会发现有两条以上的电线连接到AND门是有用的。
-现在添加其他门。首先单击OR工具（
-{% include image.html file="logisim/logisim6.gif" %} 
-）; 然后单击您想要的位置。并使用NOT工具（
-{% include image.html file="logisim/logisim7.gif" %} 
-）将两个NOT门放入画布。  
+现在添加其他门。首先单击OR工具（{% include inline_image.html file="logisim/logisim6.gif" %} ）; 然后单击您想要的位置。并使用NOT工具（{% include inline_image.html file="logisim/logisim7.gif" %} ）将两个NOT门放入画布。  
 我在NOT门和AND门之间留了一点空间; 但是，如果你愿意的话，你可以将它们相互对立，并节省你以后用电线连接它们的努力。
-现在我们要将两个输入x和y添加到图中。选择输入工具（
-{% include image.html file="logisim/logisim8.gif" %} 
-），然后放下引脚。您还应该使用输出工具（
-{% include image.html file="logisim/logisim9.gif" %} 
-）在OR门的输出旁边放置一个输出引脚。（同样，我在OR门和输出引脚之间留下一点空间，但您可以选择将它们放在彼此旁边。）  
-{% include image.html file="logisim/logisim10.gif" %} 
-如果您决定不喜欢放置内容的位置，则可以使用编辑工具（
-{% include image.html file="logisim/logisim11.gif" %} 
-）将其选中并将其拖动到所需位置。或者，您可以通过从“编辑”菜单中选择“删除”或按Delete键将其完全删除。
+现在我们要将两个输入x和y添加到图中。选择输入工具（{% include inline_image.html file="logisim/logisim8.gif" %} ），然后放下引脚。您还应该使用输出工具（{% include inline_image.html file="logisim/logisim9.gif" %} ）在OR门的输出旁边放置一个输出引脚。（同样，我在OR门和输出引脚之间留下一点空间，但您可以选择将它们放在彼此旁边。）  {% include inline_image.html file="logisim/logisim10.png" %} 
+如果您决定不喜欢放置内容的位置，则可以使用编辑工具（{% include inline_image.html file="logisim/logisim11.gif" %} ）将其选中并将其拖动到所需位置。或者，您可以通过从“编辑”菜单中选择“删除”或按Delete键将其完全删除。
 当您放置电路的每个组件时，您会注意到，只要放置组件，Logisim就会恢复到编辑工具，以便您可以移动最近放置的组件或（我们很快就会看到）连接组件通过创建电线给他人。如果要添加最近放置的组件的副本，则快捷方式是按Control-D复制选择。（某些计算机使用其他键作为菜单，例如Macintoshes上的Command键。您可以使用D键按下该键。）  
-在画布上阻止所有组件后，您就可以开始添加电线了。选择编辑工具（
-{% include image.html file="logisim/logisim11.gif" %} 
-）。当光标位于接收导线的点上方时，将在其周围绘制一个小的绿色圆圈。在那里按下鼠标按钮并尽可能地拖动电线。
+在画布上阻止所有组件后，您就可以开始添加电线了。选择编辑工具（{% include inline_image.html file="logisim/logisim11.gif" %} ）。当光标位于接收导线的点上方时，将在其周围绘制一个小的绿色圆圈。在那里按下鼠标按钮并尽可能地拖动电线。
 添加电线时Logisim非常智能：每当电线在另一根电线上结束时，Logisim会自动连接它们。您还可以使用编辑工具拖动其中一个端点来“扩展”或“缩短”导线。
 Logisim中的电线必须是水平或垂直的。为了将上输入连接到NOT门和AND门，我添加了三条不同的线。
-{% include image.html file="logisim/logisim12。png" %}  
+{% include image.html file="logisim/logisim12.png" %}  
 Logisim自动将电线连接到门和彼此。这包括如上所述在T交叉点自动绘制圆，表示导线已连接。
 在绘制电线时，您可能会看到一些蓝色或灰色电线。<p style="color:red"> Logisim中的蓝色表示该点的值为“未知”，灰色表示该线未连接任何东西。当你正在建造一个电路时，这不是什么大问题。但是当你完成它时，你的电线都不应该是蓝色或灰色。（OR门的未连接腿仍然是蓝色的：没关系。） </p>
 如果你认为一切都应该连接后你有蓝色或灰色线，那么就会出现问题。将电线连接到正确的位置非常重要。Logisim在组件上绘制小点以指示电线应该连接的位置。当你继续，你会看到点从蓝色变为浅色或深绿色。
@@ -62,9 +44,7 @@ Logisim自动将电线连接到门和彼此。这包括如上所述在T交叉点
 我们的最后一步是测试我们的电路，以确保它真正做到我们想要的。Logisim已经在模拟电路了。让我们再看看我们在哪里。  
 {% include image.html file="logisim/logisim13.png" %} 
 注意，输入引脚都包含0; 输出引脚也是如此。这已经告诉我们，当两个输入都为0时，电路已经计算出0。
-现在尝试另一种输入组合。选择戳工具小手图案（
-{% include image.html file="logisim/logisim14.gif" %} 
-）并通过单击它们开始戳输入。每次你戳一个输入，它的值将切换。例如，我们可能会首先查看底部输入。
+现在尝试另一种输入组合。选择戳工具小手图案（{% include inline_image.html file="logisim/logisim14.gif" %} ）并通过单击它们开始戳输入。每次你戳一个输入，它的值将切换。例如，我们可能会首先查看底部输入。
 {% include image.html file="logisim/logisim15.png" %} 
 当您更改输入值时，Logisim将向您显示哪些值沿着导线向下移动，方法是将它们指示为绿色以指示1值或将深绿色（几乎为黑色）指示为0值。您还可以看到输出值已更改为1。
 到目前为止，我们已经测试了真值表的前两行，输出（0和1）与所需的输出相匹配。  
@@ -109,12 +89,9 @@ Logisim中的所有组件都为每个输入和输出定义了一个位宽。相�
 ### 编辑子电路外观
 #### 默认外观
 默认情况下，当子电路放置在较大的电路中时，它被绘制为一个矩形，其中一个凹口表示子电路布局的北端。引脚将根据它们的面向放置在矩形的边框上：布局中朝东的引脚（通常出现在布局的西侧）将放置在矩形的西侧，根据其自上而下的排序布局。根据布局中从左到右的顺序，布局中朝南的引脚（通常朝向布局的北侧）将放置在矩形的北侧。
-默认矩形可以选择包含一些将出现在矩形中间的字母。要指定此项，请选择选择工具（
-{% include image.html file="logisim/logisim11.gif" %} ）并单击电路布局的背景。这将显示属性表中的电路属性，包括共享标签，共享标签面和共享标签字体属性。共享标签属性的值将绘制在矩形的中心; “共享标签面”属性可自定义文本的绘制方向，当然“共享标签字体”属性可自定义使用的字体。
+默认矩形可以选择包含一些将出现在矩形中间的字母。要指定此项，请选择选择工具（{% include inline_image.html file="logisim/logisim11.gif" %} ）并单击电路布局的背景。这将显示属性表中的电路属性，包括共享标签，共享标签面和共享标签字体属性。共享标签属性的值将绘制在矩形的中心; “共享标签面”属性可自定义文本的绘制方向，当然“共享标签字体”属性可自定义使用的字体。
 #### 定制外观
-默认外观非常实用，Logisim确实存在多年，没有其他选择。但是，如果您希望以不同方式绘制子电路，可以从“项目”菜单中选择“ 编辑电路外观 ”，Logisim的界面将从其常规布局编辑界面切换到用于绘制电路外观的界面。（您也可以单击
-{% include image.html file="logisim/logisim19.gif" %}  
-资源管理器窗格上方工具栏中的最右侧图标。）下面，我们正在编辑2：1多路复用器的外观，以便使用通常的梯形而不是矩形绘制。 
+默认外观非常实用，Logisim确实存在多年，没有其他选择。但是，如果您希望以不同方式绘制子电路，可以从“项目”菜单中选择“ 编辑电路外观 ”，Logisim的界面将从其常规布局编辑界面切换到用于绘制电路外观的界面。（您也可以单击{% include inline_image.html file="logisim/logisim19.gif" %}  资源管理器窗格上方工具栏中的最右侧图标。）下面，我们正在编辑2：1多路复用器的外观，以便使用通常的梯形而不是矩形绘制。 
 {% include image.html file="logisim/logisim20.png" %}  
 对于如上所示绘制的2：1多路复用器的外观，4：1多路复用器的布局将如下所示。  
 {% include image.html file="logisim/logisim21.png" %} 
