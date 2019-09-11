@@ -64,7 +64,7 @@ LED发光二极管有P、N两极，具有普通二极管的单向导电性，当
 
 所谓的八段就是指数码管里有八个小LED发光二极管，通过控制不同的LED的亮灭来显示出不同的字形。数码管又分为共阴极和共阳极两种类型，其实共阴极就是将八个LED的阴极连在一起，让其接地，这样给任何一个LED的另一端高电平，它便能点亮。而共阳极就是将八个LED的阳极连在一起。其原理图如下。
 
-{% include image.html file="nexys/10.png" %} {% include image.html file="nexys/11.png" %} {% include image.html file="nexys/12.png" %} 
+{% include inline_image.html file="nexys/10.png" %} {% include inline_image.html file="nexys/11.png" %} {% include inline_image.html file="nexys/12.png" %} 
 
 其中引脚图的两个COM端连在一起，是公共端，共阴数码管要将其接地，共阳数码管将其接正电源。一个八段数码管称为一位，多个数码管并列在一起可构成多位数码管，它们的段选线（即a,b,c,d,e,f,g,dp）连在一起，而各自的公共端称为位选线。显示时，都从段选线送入字符编码，而选中哪个位选线，那个数码管便会被点亮。数码管的8段，对应一个字节的8位，a对应最低位，dp对应最高位。所以如果想让数码管显示数字0，那么共阴数码管的字符编码为00111111，即0x3f；共阳数码管的字符编码为11000000，即0xc0。可以看出两个编码的各位正好相反。
 
@@ -240,7 +240,7 @@ VGA接口是一种D型接口，上面共有15针孔，分成三排，每排五�
 
 而且可以从接口处来判断显卡是独显还是集成显卡，VGA接口竖置的说明是集成显卡，VGA接口横置说明是独立显卡（一般的台式主机都可以用此方法来查看）
 
-{% include image.html file="nexys/29.png" %} {% include image.html file="nexys/30.png" %} 
+{% include inline_image.html file="nexys/29.png" %} {% include inline_image.html file="nexys/30.png" %} 
 
 显示器扫描方式分为逐行扫描和隔行扫描：逐行扫描是扫描从屏幕左上角一点开始，从左像右逐点扫描，每扫描完一行,电子束回到屏幕的左边下一行的起始位置，在这期间，CRT对电子束进行消隐，每行结束时，用行同步信号进行同步；当扫描完所有的行，形成一帧，用场同步信号进行场同步，并使扫描回到屏幕左上方，同时进行场消隐,开始下一帧。隔行扫描是指电子束扫描时每隔一行扫一线，完成一屏后在返回来扫描剩下的线，隔行扫描的显示器闪烁的厉害，会让使用者的眼睛疲劳。
 
@@ -271,8 +271,7 @@ VESA中定义行时序和场时序都需要同步脉冲（Sync a）、显示后�
 
 串口是计算机上一种非常通用的设备通信协议
 
-{% include image.html file="nexys/34.png" %} 
-{% include image.html file="nexys/35.png" %} 
+{% include inline_image.html file="nexys/34.png" %} {% include inline_image.html file="nexys/35.png" %} 
 
 两个串口连接时，接收数据针脚与发送数据针脚相连，彼此交叉，信号地对应相接即可
 
@@ -303,8 +302,7 @@ d）奇偶校验位：在串口通信中一种简单的检错方式。对于偶�
 
  55H=01010101B，取反后10101010B，加入一个起始位1，一个停止位0，55H的数据格式为1010101010B； aaH=10101010B，取反后01010101B，加入一个起始位1，一个停止位0，55H的数据格式为1101010100B
 
-{% include image.html file="nexys/37.png" %} 
-{% include image.html file="nexys/38.png" %} 
+{% include inline_image.html file="nexys/37.png" %} {% include inline_image.html file="nexys/38.png" %} 
 
 串口通信的接收过程：（异步通信：接收器和发送器有各自的时钟；同步通信：发送器和接收器由同一个时钟源控制。RS232是异步通信）
 
@@ -338,7 +336,7 @@ PS/2鼠标接口采用一种双向同步串行协议｡即每在时钟线上发�
 
        如果主机要发送数据,它必须控制鼠标产生时钟信号｡方法如下:主机首先下拉时钟线至少100μs抑制通信,然后再下拉数据线,最后释放时钟线｡通过这一时序控制鼠标产生时钟信号｡当鼠标检测到这个时序状态,会在10ms内产生时钟信号｡如图3中 A 时序段｡主机和鼠标之间,传输数据帧的时序如图2､图3所示｡2.2 数据包结构在主机程序中,利用每个数据位的时钟脉冲触发中断,在中断例程中实现数据位的判断和接收｡在实验过程中,通过合适的编程,能够正确控制并接收鼠标数据｡但该方案有一点不足,由于每个CLOCK都要产生一次中断,中断频繁,需要耗用大量的主机资源｡
 
-{% include image.html file="nexys/41.png" %}{% include image.html file="nexys/42.png" %} 
+{% include inline_image.html file="nexys/41.png" %}{% include inline_image.html file="nexys/42.png" %} 
 
  PS/2鼠标的四种工作模式是:Reset模式,当鼠标上电或主机发复位命令 0xFF给它时进入这种模式;Stream模式鼠标的默认模式,当鼠标上电或复位完成后,自动进入此模式,鼠标基本上以此模式工作;Remote模式,只有在主机发送了模式设置命令 0xF0后,鼠标才进入这种模式;Wrap模式,这种模式只用于测试鼠标与主机连接是否正确｡
 
@@ -370,9 +368,7 @@ BYTE3 -- Y坐标变化量，与byte的bit5组成9位符号数，负数表示向�
 
 BYTE4 -- 滚轮变化。
 
-{% include image.html file="nexys/43.png" %} 
-
-{% include image.html file="nexys/44.png" %} 
+{% include image.html file="nexys/43.png" %} {% include image.html file="nexys/44.png" %} 
 
 如果数据位中１的个数为偶数，校验位就为１；如果数据位中１的个数为奇数，校验位就为０；总之，数据位中１的个数加上校验位中１的个数总为奇数，因此总进行奇校验。
 

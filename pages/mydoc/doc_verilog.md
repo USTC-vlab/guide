@@ -32,7 +32,7 @@ Verilog代码如下：
 
 **input/output** :表征该信号的方向，除输入、输出外还有一种inout（输入输出）型。
 
-**操作符** ：~按位取反、&amp;按位与、|按位或
+**操作符** ：<pre>~按位取反、&amp;按位与、|按位或</pre>
 
 常用操作符及其优先级：
 
@@ -47,7 +47,7 @@ Verilog代码如下：
 ### 1.2  多bit逻辑门
 
 对于下面5个逻辑表达式
-
+<pre>
 y1 = a &amp; b;
 
 y2 = a | b;
@@ -57,7 +57,7 @@ y3 = a ^ b;
 y4 = ~(a &amp; b);
 
 y5 = ~(a | b);
-
+</pre>>
 其电路图如下所示：
 
  {% include image.html file="verilog/6.png" %} 
