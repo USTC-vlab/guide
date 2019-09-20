@@ -5,7 +5,8 @@
   {% for entry in sidebar %}
   {% for folder in entry.folders %}
   {% if folder.output contains "web" %}
-  <li>
+  <!--备注：此为下拉菜单会默认展开，每次刷新页面自动恢复默认状态-->
+  <li class='active'>
       <a title="{{folder.title}}" href="#">{{folder.title}}</a>
       <ul>
           {% for folderitem in folder.folderitems %}
@@ -55,4 +56,10 @@
 </ul>
 
 <!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
-<script>$("li.active").parents('li').toggleClass("active");</script>
+<!--需要了解toggle()函数的用法，如果只在上面设置默认展开模式，则需要添加第二个参数(true)，否则会将原来的active类删除，则最终效果变为展开另外一个sidebar，代码可以删除，行为与表现分开，满足平稳退化-->
+<!--
+    作用：将打开的页面的父标签sidebar展开
+<script>
+    $("li.active").parents('li').toggleClass("active",true);
+</script>
+-->
