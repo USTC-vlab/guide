@@ -16,7 +16,7 @@ folder: mydoc
 
 ​	接下来的一步可以使用默认选项继续安装，但是这样占用的存储空间比较大。也可以使用如用所示的最小安装方式。
 
-{% include image.html file="vivado/l1563976105757.png" %} 
+{% include image.html file="vivado/1563976105757.png" %} 
 
 接下来就是比较漫长的安装过程了。你可以先做其他事情，等会再来瞅一下。
 
