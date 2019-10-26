@@ -56,6 +56,10 @@ entries:
       url: /doc_testbench.html
       output: web, pdf
 
+    - title: 代码风格规范
+      url: /coding_convention.html
+      output: web, pdf
+
   - title: 一些例子
     output: web, pdf
     folderitems:
