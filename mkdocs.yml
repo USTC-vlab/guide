@@ -7,11 +7,37 @@ use_directory_urls: false
 theme:
   name: material
   language: zh
+  palette:
+    - scheme: default
+      media: "(prefers-color-scheme: light)"
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: 切换至深色模式
+    - scheme: slate
+      media: "(prefers-color-scheme: dark)"
+      primary: light blue
+      accent: light blue
+      toggle:
+        icon: material/toggle-switch
+        name: 切换至浅色模式
+  icon:
+    logo: material/book
+    repo: octicons/mark-github-16
   features:
     - navigation.sections
     - navigation.top
 
+markdown_extensions:
+  - def_list
+
 extra:
+  social:
+    - icon: octicons/globe-16
+      link: 'https://vlab.ustc.edu.cn/'
+    - icon: octicons/mark-github-16
+      link: 'https://github.com/USTC-vlab'
   analytics:
     provider: google
     property: UA-115907213-3

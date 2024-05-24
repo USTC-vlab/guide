@@ -34,7 +34,7 @@ module mux4_to_1(out, in0, in1, in2, in3, s1, s0); //模块名后不留空格
 
     always @(*) //关键字后空格（always后加空格）
     begin
-      	//关键字后空格（case后加空格）
+       //关键字后空格（case后加空格）
         case ({s1, s0})
             2'b00: out = in0; //分号向前紧跟
             2'b01: out = in1;
