@@ -1,9 +1,3 @@
----
-title: 复杂时序逻辑电路
-sidebar: mydoc_sidebar
-permalink: doc_complex_timing.html
-folder: mydoc
----
 # 复杂时序逻辑电路
 
 ## 1. 时序逻辑电路的基本结构和分类

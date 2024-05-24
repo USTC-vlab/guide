@@ -1,9 +1,3 @@
----
-title: 复杂组合逻辑电路
-sidebar: mydoc_sidebar
-permalink: doc_complex_logic.html
-folder: mydoc
----
 # 复杂组合逻辑电路
 
 ## 编码器，译码器和存储器介绍

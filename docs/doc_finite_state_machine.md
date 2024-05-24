@@ -1,9 +1,3 @@
----
-title: 有限状态机
-sidebar: mydoc_sidebar
-permalink: doc_finite_state_machine.html
-folder: mydoc
----
 # 有限状态机
 
 ## 有限状态机简介

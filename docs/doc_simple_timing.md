@@ -1,12 +1,4 @@
----
-title: 简单时序逻辑电路
-sidebar: mydoc_sidebar
-permalink: doc_simple_timing.html
-folder: mydoc
----
 # 简单时序逻辑电路
-
-[TOC]
 
 ## 1. 时序逻辑电路概念
 
