@@ -10,24 +10,34 @@ folder: mydoc
 ## verilog 中的数字表示
 
 在 Verilog HDL 中一个信号可能有如下四种基本的值：  
-i.0：逻辑 0 或假  
-ii.1：逻辑 1 或真  
-iii.x：未知  
-iv.z：高阻态（三态）  
-在门电路的输入端或是表达式中的 z  值通常会被译为一个 x 值（待确定）。通常情况下，Verilog HDL 是区分大小写的，但是作为值来表示时是不区分大小写的。  
 
-在 Verilog HDL 中有三种常量类型：(i) 整型，(ii) 实型，和 (iii) 字符串。在整型常量和实型常量中可以使用下划线（_）来增加可读性。但它不能出现在第一个和最后一个字符的位置上。  
+1. `0`：逻辑 0 或假  
+2. `1`：逻辑 1 或真  
+3. `x`：未知  
+4. `z`：高阻态（三态）  
+
+在门电路的输入端或是表达式中的 z 值通常会被译为一个 x 值（待确定）。通常情况下，Verilog HDL 是区分大小写的，但是作为值来表示时是不区分大小写的。  
+
+在 Verilog HDL 中有三种常量类型：(i) 整型，(ii) 实型，和 (iii) 字符串。在整型常量和实型常量中可以使用下划线（`_`）来增加可读性。但它不能出现在第一个和最后一个字符的位置上。  
 
 整数可以写成 (i) 简单的十进制数或者是 (ii) 带进制格式。一个写成简单十进制形式的整数由一个可省略的 + 或是一个 - 和一串数字组成。比如，  
-15  
--32  
-其中 15 可以被写成 5 比特格  式的二进制数 01111，-32 可以写成 6 比特格式的 100000。简单的十进制数在硬件中最终会占用 32 比特。
 
-一个数也可以被表示为进制格式，语法格式如下： [size]’base value
+```verilog
+15
+-32
+```
+
+其中 15 可以被写成 5 比特格式的二进制数 `01111`，-32 可以写成 6 比特格式的 `100000`。简单的十进制数在硬件中最终会占用 32 比特。
+
+一个数也可以被表示为进制格式，语法格式如下： `[size]’base value`。
 其中 size 代表数的比特数，base（基）是 o 或者 O（代表八进制 octal），b 或者 B（代表二进制 Binary），d 或者 D（代表十进制 Decimal），h 或者 H（代表十六进制 hexadecimal）中的一个。Value 是一个在该进制下有效的数字的序列。Value 必须是无符号的。比如，wire [4:0] 5'O37 //5 比特八进制表示
-reg [3:0] 4'B1x_01 //4 比特二进制
-wire [3:0] 4'd-4 //不合法，value 不能是负数
-wire [11:0] 7'Hx //7 比特 x 扩展到 xxxxxxx
+
+```verilog
+reg [3:0] 4'B1x_01 // 4 比特二进制
+wire [3:0] 4'd-4   // 不合法，value 不能是负数
+wire [11:0] 7'Hx   // 7 比特 x 扩展到 xxxxxxx
+```
+
 如果 size 设定得比设定的常数的值的大小要大，这个数会被用 0 扩展到左边，除非最左边的比特是 x 或 z，此时也会相应地用 x 或 z 扩展。如果 size 设定得更小，那左边的多余的位会被忽略。如果 size 未设定，那么就会使用 32 比特。
 
 ## 实验目标
@@ -78,18 +88,19 @@ Nexys4 DDR 开发板包含两个 4 位 7 段数码管 LED 显示器。每个模�
 
 1. 打开 Vivado，创建一个名为 lab2.1 的空白工程（project）。
 
-2. 创建一个顶层 Verilog module，命名为 bcdto7segment_dataflow，按数据流建模风格添加 4-bit data
-输入 (x[3:0]),阳极使能输出信号 (an[3:0])，7-bit 输出 (seg[6:0]) 。
-(提示：你必须在纸上推导 7 个段的七个表达式。). 对 an[3:0] 输出合适的信号使得只有最右边的一位显示。
+2. 创建一个顶层 Verilog module，命名为 bcdto7segment_dataflow，按数据流建模风格添加 4-bit data。输入 `x[3:0]`，阳极使能输出信号 `an[3:0]`，7-bit 输出 `seg[6:0]`。(提示：你必须在纸上推导 7 个段的七个表达式。). 对 `an[3:0]` 输出合适的信号使得只有最右边的一位显示。
 
-3. 添加对应开发板的 XDC 文件到工程。编辑 XDC 文件，将 SW3-SW0 赋给 x[3:0]，CA, CB, CC, CD, CE, CF, CG 给 seg[0]到 seg[6]，J17, J18, T9,J14, P14, T14, K2, U13 给 an7, an6, an5, an4,an3,
-an2, an1, an0 (Nexys4 DDR 开发板)
+3. 添加对应开发板的 XDC 文件到工程。编辑 XDC 文件，将 SW3-SW0 赋给 `x[3:0]`，`CA`, `CB`, `CC`, `CD`, `CE`, `CF`, `CG` 给 `seg[0]` 到 `seg[6]`，J17, J18, T9,J14, P14, T14, K2, U13 给 `an[7]`, `an[6]`, `an[5]`, `an[4]`, `an[3]`, `an[2]`, `an[1]`, `an[0]` (Nexys4 DDR 开发板)
+
 4. 综合你的设计。
+
 5. 实现你的设计。
+
 6. 生成比特流文件，将其下载到 Basys3 或 Nexys4 DDR 开发板，并验证功能。
 
 ### 参考代码
 
+```verilog
  module lab2_1(
      input [3:0]x,
      output reg [7:0]seg,
@@ -111,28 +122,30 @@ an2, an1, an0 (Nexys4 DDR 开发板)
        default seg=8'bxxxx_xxxx;
         endcase
  endmodule
+ ```
 
 修改对应的 xdc 文件段落，大致如下图：
 
- ​ set_property -dict { PACKAGE_PIN T10   IOSTANDARD LVCMOS33 } [get_ports { seg[0] }]; #IO_L24N_T3_A00_D16_14 Sch=ca
- ​ set_property -dict { PACKAGE_PIN R10   IOSTANDARD LVCMOS33 } [get_ports { seg[1] }]; #IO_25_14 Sch=cb
- ​ set_property -dict { PACKAGE_PIN K16   IOSTANDARD LVCMOS33 } [get_ports { seg[2] }]; #IO_25_15 Sch=cc
- ​ set_property -dict { PACKAGE_PIN K13   IOSTANDARD LVCMOS33 } [get_ports { seg[3] }]; #IO_L17P_T2_A26_15 Sch=cd
- ​ set_property -dict { PACKAGE_PIN P15   IOSTANDARD LVCMOS33 } [get_ports { seg[4] }]; #IO_L13P_T2_MRCC_14 Sch=ce
- ​ set_property -dict { PACKAGE_PIN T11   IOSTANDARD LVCMOS33 } [get_ports { seg[5] }]; #IO_L19P_T3_A10_D26_14 Sch=cf
- ​ set_property -dict { PACKAGE_PIN L18   IOSTANDARD LVCMOS33 } [get_ports { seg[6] }]; #IO_L4P_T0_D04_14 Sch=cg
+```shell
+​set_property -dict { PACKAGE_PIN T10   IOSTANDARD LVCMOS33 } [get_ports { seg[0] }]; #IO_L24N_T3_A00_D16_14 Sch=ca
+​set_property -dict { PACKAGE_PIN R10   IOSTANDARD LVCMOS33 } [get_ports { seg[1] }]; #IO_25_14 Sch=cb
+​set_property -dict { PACKAGE_PIN K16   IOSTANDARD LVCMOS33 } [get_ports { seg[2] }]; #IO_25_15 Sch=cc
+​set_property -dict { PACKAGE_PIN K13   IOSTANDARD LVCMOS33 } [get_ports { seg[3] }]; #IO_L17P_T2_A26_15 Sch=cd
+​set_property -dict { PACKAGE_PIN P15   IOSTANDARD LVCMOS33 } [get_ports { seg[4] }]; #IO_L13P_T2_MRCC_14 Sch=ce
+​set_property -dict { PACKAGE_PIN T11   IOSTANDARD LVCMOS33 } [get_ports { seg[5] }]; #IO_L19P_T3_A10_D26_14 Sch=cf
+​set_property -dict { PACKAGE_PIN L18   IOSTANDARD LVCMOS33 } [get_ports { seg[6] }]; #IO_L4P_T0_D04_14 Sch=cg
 ​
+set_property -dict { PACKAGE_PIN H15   IOSTANDARD LVCMOS33 } [get_ports { seg[7] }]; #IO_L19N_T3_A21_VREF_15 Sch=dp
 
- set_property -dict { PACKAGE_PIN H15   IOSTANDARD LVCMOS33 } [get_ports { seg[7] }]; #IO_L19N_T3_A21_VREF_15 Sch=dp
-
- set_property -dict { PACKAGE_PIN J17   IOSTANDARD LVCMOS33 } [get_ports { an[0] }]; #IO_L23P_T3_FOE_B_15 Sch=an[0]
- set_property -dict { PACKAGE_PIN J18   IOSTANDARD LVCMOS33 } [get_ports { an[1] }]; #IO_L23N_T3_FWE_B_15 Sch=an[1]
- set_property -dict { PACKAGE_PIN T9    IOSTANDARD LVCMOS33 } [get_ports { an[2] }]; #IO_L24P_T3_A01_D17_14 Sch=an[2]
- set_property -dict { PACKAGE_PIN J14   IOSTANDARD LVCMOS33 } [get_ports { an[3] }]; #IO_L19P_T3_A22_15 Sch=an[3]
-  set_property -dict { PACKAGE_PIN P14   IOSTANDARD LVCMOS33 } [get_ports { an[4] }]; #IO_L8N_T1_D12_14 Sch=an[4]
-  set_property -dict { PACKAGE_PIN T14   IOSTANDARD LVCMOS33 } [get_ports { an[5] }]; #IO_L14P_T2_SRCC_14 Sch=an[5]
-  set_property -dict { PACKAGE_PIN K2    IOSTANDARD LVCMOS33 } [get_ports { an[6] }]; #IO_L23P_T3_35 Sch=an[6]
-  set_property -dict { PACKAGE_PIN U13   IOSTANDARD LVCMOS33 } [get_ports { an[7] }]; #IO_L23N_T3_A02_D18_14 Sch=an[7]
+set_property -dict { PACKAGE_PIN J17   IOSTANDARD LVCMOS33 } [get_ports { an[0] }]; #IO_L23P_T3_FOE_B_15 Sch=an[0]
+set_property -dict { PACKAGE_PIN J18   IOSTANDARD LVCMOS33 } [get_ports { an[1] }]; #IO_L23N_T3_FWE_B_15 Sch=an[1]
+set_property -dict { PACKAGE_PIN T9    IOSTANDARD LVCMOS33 } [get_ports { an[2] }]; #IO_L24P_T3_A01_D17_14 Sch=an[2]
+set_property -dict { PACKAGE_PIN J14   IOSTANDARD LVCMOS33 } [get_ports { an[3] }]; #IO_L19P_T3_A22_15 Sch=an[3]
+set_property -dict { PACKAGE_PIN P14   IOSTANDARD LVCMOS33 } [get_ports { an[4] }]; #IO_L8N_T1_D12_14 Sch=an[4]
+set_property -dict { PACKAGE_PIN T14   IOSTANDARD LVCMOS33 } [get_ports { an[5] }]; #IO_L14P_T2_SRCC_14 Sch=an[5]
+set_property -dict { PACKAGE_PIN K2    IOSTANDARD LVCMOS33 } [get_ports { an[6] }]; #IO_L23P_T3_35 Sch=an[6]
+set_property -dict { PACKAGE_PIN U13   IOSTANDARD LVCMOS33 } [get_ports { an[7] }]; #IO_L23N_T3_A02_D18_14 Sch=an[7]
+```
 
 ## 将 4 比特的输入转化为相应的 2 位十进制数（BCD 码）后输出到 LED 灯（最高位）和最右边的七段数码管（更低位）上
 
@@ -165,11 +178,11 @@ an2, an1, an0 (Nexys4 DDR 开发板)
 
 #### 模块
 
-Verilog HDL 程序是由模块构成的。每个模块的内容都是嵌在 module 和 endmodule 两个语句之间。每个模块实现特定的功能。模块可以进行层次嵌套。  
+Verilog HDL 程序是由模块构成的。每个模块的内容都是嵌在 `module` 和 `endmodule` 两个语句之间。每个模块实现特定的功能。模块可以进行层次嵌套。  
 每个模块要进行端口定义，并说明输入输出口，然后对模块的功能进行行为逻辑描述。  
 Verilog HDL 程序的书写格式自由，一行可以写几个语句，一个语句也可以分写多行。  
 除了 endmodule 语句外，每个语句和数据定义的最后必须有分号。  
-可以用/…../和//…….对 Verilog HDL 程序的任何部分作注释。一个好的，有使
+可以用 `/* */` 和 `//` 对 Verilog HDL 程序的任何部分作注释。一个好的，有使
 用价值的源程序都应当加上必要的注释，以增强程序的可读性和可维护性。
 
 #### Verilog 模块调用端口的连接规则
@@ -231,10 +244,11 @@ Verilog HDL 程序的书写格式自由，一行可以写几个语句，一个�
 
 我们可以首先写出输入 m 与输出 m 与 z 的关系，使用数据流的模式来实现
 
-    reg  [3:0]m;
-    always@(*)
-    begin
-        case(v)
+```verilog
+reg  [3:0]m;
+always@(*)
+begin
+    case(v)
         4'b0000: begin z=0; m=4'b0000;  end
         4'b0001: begin z=0; m=4'b0001;  end
         4'b0010: begin z=0; m=4'b0010;  end
@@ -251,7 +265,9 @@ Verilog HDL 程序的书写格式自由，一行可以写几个语句，一个�
         4'b1101: begin z=1; m=4'b0111;  end
         4'b1110: begin z=1; m=4'b1000;  end
         4'b1111: begin z=1; m=4'b1001;  end
-        endcase
+    endcase
+end
+```
 
 添加我们在 lab1 中的代码：
 
@@ -267,36 +283,38 @@ Verilog HDL 程序的书写格式自由，一行可以写几个语句，一个�
 
 综上所述，具体的代码如下：
 
- module lab2_2(
-     input [3:0]v,
-     output reg z,
-     output  [7:0]seg,
-     output [7:0]an
-     );
-     reg  [3:0]m;
-     always@(*)
-     begin
-         case(v)
-         4'b0000: begin z=0; m=4'b0000;  end
-         4'b0001: begin z=0; m=4'b0001;  end
-         4'b0010: begin z=0; m=4'b0010;  end
-         4'b0011: begin z=0; m=4'b0011;  end
-         4'b0100: begin z=0; m=4'b0100;  end
-         4'b0101: begin z=0; m=4'b0101;  end
-         4'b0110: begin z=0; m=4'b0110;  end
-         4'b0111: begin z=0; m=4'b0111;  end
-         4'b1000: begin z=0; m=4'b1000;  end
-         4'b1001: begin z=0; m=4'b1001;  end
-         4'b1010: begin z=1; m=4'b0000;  end
-         4'b1011: begin z=1; m=4'b0001;  end
-         4'b1100: begin z=1; m=4'b0010;  end
-         4'b1101: begin z=1; m=4'b0011;  end
-         4'b1110: begin z=1; m=4'b0100;  end
-         4'b1111: begin z=1; m=4'b0101;  end
-         endcase
-     end
-     lab2_1 A(m,seg,an);  //A 是实例化的名称
- endmodule
+```verilog
+module lab2_2(
+    input [3:0]v,
+    output reg z,
+    output  [7:0]seg,
+    output [7:0]an
+    );
+    reg  [3:0]m;
+    always@(*)
+    begin
+        case(v)
+        4'b0000: begin z=0; m=4'b0000;  end
+        4'b0001: begin z=0; m=4'b0001;  end
+        4'b0010: begin z=0; m=4'b0010;  end
+        4'b0011: begin z=0; m=4'b0011;  end
+        4'b0100: begin z=0; m=4'b0100;  end
+        4'b0101: begin z=0; m=4'b0101;  end
+        4'b0110: begin z=0; m=4'b0110;  end
+        4'b0111: begin z=0; m=4'b0111;  end
+        4'b1000: begin z=0; m=4'b1000;  end
+        4'b1001: begin z=0; m=4'b1001;  end
+        4'b1010: begin z=1; m=4'b0000;  end
+        4'b1011: begin z=1; m=4'b0001;  end
+        4'b1100: begin z=1; m=4'b0010;  end
+        4'b1101: begin z=1; m=4'b0011;  end
+        4'b1110: begin z=1; m=4'b0100;  end
+        4'b1111: begin z=1; m=4'b0101;  end
+        endcase
+    end
+    lab2_1 A(m,seg,an);  //A 是实例化的名称
+endmodule
+```
 
 在你具体在函数中写入调用函数时，会自动生成两个函数之间的调用关系，这是你可以看到 lab2_2 函数成为了顶层模块。
 
@@ -327,68 +345,72 @@ Verilog HDL 程序的书写格式自由，一行可以写几个语句，一个�
 
 首先，我们需要编写一个一位的加法，具体原理请看前面的讲解：  
 
- module one_bit_add(
-     input a,
-     input b,
-     input cin,
-     output s,
-     output reg cout
-     );
-     assign s=a^b^cin;
-     always@(*)
-     begin
-         if(a&b|a&cin|b&cin)
-         cout=1;
-         else
-         cout=0;
-     end
-
- endmodule
+```verilog
+module one_bit_add(
+    input a,
+    input b,
+    input cin,
+    output s,
+    output reg cout
+    );
+    assign s=a^b^cin;
+    always@(*)
+    begin
+        if(a&b|a&cin|b&cin)
+        cout=1;
+        else
+        cout=0;
+    end
+endmodule
+```
 
 在 lab2.3 的工程中重复调用这个模块，来实现我们的四位加法器，具体代码如下：  
 
- module lab2_3(
-     input [3:0]a,
-     input [3:0]b,
-     output [3:0]s,
-     input cin,
-     output cout
-     );
-     wire temp0,temp1,temp2;
-     one_bit_add A(a[0],b[0],cin,s[0],temp0);
-     one_bit_add B(a[1],b[1],temp0,s[1],temp1);
-     one_bit_add C(a[2],b[2],temp1,s[2],temp2);
-     one_bit_add D(a[3],b[3],temp2,s[3],cout);
- endmodule
+```verilog
+module lab2_3(
+    input [3:0]a,
+    input [3:0]b,
+    output [3:0]s,
+    input cin,
+    output cout
+    );
+    wire temp0,temp1,temp2;
+    one_bit_add A(a[0],b[0],cin,s[0],temp0);
+    one_bit_add B(a[1],b[1],temp0,s[1],temp1);
+    one_bit_add C(a[2],b[2],temp1,s[2],temp2);
+    one_bit_add D(a[3],b[3],temp2,s[3],cout);
+endmodule
+```
 
 #### 仿真代码
 
 因为对参数中的变量手动一次次修改对于比较大的数字较为麻烦，所以在这里使用了循环语句。
 
- module lab2_3_tb(
-
-     );
-     reg [3:0]a;
-     reg [3:0]b;
-     wire [3:0]s;
-     reg cin;
-     wire cout;
-     integer k;
-     lab2_3 dut(a,b,s,cin,cout);
-     initial
-     begin
-     a=0; b=0; cin=0;
-         for(k=0;k<20;k=k+1)
-         begin
-          #10   if(k<10)
-                a=a+1;
-                else
-                b=b+1;
-                if(k==10)
-                cin=1;            
-         end
-     end
- endmodule
+```verilog
+module lab2_3_tb(
+    );
+    reg [3:0]a;
+    reg [3:0]b;
+    wire [3:0]s;
+    reg cin;
+    wire cout;
+    integer k;
+    lab2_3 dut(a,b,s,cin,cout);
+    initial
+    begin
+    a=0; b=0; cin=0;
+        for(k=0;k<20;k=k+1)
+        begin
+        #10   if(k<10)
+            a=a+1;
+            else
+            b=b+1;
+            if(k==10)
+            cin=1;            
+        end
+    end
+endmodule
+```
 
 查看仿真代码，确定自己的代码是否正确：
 
@@ -402,7 +424,7 @@ Verilog HDL 程序的书写格式自由，一行可以写几个语句，一个�
 
 #### 具体要求
 
-1. 打开 Vivado 并创建一个名为 lab2.kuozhan1 的空白工程。
+1. 打开 Vivado 并创建一个名为 `lab2.kuozhan1` 的空白工程。
 2. 按需求修改 3 中的工程，使之能完成需求的功能并将结果输出到 LED0 和最右边的七段数码管上显示
 
 3. 将与开发板对应的 XDF 文件添加到工程中，编辑文件添加相关的端口。使用开关
