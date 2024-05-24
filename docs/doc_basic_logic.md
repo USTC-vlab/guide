@@ -16,7 +16,9 @@ Nexys4 DDR 特性如下: (译者注：开发板各批次参数不同，仅供参
 • 72个I/O连接到扩展连接器  
 • GPIO 包括 8个LED， 5个按键开关，8个拨码开关和2个4位7段数码管  
 Nexys4 DDR 开发板如下图所示   
-{% include image.html file="basic_logic/Nexys4_DDR.png" %} 
+
+![](images/basic_logic/Nexys4_DDR.png)
+ 
 
 ## 门级建模
 Verilog HDL 支持内建的原始的门级设计。门级支持包括多输入、多输出、三态和拉态。 多输入门支持包括： and, nand, or, nor, xor, 和xnor，它们的输入为2个及以上，输出只有1个。多输出门支持包括buf 和 not ，它们的输出为2个及以上，输入只有1个。 Verilog HDL语言还支持三态门： bufif0, bufif1, notif0, 和notif1。这些三态门有一个输入，一个控制信号和一个输出。拉门支持包括  
@@ -49,26 +51,40 @@ Verilog HDL语言也允许在实例化门电路时加入延迟。 加入的延�
 - 下载比特流文件到开发板，并验证功能
 ## 使用门级建模风格设计2-to-1多路选择器并下载验证结果
 由我们数字电路课本的知识我们知道一个2-to-1多路选择器的电路大致如下如所示：
-{% include image.html file="basic_logic/2to1.png" %}     
+
+![](images/basic_logic/2to1.png)
+     
 ### 实验步骤
 1. 打开 Vivado并创建空白工程，取名为 lab1.1 (参考 Vivado2015.1 手册 Step 1)。
-{% include image.html file="basic_logic/13.png" %} 
 
-{% include image.html file="basic_logic/14.png" %} 
+![](images/basic_logic/13.png)
+ 
 
-{% include image.html file="basic_logic/15.png" %} 
+
+![](images/basic_logic/14.png)
+ 
+
+
+![](images/basic_logic/15.png)
+ 
 
 创建文件create file
 
-{% include image.html file="basic_logic/16.png" %} 
+
+![](images/basic_logic/16.png)
+ 
 
 添加xdc文件
 
-{% include image.html file="basic_logic/17.png" %} 
+
+![](images/basic_logic/17.png)
+ 
 
 选择配置文件  
 
-{% include image.html file="basic_logic/18.png" %} 
+
+![](images/basic_logic/18.png)
+ 
 2.  使用门级建模风格创建Verilog module包含3个输入(in1,in2,select)和1个输出(out) (参考Vivado2015.1手册 Step 1).
 
 
@@ -83,7 +99,9 @@ Next。单击Finish。
 
 5. 一个定义Module的窗口会出现， 通过单击Port Name并输入变量名，创建3个输入 (in1, in2, select) 和1个输出(out) 。 通过单击下拉列表选择正确的方向修改 Direction。单击OK.
 
-{% include image.html file="basic_logic/19.png" %} 
+
+![](images/basic_logic/19.png)
+ 
 
 6.		打开lab1.1.v 文件编辑其中内容。 在分号 (;)后添加上文电路的结构逻辑。选择File > Save File或 CRTL-S保存。
 
@@ -105,9 +123,13 @@ Next。单击Finish。
     endmodule
 
 点击Schematic 查看门级建模的设计  
-{% include image.html file="basic_logic/schematic.png" %} 
+
+![](images/basic_logic/schematic.png)
+ 
 我们可以看到大致如下的电路：
-{% include image.html file="basic_logic/schematic1.png" %} 
+
+![](images/basic_logic/schematic1.png)
+ 
 由此我们可以知道我们设计的门级建模的确是对的。
 
 编辑XDC文件。去注释并将 SW0 和 SW1赋给in1 和 in2, SW7 给 select, LED0给out。保存XDC文件。
@@ -115,7 +137,9 @@ Next。单击Finish。
 
 打开xdc文件
 
-{% include image.html file="basic_logic/20.png" %} 
+
+![](images/basic_logic/20.png)
+ 
 
 修改xdc文件对应段落：  
 
@@ -186,7 +210,9 @@ Next。单击Finish。
 需要注意的是，多个持续赋值不能使用同一个目标线网。
 ## 使用数据流级建模风格设计2-to-1多路选择器并下载验证结果
 对应电路图：  
-{% include image.html file="basic_logic/2to1.png" %} 
+
+![](images/basic_logic/2to1.png)
+ 
 
 ### 实验步骤
 1. 打开Vivado并创建空白工程取名为 lab1.2。
@@ -215,7 +241,9 @@ Next。单击Finish。
 
 点击Schematic 查看门级建模的设计    
 我们可以看到大致如下的电路：  
-{% include image.html file="basic_logic/shuju.png" %} 
+
+![](images/basic_logic/shuju.png)
+ 
 
 编辑XDC文件。去注释并将 SW0 和 SW1赋给in1 和 in2, SW7 给 selecet, LED0给out。保存XDC文件。
  生成比特流文件，将其下载到Basys3或Nexys4 DDR开发板，并验证功能 
@@ -257,18 +285,24 @@ initial和always语句都在time=0时刻执行，在其余时间只有always语�
 要测试我们设计的模块功能是否正常，最直接的办法就是烧写到FPGA芯片中进行验证，但是这种方式往往结果并不直观，且出现问题后也不容易定位。为提高工作效率，我们可通过电脑仿真的方式进行功能验证，待仿真通过后，再烧写到FPGA中，这样可以快速排除电路中存在的绝大多数bug。在电脑上进行仿真，除了我们设计的功能模块之外，还需要另一模块——testbench，用于产生被测模块所需的激励信号。由于testbench只是用于电脑端的仿真，而不需要最终综合成电路，因此其写法更加灵活，可以使用verilog语法中的一些不可综合的语句，如initial、#、$display、$readmemb、forever等。  
 假设我们的被测模块完成以下功能  
 
-{% include image.html file="basic_logic/1.png" %} 
+
+![](images/basic_logic/1.png)
+ 
 
 其verilog代码为：
 
-{% include image.html file="basic_logic/2.png" %} 
+
+![](images/basic_logic/2.png)
+ 
 
 测试方法可以大致分为3种，这里我们会对三种测试方法都做介绍，但在这个实验中使用的简单测试文件，其他两种方法会在之后的实验中再具体使用：
 
 ### 简单测试文件
 最简单的测试文件可以写成如下形式：
 
-{% include image.html file="basic_logic/3.png" %} 
+
+![](images/basic_logic/3.png)
+ 
 
 语法说明：  
 testbench文件一般不包含任何输入输出信号  
@@ -278,7 +312,9 @@ initial：通过initial块构造输入信号的波形，同一initial块内部�
 ###  自检测试文件
 带自检功能的测试文件如下所示，可以对输出结果进行判断，并打印错误信息
 
-{% include image.html file="basic_logic/4.png" %} 
+
+![](images/basic_logic/4.png)
+ 
 
 模块的输入信号给定之后，就有有结果输出，将实际输出结果于预期结果做比较，如果不同，则打印出错误信息。
 ### 测试向量
@@ -300,7 +336,9 @@ initial：通过initial块构造输入信号的波形，同一initial块内部�
 
 测试文件
 
-{% include image.html file="basic_logic/5.png" %} 
+
+![](images/basic_logic/5.png)
+ 
 
 前面介绍了三种测试方法，三种方法各有其优缺点。  
 简单测试文件编写简单，容易上手，但需要人工判断仿真结果的正确性；  
@@ -309,7 +347,9 @@ initial：通过initial块构造输入信号的波形，同一initial块内部�
 
 ## 使用行为级建模风格设计2-to-1多路选择器并下载验证结果
 对应电路图：   
-{% include image.html file="basic_logic/2to1.png" %} 
+
+![](images/basic_logic/2to1.png)
+ 
 ### 实验步骤
 1. 打开Vivado并创建空白工程取名为 lab1.3。
 
@@ -342,7 +382,9 @@ initial：通过initial块构造输入信号的波形，同一initial块内部�
 
 点击Schematic 查看门级建模的设计    
 我们可以看到大致如下的电路： 
-{% include image.html file="basic_logic/xingwei.png" %} 
+
+![](images/basic_logic/xingwei.png)
+ 
 
 编辑XDC文件。去注释并将 SW0 和 SW1赋给in1 和 in2, SW7 给 selecet, LED0给out。保存XDC文件。
  生成比特流文件，将其下载到Basys3或Nexys4 DDR开发板，并验证功能 
@@ -350,10 +392,14 @@ initial：通过initial块构造输入信号的波形，同一initial块内部�
 ### 仿真代码的编写和测试
 
 首先，添加仿真代码：  
-{% include image.html file="basic_logic/6.png" %} 
+
+![](images/basic_logic/6.png)
+ 
 
 选择点击add source或者使用快捷键ALT+A来打开，选择add or create simulation sources
-{% include image.html file="basic_logic/7.png" %} 
+
+![](images/basic_logic/7.png)
+ 
 
 创建文件lab1.3.tb，把之前lab1.3中的代码中的输入定义为reg类型（可以直接赋值），输出定义为wire类型，之前的文件实例化进入仿真代码。
 
@@ -378,24 +424,34 @@ initial：通过initial块构造输入信号的波形，同一initial块内部�
 
 把测试模块定义为顶层模块：
 
-{% include image.html file="basic_logic/8.png" %} 
+
+![](images/basic_logic/8.png)
+ 
 
 设定仿真的配置（simulation settings）:
 
-{% include image.html file="basic_logic/9.png" %} 
+
+![](images/basic_logic/9.png)
+ 
 
 设置仿真时间为100ns：
 
-{% include image.html file="basic_logic/10.png" %} 
+
+![](images/basic_logic/10.png)
+ 
 
 
 
 开始仿真：
-{% include image.html file="basic_logic/11.png" %} 
+
+![](images/basic_logic/11.png)
+ 
 
 查看仿真，判断我们代码的正确性：
 
-{% include image.html file="basic_logic/12.png" %} 
+
+![](images/basic_logic/12.png)
+ 
 ## 扩展实验内容
 用门级建模的方式,数据流建模或者行为级建模的方式设计一个4选1的选择器，要求将 SW0 ， SW1，SW2，SW3赋给in1，in2, in3，in4，SW7，SW8 给 selecet1 ，select2.保存XDC文件。先编写仿真代码来测试其正确性，然后生成比特流文件，将其下载到Basys3或Nexys4 DDR开发板，并验证功能 
 

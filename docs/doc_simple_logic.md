@@ -37,7 +37,9 @@ wire [11:0] 7'Hx	//7 比特 x 扩展到 xxxxxxx
 ### 数码管原理
 7段数码管显示器包含7段，编号从a到g，可以用来显示一个字符。根据不同的输入类型，可能需要做类型转换。如果需要显示4bit的BCD码，则需要一个BCD码到7段数码管的译码器。下表展示了你要显示一个数字的bit图样。
 (需要注意的是，你如果需要点亮某一段，则要输出逻辑0到这一段，并且这个显示器的阳极需要用板上的逻辑0驱动)。  
-{% include image.html file="simple_logic/1.png" %} 
+
+![](images/simple_logic/1.png)
+ 
 
 
 
@@ -61,14 +63,20 @@ wire [11:0] 7'Hx	//7 比特 x 扩展到 xxxxxxx
 
 
 Nexys4 DDR开发板包含两个4位7段数码管LED显示器。每个模块中4位的每1位都由7段组成，每一段都嵌入了一颗LED，顺序如下图。每段的LED可以被单独点亮。因而通过点亮特定的段，熄灭其他段，全部128种图样都可以在1位上实现。在这128种图样中，10种数字的图样最有用。
-{% include image.html file="simple_logic/2.png" %} 
+
+![](images/simple_logic/2.png)
+ 
 
 
-{% include image.html file="simple_logic/3.png" %} 
+
+![](images/simple_logic/3.png)
+ 
 
 组成每一位的7颗LED的阳极被连接在一起，称为“共阳极”的电路节点，但LED的阴极是独立的。共阳极节点的信号可以被获取作为4位显示器的使能信号。不同位，相同段的阴极信号分别接到7个电路节点，从CA 到CG (比如上图中4位的 “D” 笔画的阴极被连接到一起，连接到 “CD”这个电路节点)。这7个阴极节点信号可以被获取作为4位显示器的输入信号。这种信号连接的方案支持了多路复用的显示，虽然每个笔 画的阴极信号是4位共用的，但它们只能点亮阳极信号生效的位上的笔画。  
 
-{% include image.html file="simple_logic/4.png" %} 
+
+![](images/simple_logic/4.png)
+ 
 扫描显示控制器电路可以用来控制这个显示器显示一个4位数。这个电路根据阴极图样，以高于人眼可分辨地频率，对每一位的阳极信号进行重复地、持续地、接连地驱动。如果它的更新或“刷新”率降到大约45 Hz时，大多数人能看出显示在闪烁。从Lab 8（体系结构向导和知识产权目录）开始你将设计和使用一个扫描电路。
 ### 实验步骤
 1.  打开Vivado，创建一个名为 lab2.1 的空白工程（project）。
@@ -155,7 +163,9 @@ an2, an1, an0 (Nexys4 DDR开发板)
 
 
 
-{% include image.html file="simple_logic/5.png" %} 
+
+![](images/simple_logic/5.png)
+ 
 
 ### 模块调用
 #### 模块
@@ -172,12 +182,18 @@ Verilog HDL程序的书写格式自由,一行可以写几个语句,一个语句�
 在verilog中，有两种端口声明风格：  
 
 
-{% include image.html file="simple_logic/8.jpg" %} 
+
+![](images/simple_logic/8.jpg)
+ 
 ##### 具体端口连接规则
 
 
-{% include image.html file="simple_logic/9.jpg" %} 
-{% include image.html file="simple_logic/10.jpg" %} 
+
+![](images/simple_logic/9.jpg)
+ 
+
+![](images/simple_logic/10.jpg)
+ 
 
 端口连接规则 将一个端口看成由相互链接的两个部分组成，一部分位于模块内部，另一部分位于模块外部。当在一个模块中调用（实例引用）另一个模块时，端口之间的连接必须遵守一些规则。
 1. 输入端口：从模块内部来讲，输入端口必须为线网数据类型，从模块外部来看，输入端口可以连接到线网或者reg数据类型的变量。    
@@ -246,12 +262,16 @@ Verilog HDL程序的书写格式自由,一行可以写几个语句,一个语句�
 添加我们在lab1中的代码：
 
 
-{% include image.html file="simple_logic/6.png" %} 
+
+![](images/simple_logic/6.png)
+ 
 
 在这里选择添加，也可以使用快捷键ALT+A
 
 
-{% include image.html file="simple_logic/7.png" %} 
+
+![](images/simple_logic/7.png)
+ 
 
 选择add desgin source 并且选择你的lab1文件source中的代码  
 
@@ -297,7 +317,9 @@ Verilog HDL程序的书写格式自由,一行可以写几个语句,一个语句�
 进制）。当你将三个 1 比特的数相加是，结果也会是 2 比特，比如，1 + 1 = 11。这种简单的操作可以被视为将两个比特与一个更低位的操作的进位输入相加，结果产生一个和与一个进位输出——左边的比特是进位输出，右边的比特是和。下图显示了一个 4 比特的加法器。由于进位是像波纹一样从最低比特位(cin)向最高比特位传递的，这样的加法器也叫波纹进位加法器（待确定）。
 
 
-{% include image.html file="simple_logic/11.png" %} 
+
+![](images/simple_logic/11.png)
+ 
 
 ### 实验步骤
 1. 打开Vivado 并创建一个名为 lab2.3 的空白工程。
@@ -381,7 +403,9 @@ Verilog HDL程序的书写格式自由,一行可以写几个语句,一个语句�
 查看仿真代码，确定自己的代码是否正确：
 
 
-{% include image.html file="simple_logic/13.png" %} 
+
+![](images/simple_logic/13.png)
+ 
 ##  扩展实验内容
 ### 扩展实验1
 修改 3 中的工程，将 4 比特的输入看作BCD 码完成加法，生成 BCD 码的结果并在 LED0 和最右边的七段数码管上显示出来。使用开关来输入两个 4 比特 BCD 数并用SW15 输入进位。根据需求复用 2 和 3 中开发的模型。使用数据流级建模。
@@ -399,7 +423,9 @@ SW72-SW0 来给两个 4 比特的 BCD 提供输入，SW15 给进位。
 #### 实验简介
 波纹进位加法器在处理两个很大的数（比如 8 比特，16 比特，32 比特）的加法时会花很长时间运算。为了降低运算时间，可以使用另一个结构，超前进位加法器。它的工作方式是， 基于以下轻轻为每个比特位分别创建两个信号（P 和  G）：进位信号是否会从较低比特位传播过来（即至少有一个输入是 1），进位信号是否由此比特位生成（即两个输入均为 1），或者进位信号是否会被此比特位消灭（两个输入均为 0）。P 和 G 生成后，每个比特位的进位信号也生成了。    
 
-{% include image.html file="simple_logic/11.png" %} 
+
+![](images/simple_logic/11.png)
+ 
 此处𝑃𝑖 = 𝐴𝑖 + 𝐵𝑖，𝐺𝑖 = 𝐴𝑖𝐵𝑖。在超前进位单元内，𝐶𝑖+1 = 𝐺𝑖 + 𝑃𝑖𝐶𝑖。这个加速是通过使
 𝐶𝑖和相应的第i 为一起生成而达到的。
 

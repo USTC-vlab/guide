@@ -13,7 +13,9 @@ folder: mydoc
 ​	时序逻辑电路由组合电路和存储电路两部分组成，通过反馈回路将两部分连成一个整体。时序逻辑电路的一般结构如下图所示。
 
 
-{% include image.html file="complex_timing/structure.jpg" %} 
+
+![](images/complex_timing/structure.jpg)
+ 
 
 ​	图中，X~1~，…，X~n~为时序逻辑电路的**输入信号**；Z~1~，…，Z~m~为时序逻辑电路的**输出信号**；y~1~，…，y~s~为时序逻辑电路的**状态信号**，又称为组合电路的**状态变量**；Y~1~，…，Y~r~为时序逻辑电路中的**激励信号**，它决定电路下一时刻的状态；CP为**时钟脉冲信号**，它是同步时序逻辑电路中的定时信号。
 
@@ -108,7 +110,9 @@ endmodule
 3. 编写一个测试用例，仿真500ns，并分析输出。
 
    若使用供参考的Testbench，则最终仿真得到的波形应该如下：
-{% include image.html file="complex_timing/1563615302529.png" %} 
+
+![](images/complex_timing/1563615302529.png)
+ 
 
 4.  添加开发板相对应的XDC文件，编辑XDC文件，加入相关的引脚，将 Clk 赋给 SW15，D input 给SW3-SW0，reset 给 SW4, load 给 SW5，Q 给 LED3- LED0。
 
@@ -180,7 +184,9 @@ endmodule
    若使用供参考的Testbench，则最终仿真得到的波形应该如下：
 
   
-{% include image.html file="complex_timing/1563671799092.png" %}  
+
+![](images/complex_timing/1563671799092.png)
+  
 
 4. 添加开发板相对应的XDC文件，编辑XDC文件，加入相关的引脚。注意：你可能需要为你选择的拨码开关的Clk pin加入CLOCK_DEDITCATED_ROUTE 特性（property）。
 
@@ -292,7 +298,9 @@ endmodule
 3. 独立编写一个测试用例，仿真400ns。输入信号的波形参考如下：
 
 
-{% include image.html file="complex_timing/1563673253101.png" %}    
+
+![](images/complex_timing/1563673253101.png)
+    
 
 4. 添加开发板相对应的XDC文件，编辑XDC文件，加入相关的引脚。注意：你可能需要为你选择
    的拨码开关的Clk pin加入CLOCK_DEDITCATED_ROUTE 特性（property）。
@@ -328,14 +336,18 @@ endmodule
 ​	下面的电路图展示了这样的计数器。需要注意的是，清除信号是异步低电平生效的，而使能信号是同步高电平生效的。
 
 
-{% include image.html file="complex_timing/1563675030296.png" %}
+
+![](images/complex_timing/1563675030296.png)
+
 
 #### 实验目的：
 
 ​	设计一个8-bit计数器，将上面的结构扩展至8-bits。你的设计应该是分层级的，即先设计出T触发器，再通过建模实现8-bit计数器。T触发器的实现方案也是多种的，你可以直接行为级建模实现，也可以利用之前实现过的D触发器实现，因为T触发器可以用D触发器构造，如下图。
 
 
-{% include image.html file="complex_timing/1563675367351.png" %} 
+
+![](images/complex_timing/1563675367351.png)
+ 
 
 ​	编写一个测试用例并验证设计。分配Clock input, Clear_n, Enable和 Q。实现设计并在硬件上验证功能。
 
@@ -350,7 +362,9 @@ endmodule
    若使用参考测试用例，则得到的波形应该如下：
 
 
-{% include image.html file="complex_timing/1563680366835.png)" %}    
+
+![](images/complex_timing/1563680366835.png))
+    
 
 4. 添加开发板相对应的XDC文件，编辑XDC文件，加入相关的引脚。注意：你可能需要为你选择的拨码开关的Clk pin加入CLOCK_DEDITCATED_ROUTE 特性（property）。
 
@@ -454,7 +468,9 @@ else
 3. 编写一个测试用例，并验证设计。测试用例输入信号的编写参考下面的波形：
 
 
-{% include image.html file="complex_timing/1563683217154.png" %} 
+
+![](images/complex_timing/1563683217154.png)
+ 
 
 1.  添加开发板相对应的XDC文件，编辑XDC文件，加入相关的引脚。注意：你可能需要为你选择的拨码开关的Clk pin加入CLOCK_DEDITCATED_ROUTE 特性（property）。
 2. 综合你的设计并在Synthesized Design查看原理图（schematic）。
@@ -497,7 +513,9 @@ endmodule
 ​	在 Nexys4 DDR 板上，可以使用 100 MHz 时钟源，它连接到 Nexys4 DDR 的 E3引脚。 该时钟源可用于产生多个不同频率和相移的时钟。这是通过使用称为 Artix-7 系列 FPGA 的数字时钟管理器（DCM）和锁相环（PLL）的架构资源来完成的。 可以通过双击 IP Catalog 的 FPGA Feature and Design 文件夹的 Clocking 子文件夹下的 Clocking Wizard 条目来调用时钟源生成器。
 
 
-{% include image.html file="complex_timing/1563720971518.png" %} 
+
+![](images/complex_timing/1563720971518.png)
+ 
 
 ​	该向导可以轻松的为你定制的时钟电路创建源代码封装器。该向导将指导你为时钟原语设置适当的属性，并允许你更改任何向导计算的参数。除了提供用于实现所需时钟电路的HDL 包装器之外，时钟向导还提供由 Xilinx 时序工具为电路生成的时序参数汇总。 该向导的主要功能包括：
 
@@ -510,18 +528,24 @@ endmodule
   时钟生成部件核心的功能如下图：
 
 
-{% include image.html file="complex_timing/1563721124688.png" %} 
+
+![](images/complex_timing/1563721124688.png)
+ 
 
 假设我们想要生成一个与 100 MHz 输入时钟同相的 5MHz 时钟。 请按照以下步骤实现：
 
 双击 Clocking Wizard 条目，向导打开后，你会看到有五个选项。
 
 
-{% include image.html file="complex_timing/1563721348108.png" %} 
+
+![](images/complex_timing/1563721348108.png)
+ 
 
 1. 第一项标题为 Clocking Options。这里有与输入时钟，时钟参数，输入频率和范围相关的参数。由于实际的时钟频率就是 100MHz，所以我们保持默认值就行。
 2. 第二项标题为 Output Clocks。可以设置输出时钟和所需频率相关的参数。设置输出频率为 1.000MHz。**注意：如果频率显示为红色的表明存在错误。**由于此时频率显示为红色，存在错误。将鼠标移到该位置可以看到弹出提示“此设备的实际频率范围为 4.678MHz 至 800MHz”。现将其改为5.000MHz。在输出时钟中取消勾选 RESET 选项，然后我们创建一个异步复位。
-{% include image.html file="complex_timing/1563722138731.png" %} 
+
+![](images/complex_timing/1563722138731.png)
+ 
 3. 第三项标题为 Port Renaming，允许你更改端口名。我们将使用默认的端口名。
 4. 第四项标题为 MMCM Setting，用于显示计算设置。只要你知道他们都是做什么的或者它们是怎样影响设计的，你就可以检查并更改他们。我们希望看到时钟是稳定的。
 5. 最后的第五项标题为 Summary，显示你设置的摘要。
@@ -577,7 +601,9 @@ endmodule
 ​	Vivado 工具的 IP 目录允许你配置和生成各种功能的核。在 IP 目录中，根据核心功能进行分组，这些核心包括从简单的基本核（如加法器）到非常复杂的和（如 MicroBlaze 处理器）。它还涵盖了从汽车到图像处理等各个领域所需核。配置和生成核心的过程与架构向导类似。 核心将根据需要使用各种资源，包括 LUT，CLB，DSP48，BRAM 等。 让我们看看如何配置和生成计数器核。二进制计数器核可以通过双击位于 IP catalog 下的 Basic Elements 分支下的 Counters 子文件夹下的 Binary Counter 来开始生成。
 
 
-{% include image.html file="complex_timing/1563975225313.png" %} ​	
+
+![](images/complex_timing/1563975225313.png)
+ ​	
 
 ​	调用时，您将看到两个项配置。第一项标题为 Basic，其上的核心配置参数包括：Implement Using: Fabric or DSP48Output WidthIncrement Value Loadable, Restrict Count, Count Mode (Up, Down, UPDPWN),Threshold
 第二项标题为 Control，配置参数包括：Synchronous Clear, Clock Enable and various other settings.设计人员可以选择想要的功能然后点击 OK 来生成 IP 核。
@@ -595,7 +621,9 @@ endmodule
 ​	时序逻辑电路由组合电路和存储电路两部分组成，通过反馈回路将两部分连成一个整体。时序逻辑电路的一般结构如下图所示。
 
 
-{% include image.html file="complex_timing/structure.jpg" %} 
+
+![](images/complex_timing/structure.jpg)
+ 
 
 ​	图中，X~1~，…，X~n~为时序逻辑电路的**输入信号**；Z~1~，…，Z~m~为时序逻辑电路的**输出信号**；y~1~，…，y~s~为时序逻辑电路的**状态信号**，又称为组合电路的**状态变量**；Y~1~，…，Y~r~为时序逻辑电路中的**激励信号**，它决定电路下一时刻的状态；CP为**时钟脉冲信号**，它是同步时序逻辑电路中的定时信号。
 
@@ -690,7 +718,9 @@ endmodule
 3. 编写一个测试用例，仿真500ns，并分析输出。
 
    若使用供参考的Testbench，则最终仿真得到的波形应该如下：
-{% include image.html file="complex_timing/1563615302529.png" %} 
+
+![](images/complex_timing/1563615302529.png)
+ 
 
 4.  添加开发板相对应的XDC文件，编辑XDC文件，加入相关的引脚，将 Clk 赋给 SW15，D input 给SW3-SW0，reset 给 SW4, load 给 SW5，Q 给 LED3- LED0。
 
@@ -762,7 +792,9 @@ endmodule
    若使用供参考的Testbench，则最终仿真得到的波形应该如下：
 
 
-{% include image.html file="complex_timing/1563671799092.png" %}    
+
+![](images/complex_timing/1563671799092.png)
+    
 
 4. 添加开发板相对应的XDC文件，编辑XDC文件，加入相关的引脚。注意：你可能需要为你选择的拨码开关的Clk pin加入CLOCK_DEDITCATED_ROUTE 特性（property）。
 
@@ -874,7 +906,9 @@ endmodule
 3. 独立编写一个测试用例，仿真400ns。输入信号的波形参考如下：
 
 
-{% include image.html file="complex_timing/1563673253101.png" %}  
+
+![](images/complex_timing/1563673253101.png)
+  
 
 4. 添加开发板相对应的XDC文件，编辑XDC文件，加入相关的引脚。注意：你可能需要为你选择
    的拨码开关的Clk pin加入CLOCK_DEDITCATED_ROUTE 特性（property）。
@@ -910,14 +944,18 @@ endmodule
 ​	下面的电路图展示了这样的计数器。需要注意的是，清除信号是异步低电平生效的，而使能信号是同步高电平生效的。
 
 
-{% include image.html file="complex_timing/1563675030296.png" %} 
+
+![](images/complex_timing/1563675030296.png)
+ 
 
 #### 实验目的：
 
 ​	设计一个8-bit计数器，将上面的结构扩展至8-bits。你的设计应该是分层级的，即先设计出T触发器，再通过建模实现8-bit计数器。T触发器的实现方案也是多种的，你可以直接行为级建模实现，也可以利用之前实现过的D触发器实现，因为T触发器可以用D触发器构造，如下图。
 
 
-{% include image.html file="complex_timing/1563675367351.png" %}
+
+![](images/complex_timing/1563675367351.png)
+
 
 ​	编写一个测试用例并验证设计。分配Clock input, Clear_n, Enable和 Q。实现设计并在硬件上验证功能。
 
@@ -932,7 +970,9 @@ endmodule
    若使用参考测试用例，则得到的波形应该如下：
 
 
-{% include image.html file="complex_timing/1563680366835.png" %}   
+
+![](images/complex_timing/1563680366835.png)
+   
 
 4. 添加开发板相对应的XDC文件，编辑XDC文件，加入相关的引脚。注意：你可能需要为你选择的拨码开关的Clk pin加入CLOCK_DEDITCATED_ROUTE 特性（property）。
 
@@ -1036,7 +1076,9 @@ else
 3. 编写一个测试用例，并验证设计。测试用例输入信号的编写参考下面的波形：
 
 
-{% include image.html file="complex_timing/1563683217154.png" %} 
+
+![](images/complex_timing/1563683217154.png)
+ 
 
 1.  添加开发板相对应的XDC文件，编辑XDC文件，加入相关的引脚。注意：你可能需要为你选择的拨码开关的Clk pin加入CLOCK_DEDITCATED_ROUTE 特性（property）。
 2. 综合你的设计并在Synthesized Design查看原理图（schematic）。
@@ -1079,7 +1121,9 @@ endmodule
 ​	在 Nexys4 DDR 板上，可以使用 100 MHz 时钟源，它连接到 Nexys4 DDR 的 E3引脚。 该时钟源可用于产生多个不同频率和相移的时钟。这是通过使用称为 Artix-7 系列 FPGA 的数字时钟管理器（DCM）和锁相环（PLL）的架构资源来完成的。 可以通过双击 IP Catalog 的 FPGA Feature and Design 文件夹的 Clocking 子文件夹下的 Clocking Wizard 条目来调用时钟源生成器。
 
 
-{% include image.html file="complex_timing/1563720971518.png" %} 
+
+![](images/complex_timing/1563720971518.png)
+ 
 
 ​	该向导可以轻松的为你定制的时钟电路创建源代码封装器。该向导将指导你为时钟原语设置适当的属性，并允许你更改任何向导计算的参数。除了提供用于实现所需时钟电路的HDL 包装器之外，时钟向导还提供由 Xilinx 时序工具为电路生成的时序参数汇总。 该向导的主要功能包括：
 
@@ -1092,18 +1136,24 @@ endmodule
   时钟生成部件核心的功能如下图：
 
 
-{% include image.html file="complex_timing/1563721124688.png" %} 
+
+![](images/complex_timing/1563721124688.png)
+ 
 
 假设我们想要生成一个与 100 MHz 输入时钟同相的 5MHz 时钟。 请按照以下步骤实现：
 
 双击 Clocking Wizard 条目，向导打开后，你会看到有五个选项。
 
 
-{% include image.html file="complex_timing/1563721348108.png" %} 
+
+![](images/complex_timing/1563721348108.png)
+ 
 
 1. 第一项标题为 Clocking Options。这里有与输入时钟，时钟参数，输入频率和范围相关的参数。由于实际的时钟频率就是 100MHz，所以我们保持默认值就行。
 2. 第二项标题为 Output Clocks。可以设置输出时钟和所需频率相关的参数。设置输出频率为 1.000MHz。**注意：如果频率显示为红色的表明存在错误。**由于此时频率显示为红色，存在错误。将鼠标移到该位置可以看到弹出提示“此设备的实际频率范围为 4.678MHz 至 800MHz”。现将其改为5.000MHz。在输出时钟中取消勾选 RESET 选项，然后我们创建一个异步复位。
-{% include image.html file="complex_timing/1563722138731.png" %} 
+
+![](images/complex_timing/1563722138731.png)
+ 
 3. 第三项标题为 Port Renaming，允许你更改端口名。我们将使用默认的端口名。
 4. 第四项标题为 MMCM Setting，用于显示计算设置。只要你知道他们都是做什么的或者它们是怎样影响设计的，你就可以检查并更改他们。我们希望看到时钟是稳定的。
 5. 最后的第五项标题为 Summary，显示你设置的摘要。
@@ -1159,7 +1209,9 @@ endmodule
 ​	Vivado 工具的 IP 目录允许你配置和生成各种功能的核。在 IP 目录中，根据核心功能进行分组，这些核心包括从简单的基本核（如加法器）到非常复杂的和（如 MicroBlaze 处理器）。它还涵盖了从汽车到图像处理等各个领域所需核。配置和生成核心的过程与架构向导类似。 核心将根据需要使用各种资源，包括 LUT，CLB，DSP48，BRAM 等。 让我们看看如何配置和生成计数器核。二进制计数器核可以通过双击位于 IP catalog 下的 Basic Elements 分支下的 Counters 子文件夹下的 Binary Counter 来开始生成。
 
 
-{% include image.html file="complex_timing/1563975225313.png" %} ​	
+
+![](images/complex_timing/1563975225313.png)
+ ​	
 
 ​	调用时，您将看到两个项配置。第一项标题为 Basic，其上的核心配置参数包括：Implement Using: Fabric or DSP48Output WidthIncrement Value Loadable, Restrict Count, Count Mode (Up, Down, UPDPWN),Threshold
 第二项标题为 Control，配置参数包括：Synchronous Clear, Clock Enable and various other settings.设计人员可以选择想要的功能然后点击 OK 来生成 IP 核。

@@ -24,9 +24,13 @@ folder: mydoc
 
 ​	**SR锁存器**（置位/复位）是一个异步器件：它不依赖于控制信号工作，仅依赖于S和R输入的状态。它的符号表示、使用异或门级电路实现和真值表如下所示：
 
-{% include image.html file="simple_timing/1563343618646.png" %} 
 
-{% include image.html file="simple_timing/1563343625669.png" %} 
+![](images/simple_timing/1563343618646.png)
+ 
+
+
+![](images/simple_timing/1563343625669.png)
+ 
 
 ​	虽然Xilinx FPGA可以使用一个LUT（查找表）电路实现这种锁存器，但以下Verilog代码显示了如何使用门级电路和数据流建模对这种电路进行建模。
 
@@ -59,7 +63,9 @@ endmodule
 
 ​	若使用供参考的Testbench，波形应该如下：
 
-{% include image.html file="simple_timing/1563351467888.png" %} 
+
+![](images/simple_timing/1563351467888.png)
+ 
 
 ​	**4.** 将适当的板相关主XDC文件添加到项目中并编辑它以包括相关引脚，将S输入分配给SW0，将R输入分配给SW1，将Q分配给LED0，将Qbar分配给LED1。
 
@@ -97,9 +103,13 @@ endmodule
 
 ​	在某些情况下，可能需要指示锁存器何时需要锁存数据和何时不能锁存数据。这就引入了门控SR锁存器， 门控SR锁存器是SR锁存器的简单扩展，它提供一条使能线，必须将其置为高电平才能够改变锁存器中锁存的数据。 但即使现在有了控制线，SR锁存器也不是同步的，因为即使在使能处于高电平时，输入可以随时改变输出。 当使能输入为低电平时，AND门的输出也为低电平，因此Q和条Q输出保持锁存到先前的数据。 只有当Enable输入为高电平时，锁存器的状态才会发生变化，如真值表所示。 当使能线被置高电平时，门控SR锁存器在操作上与SR锁存器相同。 Enable线有时是时钟信号，但通常是读或写控制线。 门控SR锁存器的符号、电路和真值表如下所示。
 
-{% include image.html file="simple_timing/1563348507286.png" %} 
 
-{% include image.html file="simple_timing/1563348467432.png" %} 
+![](images/simple_timing/1563348507286.png)
+ 
+
+
+![](images/simple_timing/1563348467432.png)
+ 
 
 ##### 实验目的：
 
@@ -115,7 +125,9 @@ endmodule
 
 ​	若使用参考的Testbench，得到的波形应该如下：
 
-{% include image.html file="simple_timing/1563351546606.png" %} 
+
+![](images/simple_timing/1563351546606.png)
+ 
 
 ​	**4.** 将适当的电路板相关主XDC文件添加到项目中并对其进行编辑以包括相关引脚，将S输入分配给SW0，将R输入分配给SW1，将启用分配给SW2，将Q分配给LED0，将Qbar分配给LED1。
 
@@ -168,9 +180,13 @@ endmodule
 
 ​	D锁存器（D源于”data”），也叫作透明锁存器，是门控SR锁存器的简单扩展，其消除了无效输入状态（亚稳态）的可能性。 由于门控SR锁存器允许我们在不使用S或R输入的情况下锁存输出，我们可以通过使用互补驱动器驱动设置和复位输入来移除其中一个输入，即我们移除一个输入并自动使其成为另一个输入的互补输入。 只要Enable线为高电平，D锁存器就会输出D输入，否则输出是当Enable输入为最后一个高电平时D输入的输出。 这就是为什么它也被称为透明锁存器 - 当Enable被置位时，锁存器被称为“透明” - 它信号直接传播通过它，好像它不存在一样。
 
-{% include image.html file="simple_timing/1563351645754.png" %} 
 
-{% include image.html file="simple_timing/1563351653862.png" %} 
+![](images/simple_timing/1563351645754.png)
+ 
+
+
+![](images/simple_timing/1563351653862.png)
+ 
 
 ​	D锁存器可以在行为建模中建模，如下所示：
 
@@ -200,7 +216,9 @@ endmodule
 
 ​	若使用参考的Testbench，得到的波形应该如下：
 
-{% include image.html file="simple_timing/1563381597066.png" %} 
+
+![](images/simple_timing/1563381597066.png)
+ 
 
 ​	**4.** 将适当的板相关主XDC文件添加到项目中并编辑它以包0括相关引脚，将D输入分配给SW0，将输入分配给SW1，Q分配给LED0，Qbar分配给LED1。
 
@@ -285,7 +303,9 @@ endmodule
 
 ​	在FPGA中，位于不同可配置逻辑块（CLB）中的LUT和FF使用路由资源连接。在实施过程中，工具将使用这些资源，具体取决于电路的建模方式，所需资源的类型和数量，以及电路的驱动速度。通常用于交换信息的资源是彼此靠近的;但是，可能存在无法实现的情况。当相关的触发器（信息交换之间）彼此远离时，到达源触发器和目标触发器的时钟可能不会同时产生所谓的时钟偏移。时钟偏移可以改变电路的行为。在某些其他情况下，某些触发器可能不需要在每个断言的时钟边沿更新其输出。为了控制行为，FPGA中的触发器有一个额外的控制信号，称为时钟使能（CE）。在ASIC技术中，门控时钟用于控制行为。带有CE的触发器的符号如下所示：
 
-{% include image.html file="simple_timing/1563382256831.png" %} 
+
+![](images/simple_timing/1563382256831.png)
+ 
 
 ##### 实验目的：
 
@@ -301,7 +321,9 @@ endmodule
 
 ​		若使用供参考的Testbench，得到的波形应该如下：
 
-{% include image.html file="simple_timing/1563422019450" %} 
+
+![](images/simple_timing/1563422019450)
+ 
 
 ​	**4.** 将适当的板相关主XDC文件添加到项目中并编辑它以包括相关引脚，将D分配给SW0，reset为SW1，ce分配给SW2，Clk分配给SW15，Q分配给LED0。
 
@@ -445,7 +467,9 @@ endmodule
 
 ​	实现出来的RTL原理图如下：
 
-{% include image.html file="simple_timing/271607238061109.jpg" %} 
+
+![](images/simple_timing/271607238061109.jpg)
+ 
 
 ​	这是因为在每个clk的上升沿，电路并发实现两条非阻塞赋值语句，所以需要两个D触发器。
 
@@ -463,7 +487,9 @@ endmodule
 
 ​	实现出来的RTL原理图如下：
 
-{% include image.html file="simple_timing/271611489786197.jpg" %} 
+
+![](images/simple_timing/271611489786197.jpg)
+ 
 
 ​	事实上，由于在每个时钟周期上升沿执行完这个begin-end块语句后，b和c的值完全一样，所以RTL中就把b给优化掉了。
 

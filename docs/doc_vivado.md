@@ -12,11 +12,15 @@ folder: mydoc
 
 ​	开始安装，可以选择VIvado HL Webpack版本点击next继续安装。
 
-{% include image.html file="vivado/1563975870237.png" %} 
+
+![](images/vivado/1563975870237.png)
+ 
 
 ​	接下来的一步可以使用默认选项继续安装，但是这样占用的存储空间比较大。也可以使用如用所示的最小安装方式。
 
-{% include image.html file="vivado/1563976105757.png" %} 
+
+![](images/vivado/1563976105757.png)
+ 
 
 接下来就是比较漫长的安装过程了。你可以先做其他事情，等会再来瞅一下。
 
@@ -24,7 +28,9 @@ folder: mydoc
 
 ​	本使用指南将指导读者在 Xilinx Vivado 环境下，使用 Verilog HDL 语言设计一个简单的数字电路样例。一个典型的设计流程包括创建 model，创建用户约束文件，创建 Vivado 项目，导入已创建的model，编译约束文件，选择性调试运行时的行为仿真，综合你的design，实现design，生成 bitstream 文件，最后将 bitstream 文件下载到硬件中，并确认硬件能否正确的实现功能。读者即将学习的设计流程将基于 Artix-7 芯片的 Basys3 基板和 Nexys4 DDR 基板。一个典型的设计流程如下图所示，画圈数字的顺序将和本指南中的指导步骤的顺序一致。
 
-{% include image.html file="vivado/1563976287338.png" %} 
+
+![](images/vivado/1563976287338.png)
+ 
 
 ### 2-1. 目标：
 
@@ -54,7 +60,9 @@ folder: mydoc
 
 4.  在 Project name 中输入 tutorial。确保选中“Create Project Subdirectory”框，点击 Next。
 
-{% include image.html file="vivado/1563977087617.png" %} 
+
+![](images/vivado/1563977087617.png)
+ 
 
 1.  在 Project Type 表单中选择 RTL Project，点击 Next。
 2.  在 Add Sources 表单中选择 Verilog 作为 Target language 和 Simulator language。
@@ -63,9 +71,13 @@ folder: mydoc
 5.  在 Add Constraints 表单中，单击 Green Plus 按钮，然后单击 Add Files ...按钮，浏览到 c：\ xup \ digital \ sources \ tutorial 目录，选择 Basys3_Master.xdc（对应Basys3）或 Nexys4DDR_Master.xdc（对应 Nexys4 DDR），单击 Open，然后单击 Next。XDC 约束文件将 FPGA 上的物理 IO 位置分配给主板上的开关和 LED。这些信息可以通过电路板的原理图或电路板的用户指南获得。
 6.  在 Default Part 表单中，使用 Parts 选项和 Fliter 部分的各种下拉字段，选择 xc7a35tcpg236-1 part（对于 Basy3）或 xc7a100tcsg324-1 part（对于 Nexys4DDR）。点击 Next。
 
-{% include image.html file="vivado/1563977117169.png" %} 
 
-{% include image.html file="vivado/1563977129985.png" %} 
+![](images/vivado/1563977117169.png)
+ 
+
+
+![](images/vivado/1563977129985.png)
+ 
 
 1.  单击 Finish 以创建 Vivado 项目。使用 Windows 资源管理器并查看 c：\ xup \ digital \ tutorial 目录。你将看到tutorial.srcs 和其他目录以及 tutorial.xpr（Vivado）项目文件已创建。在 tutorial.srcs目录下创建了两个子目录 constrs_1 和 sources_1;在它们的下方，分别放置了复制的 Nexys4DDR_Master.xdc 或Basys3_Master.xdc（约束）和 tutorial.v（源）文件。
 
@@ -73,7 +85,9 @@ folder: mydoc
 
 1.  在 Sources 窗格中，双击 tutorial.v 条目以在文本模式下打开文件。
 
-{% include image.html file="vivado/1563977283279.png" %} 
+
+![](images/vivado/1563977283279.png)
+ 
 
 1.  请注意，在 Verilog 代码中，第一行定义了仿真器的 timescale 指令。第 2-5 行是描述模块名称和模块用途的注释行
 
@@ -85,16 +99,24 @@ folder: mydoc
 
 1.  在 Sources 窗 格 中 ， 展 开 Constraints 文 件 夹 ， 然 后 双 击Basys3_Master.xdc（Basys3）或 Nexys4DDR_Master.xdc（Nexys4 DDR）条目以在文本模式下打开文件。
 
-{% include image.html file="vivado/1563977387856.png" %} 
+
+![](images/vivado/1563977387856.png)
+ 
 
 1.  通过删除＃符号或突出显示 SW [7：0]并按 CRTL /来取消注释 SW [7：0]。取消注释 LED [7：0]，引脚名称需要进行更改，以匹配 tutorial.v 文件中的引脚名称。将 sw 更改为 swt，将 LED 更改为 led。
 
-{% include image.html file="vivado/1563977423656.png" %} 
 
-{% include image.html file="vivado/1563977433777.png" %} 
+![](images/vivado/1563977423656.png)
+ 
 
 
-{% include image.html file="vivado/1563977458759.png" %} 
+![](images/vivado/1563977433777.png)
+ 
+
+
+
+![](images/vivado/1563977458759.png)
+ 
 
 1.  将 sw [*]名称更改为 swt [*]，将 LED [*]更改为 led [*]，因为模型中的端口名称是 swt 和 led。
 2.  关闭并保存文件。
@@ -105,7 +127,9 @@ folder: mydoc
 
 2.  单击 OK 以运行分析。将详细说明模型（设计）并显示设计的逻辑视图。
 
-{% include image.html file="vivado/1563977580563.png" %} 
+
+![](images/vivado/1563977580563.png)
+ 
 
 请注意，某些开关输入会通过逻辑门后再被输出到 LED，而其余部分将和文件中的模型一样直接输出到 LED。
 

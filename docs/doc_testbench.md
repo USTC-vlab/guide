@@ -73,7 +73,9 @@ end
 
 ## 3. 使用Testbench的一个例子 {#example}
 
-{% include image.html file="testbench/1564495138182.png" %} 
+
+![](images/testbench/1564495138182.png)
+ 
 
 ​		第 1 行定义了`timescale 指令。
 
@@ -95,7 +97,9 @@ end
 
 ​		开发一个 testbench，生成如下所示的波形。
 
-{% include image.html file="testbench/1564497081267.png" %}
+
+![](images/testbench/1564497081267.png)
+
 
 ### 实验步骤：
 
