@@ -1,20 +1,14 @@
----
-title: FPGA 基础知识
-sidebar: mydoc_sidebar
-permalink: doc_fpga.html
-folder: mydoc
----
 # FPGA 基础知识介绍
 
 FPGA（Field－Programmable Gate Array），即现场可编程门阵列，它是在 PAL、GAL、CPLD 等可编程器件的基础上进一步发展的产物。它是作为专用集成电路（ASIC）领域中的一种半定制电路而出现的，既解决了定制电路的不足，又克服了原有可编程器件门电路数有限的缺点。
 
 目前 FPGA 的两大主要厂商为 xilinx 和 altera。
 
-Xilinx：公司网址为：[www.xilinx.com](http://www.xilinx.com/)。FPGA 市场的龙头老大，市场份额接近 50%，其主要产品包括：Sparten 系列、Virtex 系列、Artix 系列、Kintex 系列、Virtex 系列等
+Xilinx：公司网址为：[www.xilinx.com](https://www.xilinx.com/)。FPGA 市场的龙头老大，市场份额接近 50%，其主要产品包括：Sparten 系列、Virtex 系列、Artix 系列、Kintex 系列、Virtex 系列等
 
 开发工具：其第六代及以前的产品的开发工具为 ISE，从第七代产品开始，已全部转移到 vivado 平台。
 
-Altera：公司网址为：[www.altera.com](http://www.altera.com/)，FPGA 市场的二当家，市场份额 40% 以上，2015 年 6 月被 Intel 以 167 亿美元收购。主要产品包含：Max 系列、Cyclone 系列、Arria 系列、Stratix 系列等。主要开发工具：Quartus
+Altera：公司网址为：[www.altera.com](https://www.altera.com/)，FPGA 市场的二当家，市场份额 40% 以上，2015 年 6 月被 Intel 以 167 亿美元收购。主要产品包含：Max 系列、Cyclone 系列、Arria 系列、Stratix 系列等。主要开发工具：Quartus
 
 此外，Lattice、Actel、Atmel 等公司也有 FPGA 产品，由于市场份额小，市面上很少见到，此处不再介绍。
 
@@ -84,7 +78,6 @@ CLB（Configurable Logic Blocks）是 Sparten6 的主要资源，包含两个 Sl
 
 ![](images/fpga/11.png)
 
-v
 输入输出块，包含了焊盘及其相关电路
 
 ![](images/fpga/12.png)
@@ -101,7 +94,7 @@ Slice
 
 ![](images/fpga/15.png)
 
-block ram 资源
+Block RAM 资源
 
 ![](images/fpga/16.png)
 
