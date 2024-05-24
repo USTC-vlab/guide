@@ -1,10 +1,3 @@
----
-title: 代码风格规范
-sidebar: mydoc_sidebar
-permalink: coding_convention.html
-folder: mydoc
----
-
 ## 空行
 
 ```verilog

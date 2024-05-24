@@ -7,8 +7,28 @@ use_directory_urls: false
 theme:
   name: material
   language: zh
+  features:
+    - navigation.sections
+    - navigation.top
 
 extra:
   analytics:
     provider: google
     property: UA-115907213-3
+
+nav:
+  - 课程介绍: index.md
+  - LogiSim: doc_logisim.md
+  - Verilog 语法: doc_verilog.md
+  - FPGA 原理: doc_fpga.md
+  - Nexys4DDR 开发板: doc_nexys.md
+  - Vivado 介绍: doc_vivado.md
+  - TestBench 编写及仿真: doc_testbench.md
+  - 代码风格规范: coding_convention.md
+  - 一些例子:
+    - 基本逻辑门: doc_basic_logic.md
+    - 简单组合逻辑电路: doc_simple_logic.md
+    - 复杂组合逻辑电路: doc_complex_logic.md
+    - 简单时序逻辑电路: doc_simple_timing.md
+    - 复杂时序逻辑电路: doc_complex_timing.md
+    - 有限状态机: doc_finite_state_machine.md

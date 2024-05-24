@@ -1,9 +1,3 @@
----
-title: 基础逻辑门
-sidebar: mydoc_sidebar
-permalink: doc_basic_logic.html
-folder: mydoc
----
 # 基础逻辑门
 ## Verilog HDL简介
 Verilog HDL 设计语言支持3种设计风格： 门级，数据流级和行为级。 门级和数据流级设计风格通常用于
