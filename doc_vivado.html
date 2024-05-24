@@ -1,0 +1,1002 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="USTC Vlab">
+      
+      
+        <link rel="canonical" href="https://vlab.ustc.edu.cn/guide/doc_vivado.html">
+      
+      
+        <link rel="prev" href="doc_nexys.html">
+      
+      
+        <link rel="next" href="doc_testbench.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24">
+    
+    
+      
+        <title>Vivado 介绍 - 数字电路教程</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","UA-115907213-3"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","UA-115907213-3",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=UA-115907213-3",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vivado" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="index.html" title="数字电路教程" class="md-header__button md-logo" aria-label="数字电路教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            数字电路教程
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Vivado 介绍
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="light-blue"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="数字电路教程" class="md-nav__button md-logo" aria-label="数字电路教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12Z"/></svg>
+
+    </a>
+    数字电路教程
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    课程介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_logisim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LogiSim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_verilog.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verilog 语法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_fpga.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FPGA 原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_nexys.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nexys4DDR 开发板
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Vivado 介绍
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="doc_vivado.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Vivado 介绍
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-vivado" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. vivado 安装
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-vivado" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Vivado 使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Vivado 使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1. 目标
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2. 流程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-2. 流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-2-1-ide-vivado" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2-1. 使用 IDE 创建 Vivado 项目
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-2-tutorialv" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2-2. 打开 tutorial.v 文件并分析内容
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-3-basys3_masterxdc-nexys4ddr_masterxdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2-3. 打开 Basys3_Master.xdc 或 Nexys4DDR_Master.xdc 源，分析内容并编辑文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-4-rtl" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2-4. 对源文件执行 RTL 分析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_testbench.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TestBench 编写及仿真
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="coding_convention.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    代码风格规范
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    一些例子
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            一些例子
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_basic_logic.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基本逻辑门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_simple_logic.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简单组合逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_complex_logic.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    复杂组合逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_simple_timing.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简单时序逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_complex_timing.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    复杂时序逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_finite_state_machine.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    有限状态机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-vivado" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. vivado 安装
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-vivado" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Vivado 使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Vivado 使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1. 目标
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2. 流程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-2. 流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-2-1-ide-vivado" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2-1. 使用 IDE 创建 Vivado 项目
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-2-tutorialv" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2-2. 打开 tutorial.v 文件并分析内容
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-3-basys3_masterxdc-nexys4ddr_masterxdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2-3. 打开 Basys3_Master.xdc 或 Nexys4DDR_Master.xdc 源，分析内容并编辑文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-4-rtl" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2-4. 对源文件执行 RTL 分析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="vivado">Vivado 安装和使用</h1>
+<h2 id="1-vivado">1. vivado 安装</h2>
+<p>首先下载 vivado webpack installer，目前最新版本为 2019.1。</p>
+<p>开始安装，可以选择 VIvado HL Webpack 版本点击 next 继续安装。</p>
+<p><img alt="" src="images/vivado/1563975870237.png" /></p>
+<p>接下来的一步可以使用默认选项继续安装，但是这样占用的存储空间比较大。也可以使用如用所示的最小安装方式。</p>
+<p><img alt="" src="images/vivado/1563976105757.png" /></p>
+<p>接下来就是比较漫长的安装过程了。你可以先做其他事情，等会再来瞅一下。</p>
+<h2 id="2-vivado">2. Vivado 使用</h2>
+<p>本使用指南将指导读者在 Xilinx Vivado 环境下，使用 Verilog HDL 语言设计一个简单的数字电路样例。一个典型的设计流程包括创建 model，创建用户约束文件，创建 Vivado 项目，导入已创建的 model，编译约束文件，选择性调试运行时的行为仿真，综合你的 design，实现 design，生成 bitstream 文件，最后将 bitstream 文件下载到硬件中，并确认硬件能否正确的实现功能。读者即将学习的设计流程将基于 Artix-7 芯片的 Basys3 基板和 Nexys4 DDR 基板。一个典型的设计流程如下图所示，画圈数字的顺序将和本指南中的指导步骤的顺序一致。</p>
+<p><img alt="" src="images/vivado/1563976287338.png" /></p>
+<h3 id="2-1">2-1. 目标</h3>
+<p>在完成了本指南的所有内容后，你应该具备以下能力：</p>
+<ol>
+<li>创建一个采用 HDL 模型的 Vivado 项目，并针对位于 Basys3 和 Nexys4 DDR 板上的特定 FPGA 器件进行开发</li>
+<li>使用提供的已部分完成的 Xilinx Design Constraint (XDC) 文件来约束某些引脚的位置</li>
+<li>使用 Vivado 的 Tcl 脚本功能来增加额外的约束</li>
+<li>使用 XSim 仿真器来仿真你的设计</li>
+<li>综合并实现你的设计</li>
+<li>生成 bitstream 文件</li>
+<li>使用已生成的 bitstream 文件配置 FPGA 设备并确认功能</li>
+</ol>
+<h3 id="2-2">2-2. 流程</h3>
+<p>若要实现以上的目标，就请你按照下面的步骤完整做一遍。以下是 2015.1 版本的教程，但是和 2019.1 的步骤是差不多的。</p>
+<h4 id="2-2-1-ide-vivado">2-2-1. 使用 IDE 创建 Vivado 项目</h4>
+<p>启动 Vivado 并创建一个针对 <code>xc7a35tcpg236-1</code>（Basys3）或者 <code>xc7a100tcsg324-1</code>（Nexys4 DDR）设备的项目，并使用 Verilog HDL 语言。使用在 sources / tutorial 目录中提供的 <code>tutorial.v</code> 和 <code>Nexys4DDR_Master.xdc</code> or <code>Basys3_Master.xdc</code> 文件。</p>
+<ol>
+<li>
+<p>打开 Vivado → Start → All Programs → Xilinx Design Tools → Vivado 2015.1 → Vivado 2015.1。</p>
+</li>
+<li>
+<p>单击“Create New Project”以启动向导。你将看到“Create A New Vivado Project”对话框。点击 Next。</p>
+</li>
+<li>
+<p>单击 New Project 窗体的 Project location 字段的 Browse 按钮，浏览到 <code>C:\xup\digital</code>，然后单击 Select。</p>
+</li>
+<li>
+<p>在 Project name 中输入 tutorial。确保选中“Create Project Subdirectory”框，点击 Next。</p>
+</li>
+</ol>
+<p><img alt="" src="images/vivado/1563977087617.png" /></p>
+<ol>
+<li>在 Project Type 表单中选择 RTL Project，点击 Next。</li>
+<li>在 Add Sources 表单中选择 Verilog 作为 Target language 和 Simulator language。</li>
+<li>单击 Green Plus 按钮，然后单击 Add Files...按钮，浏览到 <code>C:\xup\digital\sources\tutorial</code> 目录，选择 <code>tutorial.v</code>，单击 Open，并确认已选中 Copy sources into project，然后单击 Next。</li>
+<li>因为我们没有在此设计中使用任何预先固定的 IP，故单击 Add Existing IP form 表单中的 Next</li>
+<li>在 Add Constraints 表单中，单击 Green Plus 按钮，然后单击 Add Files ...按钮，浏览到 <code>C:\xup\digital\sources\tutorial</code> 目录，选择 <code>Basys3_Master.xdc</code>（对应 Basys3）或 <code>Nexys4DDR_Master.xdc</code>（对应 Nexys4 DDR），单击 Open，然后单击 Next。XDC 约束文件将 FPGA 上的物理 IO 位置分配给主板上的开关和 LED。这些信息可以通过电路板的原理图或电路板的用户指南获得。</li>
+<li>在 Default Part 表单中，使用 Parts 选项和 Fliter 部分的各种下拉字段，选择 <code>xc7a35tcpg236-1</code> part（对于 Basy3）或 <code>xc7a100tcsg324-1</code> part（对于 Nexys4DDR）。点击 Next。</li>
+</ol>
+<p><img alt="" src="images/vivado/1563977117169.png" /></p>
+<p><img alt="" src="images/vivado/1563977129985.png" /></p>
+<ol>
+<li>单击 Finish 以创建 Vivado 项目。使用 Windows 资源管理器并查看 <code>C:\xup\digital\tutorial</code> 目录。你将看到 <code>tutorial.srcs</code> 和其他目录以及 <code>tutorial.xpr</code>（Vivado）项目文件已创建。在 <code>tutorial.srcs</code> 目录下创建了两个子目录 <code>constrs_1</code> 和 <code>sources_1</code>；在它们的下方，分别放置了复制的 <code>Nexys4DDR_Master.xdc</code> 或 <code>Basys3_Master.xdc</code>（约束）和 <code>tutorial.v</code>（源）文件。</li>
+</ol>
+<h4 id="2-2-2-tutorialv">2-2-2. 打开 tutorial.v 文件并分析内容</h4>
+<ol>
+<li>在 Sources 窗格中，双击 tutorial.v 条目以在文本模式下打开文件。</li>
+</ol>
+<p><img alt="" src="images/vivado/1563977283279.png" /></p>
+<ol>
+<li>
+<p>请注意，在 Verilog 代码中，第一行定义了仿真器的 timescale 指令。第 2-5 行是描述模块名称和模块用途的注释行</p>
+</li>
+<li>
+<p>第 7 行定义了开头（用关键字 module 标记），第 19 行定义了模块的结尾（用关键字 endmodule 标记）。</p>
+</li>
+<li>
+<p>第 8-9 行定义输入和输出端口而第 12-17 行定义实际功能。</p>
+</li>
+</ol>
+<h4 id="2-2-3-basys3_masterxdc-nexys4ddr_masterxdc">2-2-3. 打开 Basys3_Master.xdc 或 Nexys4DDR_Master.xdc 源，分析内容并编辑文件</h4>
+<ol>
+<li>在 Sources 窗 格 中，展 开 Constraints 文 件 夹，然 后 双 击 Basys3_Master.xdc（Basys3）或 Nexys4DDR_Master.xdc（Nexys4 DDR）条目以在文本模式下打开文件。</li>
+</ol>
+<p><img alt="" src="images/vivado/1563977387856.png" /></p>
+<ol>
+<li>通过删除＃符号或突出显示 <code>SW[7:0]</code> 并按 Ctrl / 来取消注释 <code>SW[7:0]</code>。取消注释 <code>LED[7:0]</code>，引脚名称需要进行更改，以匹配 tutorial.v 文件中的引脚名称。将 sw 更改为 swt，将 LED 更改为 led。</li>
+</ol>
+<p><img alt="" src="images/vivado/1563977423656.png" /></p>
+<p><img alt="" src="images/vivado/1563977433777.png" /></p>
+<p><img alt="" src="images/vivado/1563977458759.png" /></p>
+<ol>
+<li>将 <code>sw[*]</code> 名称更改为 <code>swt[*]</code>，将 <code>LED[*]</code> 更改为 <code>led[*]</code>，因为模型中的端口名称是 swt 和 led。</li>
+<li>关闭并保存文件。</li>
+</ol>
+<h4 id="2-2-4-rtl">2-2-4. 对源文件执行 RTL 分析</h4>
+<ol>
+<li>
+<p>展开 Flow Navigator 窗格的 RTL Analysis 任务下的 Open Elaborated Design 条目，然后单击 Schematic。</p>
+</li>
+<li>
+<p>单击 OK 以运行分析。将详细说明模型（设计）并显示设计的逻辑视图。</p>
+</li>
+</ol>
+<p><img alt="" src="images/vivado/1563977580563.png" /></p>
+<p>请注意，某些开关输入会通过逻辑门后再被输出到 LED，而其余部分将和文件中的模型一样直接输出到 LED。</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://vlab.ustc.edu.cn/" target="_blank" rel="noopener" title="vlab.ustc.edu.cn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.78 8.75a9.64 9.64 0 0 0 1.363 4.177c.255.426.542.832.857 1.215.245-.296.551-.705.857-1.215A9.64 9.64 0 0 0 10.22 8.75Zm4.44-1.5a9.64 9.64 0 0 0-1.363-4.177c-.307-.51-.612-.919-.857-1.215a9.927 9.927 0 0 0-.857 1.215A9.64 9.64 0 0 0 5.78 7.25Zm-5.944 1.5H1.543a6.507 6.507 0 0 0 4.666 5.5c-.123-.181-.24-.365-.352-.552-.715-1.192-1.437-2.874-1.581-4.948Zm-2.733-1.5h2.733c.144-2.074.866-3.756 1.58-4.948.12-.197.237-.381.353-.552a6.507 6.507 0 0 0-4.666 5.5Zm10.181 1.5c-.144 2.074-.866 3.756-1.58 4.948-.12.197-.237.381-.353.552a6.507 6.507 0 0 0 4.666-5.5Zm2.733-1.5a6.507 6.507 0 0 0-4.666-5.5c.123.181.24.365.353.552.714 1.192 1.436 2.874 1.58 4.948Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/USTC-vlab" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.sections", "navigation.top"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+    
+  </body>
+</html>

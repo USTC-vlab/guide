@@ -1,0 +1,1640 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="USTC Vlab">
+      
+      
+        <link rel="canonical" href="https://vlab.ustc.edu.cn/guide/doc_simple_timing.html">
+      
+      
+        <link rel="prev" href="doc_complex_logic.html">
+      
+      
+        <link rel="next" href="doc_complex_timing.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24">
+    
+    
+      
+        <title>简单时序逻辑电路 - 数字电路教程</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","UA-115907213-3"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","UA-115907213-3",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=UA-115907213-3",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="index.html" title="数字电路教程" class="md-header__button md-logo" aria-label="数字电路教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            数字电路教程
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              简单时序逻辑电路
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="light-blue"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="数字电路教程" class="md-nav__button md-logo" aria-label="数字电路教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12Z"/></svg>
+
+    </a>
+    数字电路教程
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    课程介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_logisim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LogiSim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_verilog.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verilog 语法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_fpga.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FPGA 原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_nexys.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nexys4DDR 开发板
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_vivado.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vivado 介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_testbench.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TestBench 编写及仿真
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="coding_convention.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    代码风格规范
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    一些例子
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            一些例子
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_basic_logic.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基本逻辑门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_simple_logic.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简单组合逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_complex_logic.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    复杂组合逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    简单时序逻辑电路
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="doc_simple_timing.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    简单时序逻辑电路
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 时序逻辑电路概念
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 锁存器和触发器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 锁存器和触发器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1. 锁存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-1. 锁存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1-1-sr" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1-1. SR 锁存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-1-1. SR 锁存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-1-2-sr" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1-2. 门控 SR 锁存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-1-2. 门控 SR 锁存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-1-3-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1-3. D 锁存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-1-3. D 锁存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2. 触发器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-2. 触发器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-2-1-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2-1. D 触发器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-2-1. D 触发器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-2-t" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2-2. T 触发器
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 总结
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 总结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-1. 同步异步问题
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-2. 阻塞非阻塞赋值问题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_complex_timing.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    复杂时序逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_finite_state_machine.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    有限状态机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 时序逻辑电路概念
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 锁存器和触发器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 锁存器和触发器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1. 锁存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-1. 锁存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1-1-sr" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1-1. SR 锁存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-1-1. SR 锁存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-1-2-sr" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1-2. 门控 SR 锁存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-1-2. 门控 SR 锁存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-1-3-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1-3. D 锁存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-1-3. D 锁存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2. 触发器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-2. 触发器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-2-1-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2-1. D 触发器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-2-1. D 触发器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-2-t" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2-2. T 触发器
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 总结
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 总结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-1. 同步异步问题
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-2. 阻塞非阻塞赋值问题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="_1">简单时序逻辑电路</h1>
+<div class="toc">
+<ul>
+<li><a href="#_1">简单时序逻辑电路</a><ul>
+<li><a href="#1">1. 时序逻辑电路概念</a></li>
+<li><a href="#2">2. 锁存器和触发器</a><ul>
+<li><a href="#2-1">2-1. 锁存器</a><ul>
+<li><a href="#2-1-1-sr">2-1-1. SR 锁存器</a><ul>
+<li><a href="#_2">实验目的</a></li>
+<li><a href="#_3">实验步骤</a></li>
+<li><a href="#_4">参考代码</a></li>
+</ul>
+</li>
+<li><a href="#2-1-2-sr">2-1-2. 门控 SR 锁存器</a><ul>
+<li><a href="#_5">实验目的</a></li>
+<li><a href="#_6">实验步骤</a></li>
+<li><a href="#_7">参考代码</a></li>
+</ul>
+</li>
+<li><a href="#2-1-3-d">2-1-3. D 锁存器</a><ul>
+<li><a href="#_8">实验目的</a></li>
+<li><a href="#_9">实验步骤</a></li>
+<li><a href="#_10">参考代码</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-2">2-2. 触发器</a><ul>
+<li><a href="#2-2-1-d">2-2-1. D 触发器</a><ul>
+<li><a href="#_11">实验目的</a></li>
+<li><a href="#_12">实验步骤</a></li>
+<li><a href="#_13">参考代码</a></li>
+</ul>
+</li>
+<li><a href="#2-2-2-t">2-2-2. T 触发器</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#3">3. 总结</a><ul>
+<li><a href="#3-1">3-1. 同步异步问题</a></li>
+<li><a href="#3-2">3-2. 阻塞非阻塞赋值问题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="1">1. 时序逻辑电路概念</h2>
+<p>​ 在前述的组合逻辑中，任意时刻的输出只与该时刻的输入信号所决定；而在接下来要讲的时序电路中，任意时刻的输出信号不仅与当时刻的输入有关，而且与电路原来的状态有关。这需要电路要能记住历史输入，所以要引入时序概念。用时钟信号保障时序电路按照时序来运行。</p>
+<h2 id="2">2. 锁存器和触发器</h2>
+<p>​ 锁存器和触发器是时序电路中常用的存储器设备。接下来将学习模拟各种类型的锁存器和使用带有控制信号的触发器。</p>
+<h3 id="2-1">2-1. 锁存器</h3>
+<p>​ 锁存器是一种具有两种稳定状态的器件：高输出和低输出。锁存器具有反馈路径，因此设备可以保留信息。锁存器是易失性存储器设备，并且只要设备通电就可以存储一位数据。顾名思义，锁存器用于“锁定”信息并保持信息。</p>
+<h4 id="2-1-1-sr">2-1-1. SR 锁存器</h4>
+<p>​ <strong>SR 锁存器</strong>（置位/复位）是一个异步器件：它不依赖于控制信号工作，仅依赖于 S 和 R 输入的状态。它的符号表示、使用异或门级电路实现和真值表如下所示：</p>
+<p><img alt="" src="images/simple_timing/1563343618646.png" /></p>
+<p><img alt="" src="images/simple_timing/1563343625669.png" /></p>
+<p>​ 虽然 Xilinx FPGA 可以使用一个 LUT（查找表）电路实现这种锁存器，但以下 Verilog 代码显示了如何使用门级电路和数据流建模对这种电路进行建模。</p>
+<pre><code class="language-verilog">门级：
+module SR_latch_gate (input R, input S, output Q, output Qbar);
+nor (Q, R, Qbar);
+nor (Qbar, S, Q); 
+endmodule
+数据流：
+module SR_latch_dataflow (input R, input S, output Q, output Qbar); 
+assign #2 Q = ~ (R | Qbar);
+assign #2 Qbar = ~ (S | Q); 
+endmodule
+</code></pre>
+<h5 id="_2">实验目的</h5>
+<p>​ 使用上面显示的代码设计 SR 锁存器。合成设计并查看合成设计的原理图。设计一个 Testbench 进行测试并验证设计。</p>
+<p>​ 该实验中将 S 输入分配给 SW0，将 R 输入分配给 SW1。将 Q 分配给 LED0，将 Qbar 分配给 LED1。实现该设计并进行仿真验证以及下载。</p>
+<h5 id="_3">实验步骤</h5>
+<p>​ <strong>1.</strong> 打开 Vivado 并创建一个名为 lab5_1_1 的空白项目。</p>
+<p>​ <strong>2.</strong> 使用 SR_latch_dataflow 代码创建和添加 Verilog 模块。</p>
+<p>​ <strong>3.</strong> 设计一个 Testbench 进行测试（也可以使用参考代码中的 Testbench），执行 100ns 的行为仿真，并验证设计。</p>
+<p>​ 若使用供参考的 Testbench，波形应该如下：</p>
+<p><img alt="" src="images/simple_timing/1563351467888.png" /></p>
+<p>​ <strong>4.</strong> 将适当的板相关主 XDC 文件添加到项目中并编辑它以包括相关引脚，将 S 输入分配给 SW0，将 R 输入分配给 SW1，将 Q 分配给 LED0，将 Qbar 分配给 LED1。</p>
+<p>​ <strong>5.</strong> 在“Bitstream Settings”中设置 tcl.pre 选项以指向提供的 lab5_prehook.tcl 文件。此文件允许将组合循环上载到电路板。</p>
+<p>​ <strong>6.</strong> 合成设计并在 Synthesized Design 过程组下查看原理图。验证它使用 2 个 LUT 和 4 个 IO（2 个 IBUF 和 2 个 OBUF）。</p>
+<p>​ <strong>7.</strong> 实现设计并查看项目摘要。它应该显示 2 个 LUT 和 4 个 IO。</p>
+<p>​ <strong>8.</strong> 生成比特流，将其下载到 Nexys4 DDR 板，并验证功能。</p>
+<h5 id="_4">参考代码</h5>
+<pre><code class="language-verilog">module RS_latch_tb();
+    reg R,S;
+    wire Q,Qbar;
+    RS_latch TB (.R(R),.S(S),.Q(Q),.Qbar(Qbar));
+    initial begin
+        R = 0;
+        S = 0;
+        #10 S = 1;
+        #10 S = 0;
+        #10 R = 1;
+        #10 R = 0; S = 1;
+        #10 R = 1; S = 0;
+        #10 R = 0; S = 1;
+        #10 R = 1; S = 0;
+        #10 S = 1; 
+    end
+endmodule
+</code></pre>
+<h4 id="2-1-2-sr">2-1-2. 门控 SR 锁存器</h4>
+<p>​ 在某些情况下，可能需要指示锁存器何时需要锁存数据和何时不能锁存数据。这就引入了门控 SR 锁存器，门控 SR 锁存器是 SR 锁存器的简单扩展，它提供一条使能线，必须将其置为高电平才能够改变锁存器中锁存的数据。但即使现在有了控制线，SR 锁存器也不是同步的，因为即使在使能处于高电平时，输入可以随时改变输出。当使能输入为低电平时，AND 门的输出也为低电平，因此 Q 和条 Q 输出保持锁存到先前的数据。只有当 Enable 输入为高电平时，锁存器的状态才会发生变化，如真值表所示。当使能线被置高电平时，门控 SR 锁存器在操作上与 SR 锁存器相同。Enable 线有时是时钟信号，但通常是读或写控制线。门控 SR 锁存器的符号、电路和真值表如下所示。</p>
+<p><img alt="" src="images/simple_timing/1563348507286.png" /></p>
+<p><img alt="" src="images/simple_timing/1563348467432.png" /></p>
+<h5 id="_5">实验目的</h5>
+<p>​ 使用数据流建模设计门控 SR 锁存器（如上图所示）。合成设计并查看合成设计的原理图。设计一个 Testbench 进行测试并验证设计。仿真设计。将 S 输入分配给 SW0，将 R 输入分配给 SW1，并将输入分配给 SW2。将 Q 分配给 LED0，将 Qbar 分配给 LED1。实现设计并进行仿真和下载。</p>
+<h5 id="_6">实验步骤</h5>
+<p>​ <strong>1.</strong> 打开 Vivado 并创建一个名为 lab5_1_2 的空白项目。</p>
+<p>​ <strong>2.</strong> 创建并添加 Verilog 模块，该模块将使用数据流建模对门控 SR 锁存器进行建模。为模型中使用的每个赋值语句分配 2 个单位延迟。</p>
+<p>​ <strong>3.</strong> 仿真 100ns。</p>
+<p>​ 若使用参考的 Testbench，得到的波形应该如下：</p>
+<p><img alt="" src="images/simple_timing/1563351546606.png" /></p>
+<p>​ <strong>4.</strong> 将适当的电路板相关主 XDC 文件添加到项目中并对其进行编辑以包括相关引脚，将 S 输入分配给 SW0，将 R 输入分配给 SW1，将启用分配给 SW2，将 Q 分配给 LED0，将 Qbar 分配给 LED1。</p>
+<p>​ <strong>5.</strong> 在“Bitstream Settings”中设置 tcl.pre 选项以指向提供的 lab5_prehook.tcl 文件。此文件允许将组合循环上载到电路板。</p>
+<p>​ <strong>6.</strong> 合成设计并在 Synthesized Design 过程下查看原理图。验证它使用 2 个 LUT 和 5 个 IO</p>
+<p>​ <strong>7.</strong> 实现设计并查看项目摘要。它应该显示 2 个 LUT 和 5 个 IO。</p>
+<p>​ <strong>8.</strong> 设计 Testbench 以仿真和验证设计。它应产生的输入如上面图中。</p>
+<p>​ <strong>9.</strong> 生成比特流，将其下载到 Nexys4 DDR 板，并验证功能。</p>
+<h5 id="_7">参考代码</h5>
+<pre><code class="language-verilog">module SR_latch_enable (input R, input S, input E, output Q, output Qbar); 
+    wire R_i,S_i;
+    assign #2 R_i = R &amp; E;
+    assign #2 S_i = S &amp; E;
+    assign #2 Q = ~ (R_i | Qbar); 
+    assign #2 Qbar = ~ (S_i | Q);
+endmodule
+
+Testbench：
+module SR_latch_enable_tb();
+    reg R,S,E;
+    wire Q,Qbar;
+    SR_latch_enable TB (.R(R),.S(S),.E(E),.Q(Q),.Qbar(Qbar));
+    initial begin
+        R = 0;
+        S = 0;
+        #10 S = 1;
+        #20 S = 0;
+        #10 R = 1;
+        #20 R = 0; S = 1;
+        #10 R = 1; S = 0;
+        #10 R = 0; S = 1;
+    end
+    initial begin
+        E = 0;
+        #20 E = 1;
+        #30 E = 0;
+        #40 E = 1;
+    end
+endmodule
+</code></pre>
+<h4 id="2-1-3-d">2-1-3. D 锁存器</h4>
+<p>​ D 锁存器（D 源于”data”），也叫作透明锁存器，是门控 SR 锁存器的简单扩展，其消除了无效输入状态（亚稳态）的可能性。由于门控 SR 锁存器允许我们在不使用 S 或 R 输入的情况下锁存输出，我们可以通过使用互补驱动器驱动设置和复位输入来移除其中一个输入，即我们移除一个输入并自动使其成为另一个输入的互补输入。只要 Enable 线为高电平，D 锁存器就会输出 D 输入，否则输出是当 Enable 输入为最后一个高电平时 D 输入的输出。这就是为什么它也被称为透明锁存器 - 当 Enable 被置位时，锁存器被称为“透明” - 它信号直接传播通过它，好像它不存在一样。</p>
+<p><img alt="" src="images/simple_timing/1563351645754.png" /></p>
+<p><img alt="" src="images/simple_timing/1563351653862.png" /></p>
+<p>​ D 锁存器可以在行为建模中建模，如下所示：</p>
+<pre><code class="language-verilog">module D_latch_behavior (input D, input Enable, output Q, output Qbar);
+ always @ (D or Enable) if(Enable)
+ begin
+  Q &lt;= D;
+  Qbar &lt;= ~D;
+ end 
+endmodule
+</code></pre>
+<p>​ 请注意，由于当 Enable 为低电平时我们没有做什么，电路会“记住”之前的状态。当 Enable 为高电平，由于 always 块也对 D 敏感，Q 和 Qbar 将随时更新 D，从而使其具有“透明”行为。另请注意，这里使用非阻塞赋值运算符（&lt;=）代替已在数据流建模中使用的阻塞运算符（=）。本文档最后介绍了阻塞和非阻塞分配之间的区别。</p>
+<h5 id="_8">实验目的</h5>
+<p>​ 使用数据流建模设计 D 锁存器（如上图所示）。合成设计并查看合成设计的原理图。实现一个 Testbench 进行测试并验证设计。模拟设计。将 D 输入分配给 SW0，并将输入分配给 SW1。将 Q 分配给 LED0，将 Qbar 分配给 LED1。实现设计并验证硬件中的功能。</p>
+<h5 id="_9">实验步骤</h5>
+<p>​ <strong>1.</strong> 打开 Vivado 并创建一个名为 lab5_1_3 的空白项目。</p>
+<p>​ <strong>2.</strong> 创建并添加将使用数据流建模对 D 锁存器建模的 Verilog 模块。为模型中使用的每个赋值语句分配 2 个单位延迟。</p>
+<p>​ <strong>3.</strong> 实现一个 Testbench 以测试和验证设计。它应该产生输入刺激。</p>
+<p>​ 若使用参考的 Testbench，得到的波形应该如下：</p>
+<p><img alt="" src="images/simple_timing/1563381597066.png" /></p>
+<p>​ <strong>4.</strong> 将适当的板相关主 XDC 文件添加到项目中并编辑它以包 0 括相关引脚，将 D 输入分配给 SW0，将输入分配给 SW1，Q 分配给 LED0，Qbar 分配给 LED1。</p>
+<p><strong>5.</strong> 在“Bitstream Settings”中设置 tcl.pre 选项以指向提供的 lab5_prehook.tcl 文件。此文件允许将组合循环上载到电路板。</p>
+<p><strong>6.</strong> 合成设计并在 Synthesized Design 过程组下查看原理图。验证它使用 2 个 LUT 和 4 个 IO。</p>
+<p><strong>7.</strong> 实现设计并查看项目摘要。它应该显示 2 个 LUT 和 4 个 IO。</p>
+<p><strong>8.</strong> 生成比特流文件，将其下载到 Nexys4 DDR 板，并验证功能。</p>
+<h5 id="_10">参考代码</h5>
+<pre><code class="language-verilog">module D_latch_enable (input D, input Enable, output Q, output Qbar);
+    wire Dbar,R_i,S_i;
+    assign #2 Dbar = ~ D;
+    assign #2 R_i = Dbar &amp; Enable;
+    assign #2 S_i = D &amp; Enable;
+    assign #2 Q = ~(R_i | Qbar);
+    assign #2 Qbar = ~(Q | S_i);
+endmodule
+
+module D_latch_enable_tb();
+    reg D,E;
+    wire Q,Qbar;
+    D_latch_enable TB (.D(D),.Enable(E),.Q(Q),.Qbar(Qbar));
+    initial begin
+        D = 0;
+        #10 D = 1;
+        #20 D = 0;
+        #10 D = 1;
+        #20 D = 0; 
+        #10 D = 1;
+        #10 D = 0;
+        #20 D = 1;
+        #10 D = 0;
+    end
+    initial begin
+        E = 0;
+        #20 E = 1;
+        #30 E = 0;
+        #40 E = 1;
+    end
+endmodule
+</code></pre>
+<h3 id="2-2">2-2. 触发器</h3>
+<p>​ 在实际的数字系统中往往包含大量的存储单元，而且经常要求他们在同一时刻同步动作，为达到这个目的，在每个存储单元电路上引入一个时钟脉冲（CLK）作为控制信号，只有当 CLK 到来时电路才被“触发”而动作，并根据输入信号改变输出状态。把这种在时钟信号触发时才能动作的存储单元电路称为触发器，以区别没有时钟信号控制的锁存器。</p>
+<h4 id="2-2-1-d">2-2-1. D 触发器</h4>
+<p>​ D 触发器是一种广泛使用的触发器类型。它也被称为数据或延迟触发器。D 触发器在时钟周期的某一部分（例如时钟的上升沿）捕获 D 输入的值。捕获的值成为 Q 输出。在其他时候，输出 Q 不会改变。D 触发器可以被视为存储器单元或延迟线。触发器中的有效边沿可以为上升，也可为下降。又分为上升（也称为正）边沿触发 D 触发器和下降（负边沿）触发 D 触发器。</p>
+<p>​ 可以使用行为建模对正边沿触发的 D 触发器建模，如下所示：</p>
+<pre><code class="language-verilog">module D_ff_behavior (input D, input Clk, output reg Q); 
+ always @ (posedge Clk)
+  if(Clk) begin
+   Q &lt;= D;
+  end 
+endmodule
+</code></pre>
+<p>​ 请注意，always 块对 Clk 信号的上升沿很敏感。当敏感信号发生更改（事件）时，将执行 if 块中的语句。posedge 灵敏度使触发器行为成为可能。对于下降沿灵敏度使用属性 negedge。</p>
+<p>​ 通常需要让同步元素以定义的输出开始。在某些电路中，还需要强制同步元素到一个已知的输出，而忽略了 D 信号的输入。可以修改上面讨论的 D 触发器以具有这样的功能。如果在时钟的有效边沿上获得所需的输出，则这种 D 触发器被称为具有<strong>同步置位</strong>和复位功能的 D 触发器，否则它被视为具有异步预置和清除的 D 触发器。这样的 D 触发器可按照下面的方法实现：</p>
+<pre><code class="language-verilog">module D_ff_with_synch_reset_behavior(input D, input Clk, input reset, output reg Q);      // 同步置位和复位功能的D触发器
+ always @(posedge Clk) 
+     if (reset) begin
+   Q &lt;= 1'b0;
+  end 
+     else begin
+   Q &lt;= D;
+  end 
+endmodule
+</code></pre>
+<p>​ 在 FPGA 中，位于不同可配置逻辑块（CLB）中的 LUT 和 FF 使用路由资源连接。在实施过程中，工具将使用这些资源，具体取决于电路的建模方式，所需资源的类型和数量，以及电路的驱动速度。通常用于交换信息的资源是彼此靠近的;但是，可能存在无法实现的情况。当相关的触发器（信息交换之间）彼此远离时，到达源触发器和目标触发器的时钟可能不会同时产生所谓的时钟偏移。时钟偏移可以改变电路的行为。在某些其他情况下，某些触发器可能不需要在每个断言的时钟边沿更新其输出。为了控制行为，FPGA 中的触发器有一个额外的控制信号，称为时钟使能（CE）。在 ASIC 技术中，门控时钟用于控制行为。带有 CE 的触发器的符号如下所示：</p>
+<p><img alt="" src="images/simple_timing/1563382256831.png" /></p>
+<h5 id="_11">实验目的</h5>
+<p>​ 使用行为建模对具有同步复位和时钟使能的 D 触发器进行建模。开发一个 testbench 进行测试（如图所示生成输入）并验证设计。仿真设计。将 D 输入分配给 SW0，复位到 SW1，ce 到 SW2，Clk 到 SW15，并将 Q 输出到 LED0。验证硬件设计。</p>
+<h5 id="_12">实验步骤</h5>
+<p>​ <strong>1.</strong> 打开 Vivado 并创建一个名为 lab5_2_4 的空白项目。</p>
+<p>​ <strong>2.</strong> 创建并添加 Verilog 模块，该模块将使用同步复位和时钟使能对 D 触发器进行建模。</p>
+<p>​ <strong>3.</strong> 开发 testbench 以测试和分析设计行为。它应该产生输入激励。</p>
+<p>​  若使用供参考的 Testbench，得到的波形应该如下：</p>
+<p><img alt="" src="images/simple_timing/1563422019450" /></p>
+<p>​ <strong>4.</strong> 将适当的板相关主 XDC 文件添加到项目中并编辑它以包括相关引脚，将 D 分配给 SW0，reset 为 SW1，ce 分配给 SW2，Clk 分配给 SW15，Q 分配给 LED0。</p>
+<p>​  set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets { clk }];</p>
+<p>​  需要将上面的代码行添加到 XDC 文件中，以允许将 SW15 用作时钟。</p>
+<p><strong>5.</strong> 在“Bitstream Settings”中设置 tcl.pre 选项以指向提供的 lab5_prehook.tcl 文件。此文件允许将组合循环上载到电路板。</p>
+<p><strong>6.</strong> 合成并实现设计。查看项目摘要并注意使用了 1 个 BUFG 和 5 个 IO。使用 BUFG 是因为在设计中使用了时钟信号。</p>
+<p>​  <strong>7.</strong> 生成比特流，将其下载到 Nexys4 DDR 板，并验证功能。</p>
+<h5 id="_13">参考代码</h5>
+<pre><code class="language-verilog">module D_ff_with_ce_and_synch_reset_behavior(input D, input Clk, input reset, input ce, output reg Q);
+    always @(posedge Clk) 
+        if (reset) begin
+            Q &lt;= 1'b0;
+        end 
+        else if (ce) begin
+            Q &lt;= D;
+        end 
+endmodule
+
+module D_ff_tb();
+    reg D,Clk,ce,reset;
+    wire Q;
+    D_ff_with_ce_and_synch_reset_behavior TB (.D(D),.Clk(Clk),.ce(ce),.reset(reset),.Q(Q));
+    initial begin
+        D = 0;
+        #20 D = 1;
+        #80 D = 0;
+        #120 D = 1;
+    end
+    initial begin
+        Clk = 0;
+        forever begin
+            #10 Clk = 1;
+            #10 Clk = 0;
+        end
+    end
+    initial begin
+        ce = 0;
+        #60 ce = 1;
+        #20 ce = 0;
+        #100 ce = 1;
+        #20 ce = 0;
+        #60 ce = 1;
+        #20 ce = 0;
+    end
+    initial begin
+        reset = 0;
+        #120 reset = 1;
+        #20 reset = 0;
+    end
+endmodule
+</code></pre>
+<h4 id="2-2-2-t">2-2-2. T 触发器</h4>
+<p>​ 在数字电路中，另一种称为 T 或 Toggle 的触发器用于实现时钟分频器电路。它可用于将输入信号频率变为原来的 1/2.如果级联 n 个 T 触发器，则时钟分频为原来的 (1/2)^n。T 触发器具有 T 输入（数据），时钟输入，以及可选的复位和使能控制信号。</p>
+<pre><code class="language-verilog">module clock_divider_behavior(input Clk, output reg Q); 
+ always @(negedge Clk)
+  Q &lt;= ~Q;
+endmodule
+</code></pre>
+<p>​ T 触发器还可以具有称为 CE（时钟使能）的控制信号，其将允许时钟分频仅在其时钟边沿时发生。以下代码模拟了 T 触发器的功能，该触发器对时钟的下降沿敏感，并具有低电平有效复位和高电平有效 T 控制信号。</p>
+<pre><code class="language-verilog">module T_ff_enable_behavior(input Clk, input reset_n, input T, output reg Q); 
+ always @(negedge Clk)
+  if (!reset_n) Q &lt;= 1'b0;
+  else if (T) Q &lt;= ~Q;
+endmodule
+</code></pre>
+<h2 id="3">3. 总结</h2>
+<h3 id="3-1">3-1. 同步异步问题</h3>
+<p>​ 同步电路：存储电路中所有触发器的时钟输入端都接同一个时钟脉冲源，因而所有触发器的状态的变化都与所加的时钟脉冲信号同步。</p>
+<p>​ 异步电路：电路没有统一的时钟，有些触发器的时钟输入端与时钟脉冲源相连，这有这些触发器的状态变化与时钟脉冲同步，而其他的触发器的状态变化不与时钟脉冲同步。</p>
+<p>​ 下面以 D 触发器为例子来讲述同步和异步之间的差别。</p>
+<p>​ 先用 verilog 描述一个异步的 D 触发器，即就是当时钟信号、复位信号或置位信号任一发生变化时，触发器都会随之发出响应。</p>
+<pre><code class="language-verilog">module D_yb(input clk,input rst,input set,input d,output q);
+ always @(posedge clk or negedge rst or negedge set) begin
+     if(!rst)       
+      q&lt;= 0;
+  else if(!set)
+      q&lt;= 1;
+  else 
+      q&lt;=d;
+ end
+endmodule
+</code></pre>
+<p>​ 再来描述一个同步的 D 触发器，当有时钟脉冲时才会做出响应，而 reset 和 set 发生时只会等时钟发生变化才会做出响应。</p>
+<pre><code class="language-verilog">module D_tb（input clk，input rst，input ser,input d,output  q）；
+ always @(poedge clk) begin
+  if(rst)
+         q&lt;= 0;
+        else if(set)
+         q&lt;=1;
+  else
+         q&lt;=d;
+    end
+endmodule
+</code></pre>
+<p>​ 有兴趣的同学们可以在测试用例中使用相同的信号，以方便观察两个触发器的区别。</p>
+<h3 id="3-2">3-2. 阻塞非阻塞赋值问题</h3>
+<p>​ 阻塞赋值：在本语句中“右式计算”和“左式更新”全部完成之后，才开始执行下一条语句。</p>
+<p>​    非阻塞赋值：当前语句的执行不会阻塞下一语句的执行。</p>
+<p>​ 例如，下面的例子使用了非阻塞赋值：</p>
+<pre><code class="language-verilog"> module nonblocking(input clk, input a,output reg c); 
+  reg b;
+ always @(posedge clk) begin
+      b &lt;= a;
+     c &lt;= b;
+   end
+ endmodule
+</code></pre>
+<p>​ 实现出来的 RTL 原理图如下：</p>
+<p><img alt="" src="images/simple_timing/271607238061109.jpg" /></p>
+<p>​ 这是因为在每个 clk 的上升沿，电路并发实现两条非阻塞赋值语句，所以需要两个 D 触发器。</p>
+<p>​ 而下面的例子和上个例子几乎完全一样，只是把非阻塞赋值改成了阻塞赋值，如下：</p>
+<pre><code class="language-verilog">module blocking(input clk, input a,output reg c); 
+ reg b;
+ always @(posedge clk) begin
+     b = a;  
+     c = b;
+ end
+endmodule
+</code></pre>
+<p>​ 实现出来的 RTL 原理图如下：</p>
+<p><img alt="" src="images/simple_timing/271611489786197.jpg" /></p>
+<p>​ 事实上，由于在每个时钟周期上升沿执行完这个 begin-end 块语句后，b 和 c 的值完全一样，所以 RTL 中就把 b 给优化掉了。</p>
+<p>​ 如果你还有更多探索的兴趣，可以先试试把上面的例子中 b = a; c = b;的顺序交换一下，再把实现出来的结果和非阻塞赋值例子的结果相比较，看看是不是相同。</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://vlab.ustc.edu.cn/" target="_blank" rel="noopener" title="vlab.ustc.edu.cn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.78 8.75a9.64 9.64 0 0 0 1.363 4.177c.255.426.542.832.857 1.215.245-.296.551-.705.857-1.215A9.64 9.64 0 0 0 10.22 8.75Zm4.44-1.5a9.64 9.64 0 0 0-1.363-4.177c-.307-.51-.612-.919-.857-1.215a9.927 9.927 0 0 0-.857 1.215A9.64 9.64 0 0 0 5.78 7.25Zm-5.944 1.5H1.543a6.507 6.507 0 0 0 4.666 5.5c-.123-.181-.24-.365-.352-.552-.715-1.192-1.437-2.874-1.581-4.948Zm-2.733-1.5h2.733c.144-2.074.866-3.756 1.58-4.948.12-.197.237-.381.353-.552a6.507 6.507 0 0 0-4.666 5.5Zm10.181 1.5c-.144 2.074-.866 3.756-1.58 4.948-.12.197-.237.381-.353.552a6.507 6.507 0 0 0 4.666-5.5Zm2.733-1.5a6.507 6.507 0 0 0-4.666-5.5c.123.181.24.365.353.552.714 1.192 1.436 2.874 1.58 4.948Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/USTC-vlab" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.sections", "navigation.top"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+    
+  </body>
+</html>

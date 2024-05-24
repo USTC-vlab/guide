@@ -1,0 +1,3275 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="USTC Vlab">
+      
+      
+        <link rel="canonical" href="https://vlab.ustc.edu.cn/guide/doc_complex_timing.html">
+      
+      
+        <link rel="prev" href="doc_simple_timing.html">
+      
+      
+        <link rel="next" href="doc_finite_state_machine.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24">
+    
+    
+      
+        <title>复杂时序逻辑电路 - 数字电路教程</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","UA-115907213-3"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","UA-115907213-3",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=UA-115907213-3",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="index.html" title="数字电路教程" class="md-header__button md-logo" aria-label="数字电路教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            数字电路教程
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              复杂时序逻辑电路
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="light-blue"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="数字电路教程" class="md-nav__button md-logo" aria-label="数字电路教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12Z"/></svg>
+
+    </a>
+    数字电路教程
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    课程介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_logisim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LogiSim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_verilog.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verilog 语法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_fpga.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FPGA 原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_nexys.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nexys4DDR 开发板
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_vivado.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vivado 介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_testbench.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TestBench 编写及仿真
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="coding_convention.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    代码风格规范
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    一些例子
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            一些例子
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_basic_logic.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基本逻辑门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_simple_logic.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简单组合逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_complex_logic.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    复杂组合逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_simple_timing.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简单时序逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    复杂时序逻辑电路
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="doc_complex_timing.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    复杂时序逻辑电路
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 时序逻辑电路的基本结构和分类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 时序逻辑电路的基本结构和分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-1. 基本结构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-2. 时序逻辑电路的分类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1-2. 时序逻辑电路的分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-2-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-2-1. 异步时序电路与同步时序电路
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-2-2. 米利型和摩尔型电路
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 几个典型的时序逻辑电路
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 几个典型的时序逻辑电路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1. 可同步重置、载入信号的寄存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-1. 可同步重置、载入信号的寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2. 可同步重置、同步置位、载入信号的寄存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-2. 可同步重置、同步置位、载入信号的寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-3-4-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-3. 4-bit 并行输入并行输出移位寄存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-3. 4-bit 并行输入并行输出移位寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-4-8-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-4. 8-bit 计数器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-4. 8-bit 计数器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-4-4-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-4. 4-bit 递减计数器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-4. 4-bit 递减计数器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. FPGA 工具中的常用电路
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. FPGA 工具中的常用电路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-1. 时钟约束向导
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3-1. 时钟约束向导">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-2. IP 目录
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3-2. IP 目录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 时序逻辑电路的基本结构和分类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 时序逻辑电路的基本结构和分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-1. 基本结构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-2. 时序逻辑电路的分类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1-2. 时序逻辑电路的分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-2-1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-2-1. 异步时序电路与同步时序电路
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2-2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-2-2. 米利型和摩尔型电路
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 几个典型的时序逻辑电路
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 几个典型的时序逻辑电路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1. 可同步重置、载入信号的寄存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-1. 可同步重置、载入信号的寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2. 可同步重置、同步置位、载入信号的寄存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-2. 可同步重置、同步置位、载入信号的寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-3-4-bit_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-3. 4-bit 并行输入并行输出移位寄存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-3. 4-bit 并行输入并行输出移位寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-4-8-bit_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-4. 8-bit 计数器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-4. 8-bit 计数器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-4-4-bit_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-4. 4-bit 递减计数器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-4. 4-bit 递减计数器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-fpga_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. FPGA 工具中的常用电路
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. FPGA 工具中的常用电路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-1. 时钟约束向导
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3-1. 时钟约束向导">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2-ip_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-2. IP 目录
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3-2. IP 目录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_finite_state_machine.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    有限状态机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 时序逻辑电路的基本结构和分类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 时序逻辑电路的基本结构和分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-1. 基本结构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-2. 时序逻辑电路的分类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1-2. 时序逻辑电路的分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-2-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-2-1. 异步时序电路与同步时序电路
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-2-2. 米利型和摩尔型电路
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 几个典型的时序逻辑电路
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 几个典型的时序逻辑电路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1. 可同步重置、载入信号的寄存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-1. 可同步重置、载入信号的寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2. 可同步重置、同步置位、载入信号的寄存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-2. 可同步重置、同步置位、载入信号的寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-3-4-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-3. 4-bit 并行输入并行输出移位寄存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-3. 4-bit 并行输入并行输出移位寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-4-8-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-4. 8-bit 计数器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-4. 8-bit 计数器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-4-4-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-4. 4-bit 递减计数器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-4. 4-bit 递减计数器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. FPGA 工具中的常用电路
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. FPGA 工具中的常用电路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-1. 时钟约束向导
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3-1. 时钟约束向导">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-2. IP 目录
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3-2. IP 目录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 时序逻辑电路的基本结构和分类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 时序逻辑电路的基本结构和分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-1. 基本结构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-2. 时序逻辑电路的分类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1-2. 时序逻辑电路的分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-2-1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-2-1. 异步时序电路与同步时序电路
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2-2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1-2-2. 米利型和摩尔型电路
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 几个典型的时序逻辑电路
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 几个典型的时序逻辑电路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-1. 可同步重置、载入信号的寄存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-1. 可同步重置、载入信号的寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-2. 可同步重置、同步置位、载入信号的寄存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-2. 可同步重置、同步置位、载入信号的寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-3-4-bit_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-3. 4-bit 并行输入并行输出移位寄存器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-3. 4-bit 并行输入并行输出移位寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-4-8-bit_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-4. 8-bit 计数器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-4. 8-bit 计数器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-4-4-bit_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2-4. 4-bit 递减计数器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2-4. 4-bit 递减计数器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-fpga_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. FPGA 工具中的常用电路
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. FPGA 工具中的常用电路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-1. 时钟约束向导
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3-1. 时钟约束向导">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2-ip_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3-2. IP 目录
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3-2. IP 目录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目的
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="_1">复杂时序逻辑电路</h1>
+<h2 id="1">1. 时序逻辑电路的基本结构和分类</h2>
+<h3 id="1-1">1-1. 基本结构</h3>
+<p>​ 时序逻辑电路由组合电路和存储电路两部分组成，通过反馈回路将两部分连成一个整体。时序逻辑电路的一般结构如下图所示。</p>
+<p><img alt="" src="images/complex_timing/structure.jpg" /></p>
+<p>​ 图中，X~1~，…，X~n~为时序逻辑电路的<strong>输入信号</strong>；Z~1~，…，Z~m~为时序逻辑电路的<strong>输出信号</strong>；y~1~，…，y~s~为时序逻辑电路的<strong>状态信号</strong>，又称为组合电路的<strong>状态变量</strong>；Y~1~，…，Y~r~为时序逻辑电路中的<strong>激励信号</strong>，它决定电路下一时刻的状态；CP 为<strong>时钟脉冲信号</strong>，它是同步时序逻辑电路中的定时信号。</p>
+<p>​ 若记输入信号为$\vec{X}$，输出信号为$\vec{Z}$，激励信号为$\vec{Y}$，状态信号为$\vec{y}$，于是上述的 4 个向量之间的转换关系可以由下面的三个公式表示：
+$$
+\vec{Z} = f(\vec{X},\vec{y})
+\tag{1-1.1}
+$$</p>
+<p>$$
+\vec{Y} = g(\vec{X},\vec{y})
+\tag{1-1.2}
+$$</p>
+<p>$$
+\vec{y^{n+1}} = h(\vec{Y},\vec{y^n})
+\tag{1-1.3}
+$$</p>
+<p>​ 其中，式 1-1.1 表达了输出信号与输入信号和状态信号之间的关系，被称为输出方程组；式 1-1.2 表示了激励信号与状态信号和输入信号之间的关系，称为时序电路的激励方程；式 1-1.3 表示了电路从现态到次态的转换过程，被称作状态转换方程。</p>
+<p>​ 在这里大家可以看到，上面的时序电路又是状态（$\vec{y}$）依赖的，我们常把这样的电路叫做状态机。下一部分有对于状态机的详细描述，敬请期待:smile:。</p>
+<h3 id="1-2">1-2. 时序逻辑电路的分类</h3>
+<h4 id="1-2-1">1-2-1. 异步时序电路与同步时序电路</h4>
+<p>​ 关于这个问题在上一章有过讨论。这里还要再啰嗦两句。</p>
+<p>​ 可以这样理解：如果时序电路中个存储单元的状态更新不是同时发生的，则这种电路称为异步时序电路；如果个存储电路状态是在同一信号的同一边沿更新的，就可以称作同步时序电路。</p>
+<p>​ 导致这种更新不同步的原因可能是：电路的触发器的时钟输入端没有连接在相同的时钟脉冲上，或者这个电路里根本就没有时钟脉冲。</p>
+<h4 id="1-2-2">1-2-2. 米利型和摩尔型电路</h4>
+<p>​ 关于这个问题的详细描述将在下一章出现。</p>
+<h2 id="2">2. 几个典型的时序逻辑电路</h2>
+<p>​ 多个触发器在同一时钟下组合在一起，来保存相关信息的电路称为<strong>寄存器</strong>。就像触发器一样，寄存器也可以有其它的控制信号。你将了解具有附加控制信号的寄存器的行为。</p>
+<p>​ <strong>计数器</strong>是广泛使用的时序电路。在本次实验中，你将用几种方法设计寄存器和计数器。请参考 Vivado 教程上关于如何使用 Vivado 创建工程和验证电路。</p>
+<h3 id="2-1">2-1. 可同步重置、载入信号的寄存器</h3>
+<p>​ 在计算机系统中，相关信息常常在同时被存储。寄存器（register）以这样的方式存储信息比特，即系统可以在同一时间写入或读出所有的比特。寄存器的例子包含数据、地址、控制和状态。简单的寄存器数据的输入引脚和输出引脚分开，但它们用相同的时钟源。一个简单寄存器的设计如下。</p>
+<pre><code class="language-verilog">module Register (input [3:0] D, input Clk, output reg [3:0] Q);
+ always @(posedge Clk)
+  Q &lt;= D;
+endmodule
+</code></pre>
+<p>​ 这个简单的寄存器会在每个时钟周期工作，保存需要的信息。然而，在有的情况下，需要只有在特定条件发生时，寄存器内容才被更新。比如，在计算机系统中的状态寄存器只在特定的指令执行时才更新。在这种情况下，寄存器的时钟需要用一个控制信号控制。这样的寄存器需要包含一个时钟使能引脚。下面是这种寄存器的设计。</p>
+<pre><code class="language-verilog">module Register_with_synch_load_behavior(input [3:0] D, input Clk, 
+                                         input load, output reg [3:0] Q);
+ always @(posedge Clk)
+  if (load)
+   Q &lt;= D;
+endmodule
+</code></pre>
+<p>​ 另一个希望寄存器包含的特性是，当特定条件发生时，寄存器会重置存储的内容。下面是一个包含同步的
+（synchronous）重置和载入信号（重置的优先级高于载入）的简单寄存器的设计。</p>
+<pre><code class="language-verilog">module Register_with_synch_reset_load(input [3:0] D, input Clk,input reset, 
+                                      input load, output reg [3:0] Q);
+ always @(posedge Clk)
+        if (reset) begin
+   Q &lt;= 4'b0;
+  end 
+     else if (load) begin
+   Q &lt;= D;
+  end
+endmodule
+</code></pre>
+<h4 id="_2">实验目的</h4>
+<p>​ 用上面的例子，设计一个 4-bit 寄存器，包含同步的重置和载入信号。编写一个测试用例并对你的设计仿真。对 Clk, D input, reset, load，和 output Q 赋值。在硬件中验证你的设计。</p>
+<h4 id="_3">参考步骤</h4>
+<ol>
+<li>
+<p>打开 Vivado，创建一个工程命名为 lab6_1_1。</p>
+</li>
+<li>
+<p>创建 Verilog module 并添加包含同步重置和载入信号的 4-bit 寄存器。使用上面例子中提供的代码。</p>
+</li>
+<li>
+<p>编写一个测试用例，仿真 500ns，并分析输出。</p>
+</li>
+</ol>
+<p>若使用供参考的 Testbench，则最终仿真得到的波形应该如下：</p>
+<p><img alt="" src="images/complex_timing/1563615302529.png" /></p>
+<ol>
+<li>
+<p>添加开发板相对应的 XDC 文件，编辑 XDC 文件，加入相关的引脚，将 Clk 赋给 SW15，D input 给 SW3-SW0，reset 给 SW4, load 给 SW5，Q 给 LED3- LED0。</p>
+</li>
+<li>
+<p>把下面这行代码加入 XDC 文件，使 SW15 允许被当作时钟使用。
+   set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets { clk }];</p>
+</li>
+<li>
+<p>综合你的设计。</p>
+</li>
+<li>
+<p>实现你的设计，查看 Project Summary 和 Utilization table，注意到 1 个 BUFG 和 11 个 IO 被使用了。</p>
+</li>
+<li>
+<p>生成比特流文件，将其下载到 Nexys4 DDR 开发板，并验证功能。</p>
+</li>
+</ol>
+<h4 id="_4">参考代码</h4>
+<pre><code class="language-verilog">寄存器的实现代码参考例子即可
+下面是Testbench的参考代码
+module Register1_tb();
+    reg Clk, reset, load;
+    reg [3:0] D;
+    wire [3:0] Q;
+    Register_with_synch_reset_load TB(.Clk(Clk),.load(load),.reset(reset),.D(D),.Q(Q));
+    initial begin
+        Clk = 0;
+        forever begin
+            #10 Clk = 1;
+            #10 Clk = 0;
+        end
+    end
+    initial begin
+        load = 0;
+        #60 load = 1;
+        #20 load = 0;
+        #40 load = 1;
+        #20 load = 0;
+        #55 load = 1;
+        #20 load = 0;
+        #65 load = 1;
+    end
+    initial begin
+        reset = 0;
+        #155 reset = 1;
+        #85 reset = 0;
+    end
+    initial begin
+        D = 4'b0000;
+        #20 D = 4'b0101;
+        #60 D = 4'b1001;
+    end
+endmodule
+</code></pre>
+<h3 id="2-2">2-2. 可同步重置、同步置位、载入信号的寄存器</h3>
+<p>​ 在一些仿真中，有必要把寄存器设置到一个预设值。对于这种情况，需要使用另一个控制信号，称为设置 set。一般情况下，在这种寄存器中，重置信号会比设置信号拥有更高优先级，而设置信号比载入信号拥有更高优先级。</p>
+<h4 id="_5">实验目的</h4>
+<p>​ 设计一个 4-bit 包含同步重置，设置和载入信号的寄存器。分配好 Clk, D input, reset, set,load 和 output Q。在硬件中验证功能。</p>
+<h4 id="_6">参考步骤</h4>
+<ol>
+<li>
+<p>打开 Vivado，创建一个工程命名为 lab6_1_2.</p>
+</li>
+<li>
+<p>创建 Verilog module 并添加包含同步重置，设置和载入信号的 4-bit 寄存器。</p>
+</li>
+<li>
+<p>编写一个测试用例，仿真 500ns，并分析输出。</p>
+</li>
+</ol>
+<p>若使用供参考的 Testbench，则最终仿真得到的波形应该如下：</p>
+<p><img alt="" src="images/complex_timing/1563671799092.png" /></p>
+<ol>
+<li>
+<p>添加开发板相对应的 XDC 文件，编辑 XDC 文件，加入相关的引脚。注意：你可能需要为你选择的拨码开关的 Clk pin 加入 CLOCK_DEDITCATED_ROUTE 特性（property）。</p>
+</li>
+<li>
+<p>综合你的设计。</p>
+</li>
+<li>
+<p>实现你的设计。查看 Project Summary 并注意使用资源。理解输出的结果。</p>
+</li>
+<li>
+<p>生成比特流文件，将其下载到 Nexys4 DDR 开发板，并验证功能。</p>
+</li>
+</ol>
+<h4 id="_7">参考代码</h4>
+<pre><code class="language-verilog">module Register_with_synch_reset_load_behavior(input [3:0] D, input Clk,input set,
+                                               input reset, input load, output reg [3:0] Q);
+    always @(posedge Clk)
+        if (reset) begin
+            Q &lt;= 4'b0;
+        end 
+        else if (set) begin
+            Q &lt;= 4'b1111;
+        end
+        else if (load) begin
+            Q &lt;= D;
+        end
+endmodule
+</code></pre>
+<pre><code class="language-verilog">module Register1_tb();
+    reg Clk, reset, set, load;
+    reg [3:0] D;
+    wire [3:0] Q;
+    Register_with_synch_reset_load_behavior TB(.Clk(Clk),.set(set),.load(load),.reset(reset),.D(D),.Q(Q));
+    initial begin
+        Clk = 0;
+        forever begin
+            #10 Clk = 1;
+            #10 Clk = 0;
+        end
+    end
+    initial begin
+        load = 0;
+        #60 load = 1;
+        #20 load = 0;
+        #40 load = 1;
+        #20 load = 0;
+        #55 load = 1;
+        #20 load = 0;
+        #65 load = 1;
+    end
+    initial begin
+        reset = 0;
+        #155 reset = 1;
+        #85 reset = 0;
+    end
+    initial begin
+        set = 0;
+        #220  set = 1;
+        #50 set = 0;
+    end
+    initial begin
+        D = 4'b0000;
+        #20 D = 4'b0101;
+        #60 D = 4'b1001;
+    end
+endmodule
+</code></pre>
+<h3 id="2-3-4-bit">2-3. 4-bit 并行输入并行输出移位寄存器</h3>
+<p>​ 还有一种寄存器称为移位寄存器。移位寄存器是当控制信号生效时，存储的二进制数据会左移或右移的寄存器。移位寄存器可以被进一步分类为并行载入串行输出，串行载入并行输出和串行载入串行输出。它们可能有也可能没有重置信号。</p>
+<p>​ 在 Xilinx FPGA，LUT 可以被用作串行移位寄存器；如果代码写对的话，1 个 LUT 就可以用作 1bit 输入 1bit 输出的 SRL32，因而可以提供非常经济的设计（而不是串联 32 个触发器）。它可以有也可以没有使能信号。当使能信号生效时，内部存储的数据会移位 1bit，1bit 新的数据也会移入。</p>
+<p>​ 下面是一个简单的没有使能信号的 1bit 串行移入移出寄存器的设计。在这个设计中移入的 bit 需要经过 32 个时钟周期移出。这个设计可以用来实现一个延迟线。</p>
+<pre><code class="language-verilog">module simple_one_bit_serial_shift_register_behavior(input Clk, input
+              ShiftIn, output ShiftOut);
+ reg [31:0] shift_reg;
+ always @(posedge Clk)
+  shift_reg &lt;= {shift_reg[30:0], ShiftIn};
+ assign ShiftOut = shift_reg[31];
+endmodule
+</code></pre>
+<p>​ 如果我们要实现一个少于 32 个时钟周期的延迟线，可以修改上面这个设计。下面是一个 3 时钟周期的延迟线。</p>
+<pre><code class="language-verilog">module delay_line3_behavior(input Clk, input ShiftIn, output ShiftOut);
+ reg [2:0] shift_reg;
+ always @(posedge Clk)
+  shift_reg &lt;= {shift_reg[1:0], ShiftIn};
+ assign ShiftOut = shift_reg[2];
+endmodule
+</code></pre>
+<h4 id="_8">实验目的</h4>
+<p>​ 设计一个 4-bit 并行输入的向左移位寄存器。使用下图的信号刺激，编写一个测试用例并对你的设计仿真。
+分配 Clk, ParallelIn, load, ShiftEn, ShiftIn, RegContent 和 ShiftOut.。在硬件上验证功能。</p>
+<h4 id="_9">参考步骤</h4>
+<ol>
+<li>
+<p>打开 Vivado，创建一个工程命名为 lab6_1_4.</p>
+</li>
+<li>
+<p>创建 Verilog module，使用上面的代码，添加 4-bit 并行输入的向左移位寄存器。</p>
+</li>
+<li>
+<p>独立编写一个测试用例，仿真 400ns。输入信号的波形参考如下：</p>
+</li>
+</ol>
+<p><img alt="" src="images/complex_timing/1563673253101.png" /></p>
+<ol>
+<li>
+<p>添加开发板相对应的 XDC 文件，编辑 XDC 文件，加入相关的引脚。注意：你可能需要为你选择
+   的拨码开关的 Clk pin 加入 CLOCK_DEDITCATED_ROUTE 特性（property）。</p>
+</li>
+<li>
+<p>综合你的设计。</p>
+</li>
+<li>
+<p>实现你的设计。
+   查看 Project Summary 并注意使用资源。理解输出的结果。</p>
+</li>
+<li>
+<p>生成比特流文件，将其下载到 Nexys4 DDR 开发板，并验证功能。</p>
+</li>
+</ol>
+<h4 id="_10">参考代码</h4>
+<pre><code class="language-verilog">module Parallelin_serialout_load_enable(input Clk, input ShiftIn,input [3:0] ParallelIn,            input load, input ShiftEn, output ShiftOut,            output [3:0] RegContent);
+ reg [3:0] shift_reg;
+
+ always @(posedge Clk)
+  if(load)
+   shift_reg &lt;= ParallelIn;
+  else if (ShiftEn)
+   shift_reg &lt;= {shift_reg[2:0], ShiftIn};
+
+ assign ShiftOut = shift_reg[3];
+ assign RegContent = shift_reg;
+endmodule
+</code></pre>
+<h3 id="2-4-8-bit">2-4. 8-bit 计数器</h3>
+<p>​ 计数器可以是异步的也可以是同步的。异步计数器只使用事件信号来对事件计数。而同步计数器，使用共有的时钟信号，因而当多个触发器必须改变状态时，状态的改变同时发生。二进制计数器是一种简单的计数器，当使能信号生效时会计数，当重置信号生效时会重置。当然，重置信号比使能信号的优先级高。</p>
+<p>​ 下面的电路图展示了这样的计数器。需要注意的是，清除信号是异步低电平生效的，而使能信号是同步高电平生效的。</p>
+<p><img alt="" src="images/complex_timing/1563675030296.png" /></p>
+<h4 id="_11">实验目的</h4>
+<p>​ 设计一个 8-bit 计数器，将上面的结构扩展至 8-bits。你的设计应该是分层级的，即先设计出 T 触发器，再通过建模实现 8-bit 计数器。T 触发器的实现方案也是多种的，你可以直接行为级建模实现，也可以利用之前实现过的 D 触发器实现，因为 T 触发器可以用 D 触发器构造，如下图。</p>
+<p><img alt="" src="images/complex_timing/1563675367351.png" /></p>
+<p>​ 编写一个测试用例并验证设计。分配 Clock input, Clear_n, Enable 和 Q。实现设计并在硬件上验证功能。</p>
+<h4 id="_12">参考步骤</h4>
+<ol>
+<li>
+<p>打开 Vivado，创建一个工程命名为 lab6_2_1.</p>
+</li>
+<li>
+<p>创建并添加 Verilog module 以提供所需的功能。</p>
+</li>
+<li>
+<p>编写一个测试用例，并验证设计。</p>
+</li>
+</ol>
+<p>若使用参考测试用例，则得到的波形应该如下：</p>
+<p><img alt="" src="images/complex_timing/1563680366835.png" />)</p>
+<ol>
+<li>
+<p>添加开发板相对应的 XDC 文件，编辑 XDC 文件，加入相关的引脚。注意：你可能需要为你选择的拨码开关的 Clk pin 加入 CLOCK_DEDITCATED_ROUTE 特性（property）。</p>
+</li>
+<li>
+<p>综合你的设计并在 Synthesized Design 查看原理图（schematic）。指出用了什么资源，用了多少。</p>
+</li>
+<li>
+<p>实现你的设计。</p>
+</li>
+<li>
+<p>生成比特流文件，将其下载到 Basys3 或 Nexys4 DDR 开发板，并验证功能。</p>
+</li>
+</ol>
+<h4 id="_13">参考代码</h4>
+<pre><code class="language-verilog">module T_ff_clear_behavior(
+    input T,
+    input Clk,
+    input Clr,
+    output reg Q
+    );
+    always@(posedge Clk or negedge Clr)begin
+        if(~Clr)begin
+            Q &lt;= 0;
+        end
+        else if(T) begin
+            Q &lt;= ~Q;
+        end
+    end
+endmodule
+</code></pre>
+<pre><code class="language-verilog">module counter_8_bit(
+    input Clk,
+    input Clr,
+    input Enable,
+    output [7:0] Q
+    );
+    T_ff_clear_behavior A1(.Clk(Clk),.Clr(Clr),.T(Enable),.Q(Q[0]));
+    T_ff_clear_behavior A2(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0]),.Q(Q[1]));
+    T_ff_clear_behavior A3(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1]),.Q(Q[2]));
+    T_ff_clear_behavior A4(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2]),.Q(Q[3]));
+    T_ff_clear_behavior A5(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp;          Q[3]),.Q(Q[4]));
+    T_ff_clear_behavior A6(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp; Q[3] &amp;         Q[4]),.Q(Q[5]));
+    T_ff_clear_behavior A7(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp; Q[3] &amp;         Q[4] &amp; Q[5]),.Q(Q[6]));
+    T_ff_clear_behavior A8(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp; Q[3] &amp;         Q[4] &amp; Q[5] &amp; Q[6]),.Q(Q[7]));
+endmodule
+</code></pre>
+<pre><code class="language-verilog">module counter_8_bit_tb();
+    reg Clk,Clr,Enable;
+    wire [7:0] Q;
+    counter_8_bit TB(.Clk(Clk),.Clr(Clr),.Enable(Enable),.Q(Q));
+    initial begin
+        Clk = 0;
+        forever begin
+            #10 Clk = 1;
+            #10 Clk = 0;
+        end
+    end
+    initial begin
+        Clr = 1;
+        #5 Clr = 0;
+        #5 Clr = 1;
+    end
+    initial begin
+        Enable = 0;
+        #20 Enable = 1;
+        #100 Enable = 0;
+        #150 Enable = 1;
+    end
+endmodule
+</code></pre>
+<h3 id="2-4-4-bit">2-4. 4-bit 递减计数器</h3>
+<p>​ 有些情况下，你可能要求计数器从非 0 的地方开始计数增或计数减，要求计数器到达指定值时停下。这是一个 4-bit 计数器的例子，它从 10 开始计数递减到 0。当计数值到 0 时，它会重新初始化到 10。在任何时候，如果使能信号是低电平，计数器会暂停计数，直到使能信号恢复。假定在计数开始前，载入信号就生效来载入预设值。</p>
+<pre><code class="language-verilog">reg [3:0] count;
+wire cnt_done;
+assign cnt_done = ~| count;
+assign Q = count;
+always @(posedge Clock)
+if (Clear)
+ count &lt;= 0;
+else if (Enable)
+if (Load | cnt_done)
+ count &lt;= 4'b1010; // decimal 10
+else
+ count &lt;= count - 1;
+</code></pre>
+<h4 id="_14">实验目的</h4>
+<p>​ 参考上面的代码，设计一个 4-bit 递减计数器，包含同步载入、使能和清除。编写测试用例并验证功能。分配 Clock input, Clear,Enable, Load 和 Q。实现设计并在硬件上验证功能。</p>
+<h4 id="_15">参考步骤</h4>
+<ol>
+<li>打开 Vivado，创建一个工程命名为 lab6_2_3.</li>
+<li>创建并添加 Verilog module 以提供所需的功能。</li>
+<li>编写一个测试用例，并验证设计。测试用例输入信号的编写参考下面的波形：</li>
+</ol>
+<p><img alt="" src="images/complex_timing/1563683217154.png" /></p>
+<ol>
+<li>添加开发板相对应的 XDC 文件，编辑 XDC 文件，加入相关的引脚。注意：你可能需要为你选择的拨码开关的 Clk pin 加入 CLOCK_DEDITCATED_ROUTE 特性（property）。</li>
+<li>综合你的设计并在 Synthesized Design 查看原理图（schematic）。</li>
+<li>实现你的设计。</li>
+<li>生成比特流文件，将其下载到 Nexys4 DDR 开发板，并验证功能。</li>
+</ol>
+<h4 id="_16">参考代码</h4>
+<pre><code class="language-verilog">module counter_decline(
+ input Clock,
+    input Clear,
+    input Enable, 
+    input Load,
+    output [3:0] Q
+);
+    reg [3:0] count;
+ wire cnt_done;
+ assign cnt_done = ~ | count; //count是否递减到0
+ assign Q = count;
+ always @(posedge Clock)
+ if (Clear)
+  count &lt;= 0;
+ else if (Enable)
+  if (Load | cnt_done)
+   count &lt;= 4'b1010; // decimal 10
+  else
+   count &lt;= count - 1;
+endmodule
+</code></pre>
+<h2 id="3-fpga">3. FPGA 工具中的常用电路</h2>
+<p>​ 现在的 Xilinx FPGA 包含了比基本的 LUT,CLB,IOB 和布线更多的资源。与胶合逻辑发明时相比，现在 FPGA 被用来实现更复杂的数字电路。一些复杂的架构资源，例如时钟，必须利用配置和实例化，而不是自己实现。FPGA 工具也提供经常使用的复杂电路，例如 ReedSolomon 译码器，使得开发者不需要“重新设计轮子”。本次实验介绍架构向导，和可以通过 IP 目录获得的 IP 生成工具。</p>
+<h3 id="3-1">3-1.  时钟约束向导</h3>
+<p>​ 通过对 FPGA 提供的工具的正确配置和实例化，而不是亲自实现，可以有效的使用专业和高级的架构。所使用的 FPGA 系列不同，所提供的架构的数量和种类也不同。在 Artix-7 系列中，提供了时钟、SelectIO，软错误缓解和 XADC 资源。可以在 IP Catalog 工具的 FPGA Features andDesign 文件夹下访问这些资源。</p>
+<p>​ 在 Nexys4 DDR 板上，可以使用 100 MHz 时钟源，它连接到 Nexys4 DDR 的 E3 引脚。该时钟源可用于产生多个不同频率和相移的时钟。这是通过使用称为 Artix-7 系列 FPGA 的数字时钟管理器（DCM）和锁相环（PLL）的架构资源来完成的。可以通过双击 IP Catalog 的 FPGA Feature and Design 文件夹的 Clocking 子文件夹下的 Clocking Wizard 条目来调用时钟源生成器。</p>
+<p><img alt="" src="images/complex_timing/1563720971518.png" /></p>
+<p>​ 该向导可以轻松的为你定制的时钟电路创建源代码封装器。该向导将指导你为时钟原语设置适当的属性，并允许你更改任何向导计算的参数。除了提供用于实现所需时钟电路的 HDL 包装器之外，时钟向导还提供由 Xilinx 时序工具为电路生成的时序参数汇总。该向导的主要功能包括：</p>
+<ol>
+<li>每个时钟网络最多可接受两个输入时钟和七个输出时钟；</li>
+<li>自动为所选设备选择正确的时钟原语；</li>
+<li>根据用户选择的时钟功能自动配置时钟原语；</li>
+<li>自动实现支持相移和占空比要求的整体配置；</li>
+<li>可选择缓冲时钟信号。</li>
+</ol>
+<p>时钟生成部件核心的功能如下图：</p>
+<p><img alt="" src="images/complex_timing/1563721124688.png" /></p>
+<p>假设我们想要生成一个与 100 MHz 输入时钟同相的 5MHz 时钟。请按照以下步骤实现：</p>
+<p>双击 Clocking Wizard 条目，向导打开后，你会看到有五个选项。</p>
+<p><img alt="" src="images/complex_timing/1563721348108.png" /></p>
+<ol>
+<li>第一项标题为 Clocking Options。这里有与输入时钟，时钟参数，输入频率和范围相关的参数。由于实际的时钟频率就是 100MHz，所以我们保持默认值就行。</li>
+<li>第二项标题为 Output Clocks。可以设置输出时钟和所需频率相关的参数。设置输出频率为 1.000MHz。<strong>注意：如果频率显示为红色的表明存在错误。</strong>由于此时频率显示为红色，存在错误。将鼠标移到该位置可以看到弹出提示“此设备的实际频率范围为 4.678MHz 至 800MHz”。现将其改为 5.000MHz。在输出时钟中取消勾选 RESET 选项，然后我们创建一个异步复位。</li>
+</ol>
+<p><img alt="" src="images/complex_timing/1563722138731.png" /></p>
+<ol>
+<li>第三项标题为 Port Renaming，允许你更改端口名。我们将使用默认的端口名。</li>
+<li>第四项标题为 MMCM Setting，用于显示计算设置。只要你知道他们都是做什么的或者它们是怎样影响设计的，你就可以检查并更改他们。我们希望看到时钟是稳定的。</li>
+<li>最后的第五项标题为 Summary，显示你设置的摘要。</li>
+</ol>
+<p>点击 OK 然后点击 Generate 生成用于综合，实现和仿真的文件。</p>
+<p>​ 可以通过“IP 源”选项卡访问文件（包括实例化文件）。以下是.veo 文件内容的示例。</p>
+<pre><code class="language-verilog">clk_5MHz instance_name
+(// Clock in ports
+.clk_in1(CLK_IN1), // IN
+// Clock out ports
+.clk_out1(CLK_OUT1), // OUT
+// Status and control signals
+.reset(RESET), // IN
+.locked(LOCKED)); // OUT
+</code></pre>
+<h4 id="_17">实验目的</h4>
+<p>​ 设计一个一秒脉冲发生器。使用时钟向导生成 5MHz 时钟，通过时钟分频器（以行为建模编写）进一步分频，以生成一个以一秒为周期信号。上述使用时钟向导（以及生成的实例化模板）的步骤可用于本练习。使用 100 MHz 的板载时钟源，BTNU 按钮复位电路，SW0 作为使能信号，LED0 作为输出信号，Q 为生成的秒周期信号。LED15 用于输出 DCM 锁定信号。完成设计流程，生成比特流，并将其下载到 Nexys4 DDR 板。验证功能。</p>
+<h4 id="_18">参考代码</h4>
+<pre><code class="language-verilog">module clk_instance(
+    input clk100mhz,
+    input reset,
+    output reg led
+    );
+    wire clk5mhz;
+    wire locked;
+    reg [20:0]counter;
+    clk_wiz_0 clk_wiz_0(.reset(reset),.clk_in1(clk100mhz),.clk_out1(clk5mhz),.locked(locked));
+    always@(posedge clk100mhz or negedge locked)begin
+        if(~locked)begin
+            counter &lt;= 0;
+        end
+        else if(counter &lt; 500000) begin
+            counter &lt;= counter + 1;
+        end
+        else begin
+            counter &lt;= 0;
+            led &lt;= ~led;
+        end
+    end
+endmodule
+</code></pre>
+<h3 id="3-2-ip">3-2. IP 目录</h3>
+<p>​ Vivado 工具的 IP 目录允许你配置和生成各种功能的核。在 IP 目录中，根据核心功能进行分组，这些核心包括从简单的基本核（如加法器）到非常复杂的和（如 MicroBlaze 处理器）。它还涵盖了从汽车到图像处理等各个领域所需核。配置和生成核心的过程与架构向导类似。核心将根据需要使用各种资源，包括 LUT，CLB，DSP48，BRAM 等。让我们看看如何配置和生成计数器核。二进制计数器核可以通过双击位于 IP catalog 下的 Basic Elements 分支下的 Counters 子文件夹下的 Binary Counter 来开始生成。</p>
+<p><img alt="" src="images/complex_timing/1563975225313.png" />
+ ​</p>
+<p>​ 调用时，您将看到两个项配置。第一项标题为 Basic，其上的核心配置参数包括：Implement Using: Fabric or DSP48Output WidthIncrement Value Loadable, Restrict Count, Count Mode (Up, Down, UPDPWN),Threshold
+第二项标题为 Control，配置参数包括：Synchronous Clear, Clock Enable and various other settings.设计人员可以选择想要的功能然后点击 OK 来生成 IP 核。</p>
+<h4 id="_19">实验目的</h4>
+<p>​ 使用 IP 目录生成一个简单的 4 位计数器内核，从 0 计数到 9（提示：配置计数器核时使用 Threshold output）将其实例化两次以创建已创建一个两位数的 BCD 计数器，每秒计数一次。利用架构向导生成一个 5MHz 的时钟，然后使用行为建模生成 1Hz 的周期信号来驱动计数器。将结果显示在两个 7 段数码管上。设计的输入使用 100MHz 的时钟源，使用 BTNU 按钮作为复位信号，使用 SW0 作为使能信号。使用 Basys3 或 Nexys4 DDR 板验证硬件设计功能。# 复杂时序逻辑电路</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">复杂时序逻辑电路</a><ul>
+<li><a href="#1">1. 时序逻辑电路的基本结构和分类</a><ul>
+<li><a href="#1-1">1-1. 基本结构</a></li>
+<li><a href="#1-2">1-2. 时序逻辑电路的分类</a><ul>
+<li><a href="#1-2-1">1-2-1. 异步时序电路与同步时序电路</a></li>
+<li><a href="#1-2-2">1-2-2. 米利型和摩尔型电路</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2">2. 几个典型的时序逻辑电路</a><ul>
+<li><a href="#2-1">2-1. 可同步重置、载入信号的寄存器</a><ul>
+<li><a href="#_2">实验目的</a></li>
+<li><a href="#_3">参考步骤</a></li>
+<li><a href="#_4">参考代码</a></li>
+</ul>
+</li>
+<li><a href="#2-2">2-2. 可同步重置、同步置位、载入信号的寄存器</a><ul>
+<li><a href="#_5">实验目的</a></li>
+<li><a href="#_6">参考步骤</a></li>
+<li><a href="#_7">参考代码</a></li>
+</ul>
+</li>
+<li><a href="#2-3-4-bit">2-3. 4-bit 并行输入并行输出移位寄存器</a><ul>
+<li><a href="#_8">实验目的</a></li>
+<li><a href="#_9">参考步骤</a></li>
+<li><a href="#_10">参考代码</a></li>
+</ul>
+</li>
+<li><a href="#2-4-8-bit">2-4. 8-bit 计数器</a><ul>
+<li><a href="#_11">实验目的</a></li>
+<li><a href="#_12">参考步骤</a></li>
+<li><a href="#_13">参考代码</a></li>
+</ul>
+</li>
+<li><a href="#2-4-4-bit">2-4. 4-bit 递减计数器</a><ul>
+<li><a href="#_14">实验目的</a></li>
+<li><a href="#_15">参考步骤</a></li>
+<li><a href="#_16">参考代码</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#3-fpga">3. FPGA 工具中的常用电路</a><ul>
+<li><a href="#3-1">3-1. 时钟约束向导</a><ul>
+<li><a href="#_17">实验目的</a></li>
+<li><a href="#_18">参考代码</a></li>
+</ul>
+</li>
+<li><a href="#3-2-ip">3-2. IP 目录</a><ul>
+<li><a href="#_19">实验目的</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#1_1">1. 时序逻辑电路的基本结构和分类</a><ul>
+<li><a href="#1-1_1">1-1. 基本结构</a></li>
+<li><a href="#1-2_1">1-2. 时序逻辑电路的分类</a><ul>
+<li><a href="#1-2-1_1">1-2-1. 异步时序电路与同步时序电路</a></li>
+<li><a href="#1-2-2_1">1-2-2. 米利型和摩尔型电路</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2_1">2. 几个典型的时序逻辑电路</a><ul>
+<li><a href="#2-1_1">2-1. 可同步重置、载入信号的寄存器</a><ul>
+<li><a href="#_20">实验目的</a></li>
+<li><a href="#_21">参考步骤</a></li>
+<li><a href="#_22">参考代码</a></li>
+</ul>
+</li>
+<li><a href="#2-2_1">2-2. 可同步重置、同步置位、载入信号的寄存器</a><ul>
+<li><a href="#_23">实验目的</a></li>
+<li><a href="#_24">参考步骤</a></li>
+<li><a href="#_25">参考代码</a></li>
+</ul>
+</li>
+<li><a href="#2-3-4-bit_1">2-3. 4-bit 并行输入并行输出移位寄存器</a><ul>
+<li><a href="#_26">实验目的</a></li>
+<li><a href="#_27">参考步骤</a></li>
+<li><a href="#_28">参考代码</a></li>
+</ul>
+</li>
+<li><a href="#2-4-8-bit_1">2-4. 8-bit 计数器</a><ul>
+<li><a href="#_29">实验目的</a></li>
+<li><a href="#_30">参考步骤</a></li>
+<li><a href="#_31">参考代码</a></li>
+</ul>
+</li>
+<li><a href="#2-4-4-bit_1">2-4. 4-bit 递减计数器</a><ul>
+<li><a href="#_32">实验目的</a></li>
+<li><a href="#_33">参考步骤</a></li>
+<li><a href="#_34">参考代码</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#3-fpga_1">3. FPGA 工具中的常用电路</a><ul>
+<li><a href="#3-1_1">3-1. 时钟约束向导</a><ul>
+<li><a href="#_35">实验目的</a></li>
+<li><a href="#_36">参考代码</a></li>
+</ul>
+</li>
+<li><a href="#3-2-ip_1">3-2. IP 目录</a><ul>
+<li><a href="#_37">实验目的</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="1_1">1. 时序逻辑电路的基本结构和分类</h2>
+<h3 id="1-1_1">1-1. 基本结构</h3>
+<p>​ 时序逻辑电路由组合电路和存储电路两部分组成，通过反馈回路将两部分连成一个整体。时序逻辑电路的一般结构如下图所示。</p>
+<p><img alt="" src="images/complex_timing/structure.jpg" /></p>
+<p>​ 图中，X~1~，…，X~n~为时序逻辑电路的<strong>输入信号</strong>；Z~1~，…，Z~m~为时序逻辑电路的<strong>输出信号</strong>；y~1~，…，y~s~为时序逻辑电路的<strong>状态信号</strong>，又称为组合电路的<strong>状态变量</strong>；Y~1~，…，Y~r~为时序逻辑电路中的<strong>激励信号</strong>，它决定电路下一时刻的状态；CP 为<strong>时钟脉冲信号</strong>，它是同步时序逻辑电路中的定时信号。</p>
+<p>​ 若记输入信号为$\vec{X}$，输出信号为$\vec{Z}$，激励信号为$\vec{Y}$，状态信号为$\vec{y}$，于是上述的 4 个向量之间的转换关系可以由下面的三个公式表示：
+$$
+\vec{Z} = f(\vec{X},\vec{y})
+\tag{1-1.1}
+$$</p>
+<p>$$
+\vec{Y} = g(\vec{X},\vec{y})
+\tag{1-1.2}
+$$</p>
+<p>$$
+\vec{y^{n+1}} = h(\vec{Y},\vec{y^n})
+\tag{1-1.3}
+$$</p>
+<p>​ 其中，式 1-1.1 表达了输出信号与输入信号和状态信号之间的关系，被称为输出方程组；式 1-1.2 表示了激励信号与状态信号和输入信号之间的关系，称为时序电路的激励方程；式 1-1.3 表示了电路从现态到次态的转换过程，被称作状态转换方程。</p>
+<p>​ 在这里大家可以看到，上面的时序电路又是状态（$\vec{y}$）依赖的，我们常把这样的电路叫做状态机。下一部分有对于状态机的详细描述，敬请期待:smile:。</p>
+<h3 id="1-2_1">1-2. 时序逻辑电路的分类</h3>
+<h4 id="1-2-1_1">1-2-1. 异步时序电路与同步时序电路</h4>
+<p>​ 关于这个问题在上一章有过讨论。这里还要再啰嗦两句。</p>
+<p>​ 可以这样理解：如果时序电路中个存储单元的状态更新不是同时发生的，则这种电路称为异步时序电路；如果个存储电路状态是在同一信号的同一边沿更新的，就可以称作同步时序电路。</p>
+<p>​ 导致这种更新不同步的原因可能是：电路的触发器的时钟输入端没有连接在相同的时钟脉冲上，或者这个电路里根本就没有时钟脉冲。</p>
+<h4 id="1-2-2_1">1-2-2. 米利型和摩尔型电路</h4>
+<p>​ 关于这个问题的详细描述将在下一章出现。</p>
+<h2 id="2_1">2. 几个典型的时序逻辑电路</h2>
+<p>​ 多个触发器在同一时钟下组合在一起，来保存相关信息的电路称为<strong>寄存器</strong>。就像触发器一样，寄存器也可以有其它的控制信号。你将了解具有附加控制信号的寄存器的行为。</p>
+<p>​ <strong>计数器</strong>是广泛使用的时序电路。在本次实验中，你将用几种方法设计寄存器和计数器。请参考 Vivado 教程上关于如何使用 Vivado 创建工程和验证电路。</p>
+<h3 id="2-1_1">2-1. 可同步重置、载入信号的寄存器</h3>
+<p>​ 在计算机系统中，相关信息常常在同时被存储。寄存器（register）以这样的方式存储信息比特，即系统可以在同一时间写入或读出所有的比特。寄存器的例子包含数据、地址、控制和状态。简单的寄存器数据的输入引脚和输出引脚分开，但它们用相同的时钟源。一个简单寄存器的设计如下。</p>
+<pre><code class="language-verilog">module Register (input [3:0] D, input Clk, output reg [3:0] Q);
+ always @(posedge Clk)
+  Q &lt;= D;
+endmodule
+</code></pre>
+<p>​ 这个简单的寄存器会在每个时钟周期工作，保存需要的信息。然而，在有的情况下，需要只有在特定条件发生时，寄存器内容才被更新。比如，在计算机系统中的状态寄存器只在特定的指令执行时才更新。在这种情况下，寄存器的时钟需要用一个控制信号控制。这样的寄存器需要包含一个时钟使能引脚。下面是这种寄存器的设计。</p>
+<pre><code class="language-verilog">module Register_with_synch_load_behavior(input [3:0] D, input Clk, 
+                                         input load, output reg [3:0] Q);
+ always @(posedge Clk)
+  if (load)
+   Q &lt;= D;
+endmodule
+</code></pre>
+<p>​ 另一个希望寄存器包含的特性是，当特定条件发生时，寄存器会重置存储的内容。下面是一个包含同步的
+（synchronous）重置和载入信号（重置的优先级高于载入）的简单寄存器的设计。</p>
+<pre><code class="language-verilog">module Register_with_synch_reset_load(input [3:0] D, input Clk,input reset, 
+                                      input load, output reg [3:0] Q);
+ always @(posedge Clk)
+        if (reset) begin
+   Q &lt;= 4'b0;
+  end 
+     else if (load) begin
+   Q &lt;= D;
+  end
+endmodule
+</code></pre>
+<h4 id="_20">实验目的</h4>
+<p>​ 用上面的例子，设计一个 4-bit 寄存器，包含同步的重置和载入信号。编写一个测试用例并对你的设计仿真。对 Clk, D input, reset, load，和 output Q 赋值。在硬件中验证你的设计。</p>
+<h4 id="_21">参考步骤</h4>
+<ol>
+<li>
+<p>打开 Vivado，创建一个工程命名为 lab6_1_1。</p>
+</li>
+<li>
+<p>创建 Verilog module 并添加包含同步重置和载入信号的 4-bit 寄存器。使用上面例子中提供的代码。</p>
+</li>
+<li>
+<p>编写一个测试用例，仿真 500ns，并分析输出。</p>
+</li>
+</ol>
+<p>若使用供参考的 Testbench，则最终仿真得到的波形应该如下：</p>
+<p><img alt="" src="images/complex_timing/1563615302529.png" /></p>
+<ol>
+<li>
+<p>添加开发板相对应的 XDC 文件，编辑 XDC 文件，加入相关的引脚，将 Clk 赋给 SW15，D input 给 SW3-SW0，reset 给 SW4, load 给 SW5，Q 给 LED3- LED0。</p>
+</li>
+<li>
+<p>把下面这行代码加入 XDC 文件，使 SW15 允许被当作时钟使用。
+   set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets { clk }];</p>
+</li>
+<li>
+<p>综合你的设计。</p>
+</li>
+<li>
+<p>实现你的设计，查看 Project Summary 和 Utilization table，注意到 1 个 BUFG 和 11 个 IO 被使用了。</p>
+</li>
+<li>
+<p>生成比特流文件，将其下载到 Nexys4 DDR 开发板，并验证功能。</p>
+</li>
+</ol>
+<h4 id="_22">参考代码</h4>
+<pre><code class="language-verilog">寄存器的实现代码参考例子即可
+下面是Testbench的参考代码
+module Register1_tb();
+    reg Clk, reset, load;
+    reg [3:0] D;
+    wire [3:0] Q;
+    Register_with_synch_reset_load TB(.Clk(Clk),.load(load),.reset(reset),.D(D),.Q(Q));
+    initial begin
+        Clk = 0;
+        forever begin
+            #10 Clk = 1;
+            #10 Clk = 0;
+        end
+    end
+    initial begin
+        load = 0;
+        #60 load = 1;
+        #20 load = 0;
+        #40 load = 1;
+        #20 load = 0;
+        #55 load = 1;
+        #20 load = 0;
+        #65 load = 1;
+    end
+    initial begin
+        reset = 0;
+        #155 reset = 1;
+        #85 reset = 0;
+    end
+    initial begin
+        D = 4'b0000;
+        #20 D = 4'b0101;
+        #60 D = 4'b1001;
+    end
+endmodule
+</code></pre>
+<h3 id="2-2_1">2-2. 可同步重置、同步置位、载入信号的寄存器</h3>
+<p>​ 在一些仿真中，有必要把寄存器设置到一个预设值。对于这种情况，需要使用另一个控制信号，称为设置 set。一般情况下，在这种寄存器中，重置信号会比设置信号拥有更高优先级，而设置信号比载入信号拥有更高优先级。</p>
+<h4 id="_23">实验目的</h4>
+<p>​ 设计一个 4-bit 包含同步重置，设置和载入信号的寄存器。分配好 Clk, D input, reset, set,load 和 output Q。在硬件中验证功能。</p>
+<h4 id="_24">参考步骤</h4>
+<ol>
+<li>
+<p>打开 Vivado，创建一个工程命名为 lab6_1_2.</p>
+</li>
+<li>
+<p>创建 Verilog module 并添加包含同步重置，设置和载入信号的 4-bit 寄存器。</p>
+</li>
+<li>
+<p>编写一个测试用例，仿真 500ns，并分析输出。</p>
+</li>
+</ol>
+<p>若使用供参考的 Testbench，则最终仿真得到的波形应该如下：</p>
+<p><img alt="" src="images/complex_timing/1563671799092.png" /></p>
+<ol>
+<li>
+<p>添加开发板相对应的 XDC 文件，编辑 XDC 文件，加入相关的引脚。注意：你可能需要为你选择的拨码开关的 Clk pin 加入 CLOCK_DEDITCATED_ROUTE 特性（property）。</p>
+</li>
+<li>
+<p>综合你的设计。</p>
+</li>
+<li>
+<p>实现你的设计。查看 Project Summary 并注意使用资源。理解输出的结果。</p>
+</li>
+<li>
+<p>生成比特流文件，将其下载到 Nexys4 DDR 开发板，并验证功能。</p>
+</li>
+</ol>
+<h4 id="_25">参考代码</h4>
+<pre><code class="language-verilog">module Register_with_synch_reset_load_behavior(input [3:0] D, input Clk,input set,
+                                               input reset, input load, output reg [3:0] Q);
+    always @(posedge Clk)
+        if (reset) begin
+            Q &lt;= 4'b0;
+        end 
+        else if (set) begin
+            Q &lt;= 4'b1111;
+        end
+        else if (load) begin
+            Q &lt;= D;
+        end
+endmodule
+</code></pre>
+<pre><code class="language-verilog">module Register1_tb();
+    reg Clk, reset, set, load;
+    reg [3:0] D;
+    wire [3:0] Q;
+    Register_with_synch_reset_load_behavior TB(.Clk(Clk),.set(set),.load(load),.reset(reset),.D(D),.Q(Q));
+    initial begin
+        Clk = 0;
+        forever begin
+            #10 Clk = 1;
+            #10 Clk = 0;
+        end
+    end
+    initial begin
+        load = 0;
+        #60 load = 1;
+        #20 load = 0;
+        #40 load = 1;
+        #20 load = 0;
+        #55 load = 1;
+        #20 load = 0;
+        #65 load = 1;
+    end
+    initial begin
+        reset = 0;
+        #155 reset = 1;
+        #85 reset = 0;
+    end
+    initial begin
+        set = 0;
+        #220  set = 1;
+        #50 set = 0;
+    end
+    initial begin
+        D = 4'b0000;
+        #20 D = 4'b0101;
+        #60 D = 4'b1001;
+    end
+endmodule
+</code></pre>
+<h3 id="2-3-4-bit_1">2-3. 4-bit 并行输入并行输出移位寄存器</h3>
+<p>​ 还有一种寄存器称为移位寄存器。移位寄存器是当控制信号生效时，存储的二进制数据会左移或右移的寄存器。移位寄存器可以被进一步分类为并行载入串行输出，串行载入并行输出和串行载入串行输出。它们可能有也可能没有重置信号。</p>
+<p>​ 在 Xilinx FPGA，LUT 可以被用作串行移位寄存器；如果代码写对的话，1 个 LUT 就可以用作 1bit 输入 1bit 输出的 SRL32，因而可以提供非常经济的设计（而不是串联 32 个触发器）。它可以有也可以没有使能信号。当使能信号生效时，内部存储的数据会移位 1bit，1bit 新的数据也会移入。</p>
+<p>​ 下面是一个简单的没有使能信号的 1bit 串行移入移出寄存器的设计。在这个设计中移入的 bit 需要经过 32 个时钟周期移出。这个设计可以用来实现一个延迟线。</p>
+<pre><code class="language-verilog">module simple_one_bit_serial_shift_register_behavior(input Clk, input
+              ShiftIn, output ShiftOut);
+ reg [31:0] shift_reg;
+ always @(posedge Clk)
+  shift_reg &lt;= {shift_reg[30:0], ShiftIn};
+ assign ShiftOut = shift_reg[31];
+endmodule
+</code></pre>
+<p>​ 如果我们要实现一个少于 32 个时钟周期的延迟线，可以修改上面这个设计。下面是一个 3 时钟周期的延迟线。</p>
+<pre><code class="language-verilog">module delay_line3_behavior(input Clk, input ShiftIn, output ShiftOut);
+ reg [2:0] shift_reg;
+ always @(posedge Clk)
+  shift_reg &lt;= {shift_reg[1:0], ShiftIn};
+ assign ShiftOut = shift_reg[2];
+endmodule
+</code></pre>
+<h4 id="_26">实验目的</h4>
+<p>​ 设计一个 4-bit 并行输入的向左移位寄存器。使用下图的信号刺激，编写一个测试用例并对你的设计仿真。
+分配 Clk, ParallelIn, load, ShiftEn, ShiftIn, RegContent 和 ShiftOut.。在硬件上验证功能。</p>
+<h4 id="_27">参考步骤</h4>
+<ol>
+<li>
+<p>打开 Vivado，创建一个工程命名为 lab6_1_4.</p>
+</li>
+<li>
+<p>创建 Verilog module，使用上面的代码，添加 4-bit 并行输入的向左移位寄存器。</p>
+</li>
+<li>
+<p>独立编写一个测试用例，仿真 400ns。输入信号的波形参考如下：</p>
+</li>
+</ol>
+<p><img alt="" src="images/complex_timing/1563673253101.png" /></p>
+<ol>
+<li>
+<p>添加开发板相对应的 XDC 文件，编辑 XDC 文件，加入相关的引脚。注意：你可能需要为你选择
+   的拨码开关的 Clk pin 加入 CLOCK_DEDITCATED_ROUTE 特性（property）。</p>
+</li>
+<li>
+<p>综合你的设计。</p>
+</li>
+<li>
+<p>实现你的设计。
+   查看 Project Summary 并注意使用资源。理解输出的结果。</p>
+</li>
+<li>
+<p>生成比特流文件，将其下载到 Nexys4 DDR 开发板，并验证功能。</p>
+</li>
+</ol>
+<h4 id="_28">参考代码</h4>
+<pre><code class="language-verilog">module Parallelin_serialout_load_enable(input Clk, input ShiftIn,input [3:0] ParallelIn,            input load, input ShiftEn, output ShiftOut,            output [3:0] RegContent);
+ reg [3:0] shift_reg;
+
+ always @(posedge Clk)
+  if(load)
+   shift_reg &lt;= ParallelIn;
+  else if (ShiftEn)
+   shift_reg &lt;= {shift_reg[2:0], ShiftIn};
+
+ assign ShiftOut = shift_reg[3];
+ assign RegContent = shift_reg;
+endmodule
+</code></pre>
+<h3 id="2-4-8-bit_1">2-4. 8-bit 计数器</h3>
+<p>​ 计数器可以是异步的也可以是同步的。异步计数器只使用事件信号来对事件计数。而同步计数器，使用共有的时钟信号，因而当多个触发器必须改变状态时，状态的改变同时发生。二进制计数器是一种简单的计数器，当使能信号生效时会计数，当重置信号生效时会重置。当然，重置信号比使能信号的优先级高。</p>
+<p>​ 下面的电路图展示了这样的计数器。需要注意的是，清除信号是异步低电平生效的，而使能信号是同步高电平生效的。</p>
+<p><img alt="" src="images/complex_timing/1563675030296.png" /></p>
+<h4 id="_29">实验目的</h4>
+<p>​ 设计一个 8-bit 计数器，将上面的结构扩展至 8-bits。你的设计应该是分层级的，即先设计出 T 触发器，再通过建模实现 8-bit 计数器。T 触发器的实现方案也是多种的，你可以直接行为级建模实现，也可以利用之前实现过的 D 触发器实现，因为 T 触发器可以用 D 触发器构造，如下图。</p>
+<p><img alt="" src="images/complex_timing/1563675367351.png" /></p>
+<p>​ 编写一个测试用例并验证设计。分配 Clock input, Clear_n, Enable 和 Q。实现设计并在硬件上验证功能。</p>
+<h4 id="_30">参考步骤</h4>
+<ol>
+<li>
+<p>打开 Vivado，创建一个工程命名为 lab6_2_1.</p>
+</li>
+<li>
+<p>创建并添加 Verilog module 以提供所需的功能。</p>
+</li>
+<li>
+<p>编写一个测试用例，并验证设计。</p>
+</li>
+</ol>
+<p>若使用参考测试用例，则得到的波形应该如下：</p>
+<p><img alt="" src="images/complex_timing/1563680366835.png" /></p>
+<ol>
+<li>
+<p>添加开发板相对应的 XDC 文件，编辑 XDC 文件，加入相关的引脚。注意：你可能需要为你选择的拨码开关的 Clk pin 加入 CLOCK_DEDITCATED_ROUTE 特性（property）。</p>
+</li>
+<li>
+<p>综合你的设计并在 Synthesized Design 查看原理图（schematic）。指出用了什么资源，用了多少。</p>
+</li>
+<li>
+<p>实现你的设计。</p>
+</li>
+<li>
+<p>生成比特流文件，将其下载到 Basys3 或 Nexys4 DDR 开发板，并验证功能。</p>
+</li>
+</ol>
+<h4 id="_31">参考代码</h4>
+<pre><code class="language-verilog">module T_ff_clear_behavior(
+    input T,
+    input Clk,
+    input Clr,
+    output reg Q
+    );
+    always@(posedge Clk or negedge Clr)begin
+        if(~Clr)begin
+            Q &lt;= 0;
+        end
+        else if(T) begin
+            Q &lt;= ~Q;
+        end
+    end
+endmodule
+</code></pre>
+<pre><code class="language-verilog">module counter_8_bit(
+    input Clk,
+    input Clr,
+    input Enable,
+    output [7:0] Q
+    );
+    T_ff_clear_behavior A1(.Clk(Clk),.Clr(Clr),.T(Enable),.Q(Q[0]));
+    T_ff_clear_behavior A2(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0]),.Q(Q[1]));
+    T_ff_clear_behavior A3(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1]),.Q(Q[2]));
+    T_ff_clear_behavior A4(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2]),.Q(Q[3]));
+    T_ff_clear_behavior A5(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp;          Q[3]),.Q(Q[4]));
+    T_ff_clear_behavior A6(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp; Q[3] &amp;         Q[4]),.Q(Q[5]));
+    T_ff_clear_behavior A7(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp; Q[3] &amp;         Q[4] &amp; Q[5]),.Q(Q[6]));
+    T_ff_clear_behavior A8(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp; Q[3] &amp;         Q[4] &amp; Q[5] &amp; Q[6]),.Q(Q[7]));
+endmodule
+</code></pre>
+<pre><code class="language-verilog">module counter_8_bit_tb();
+    reg Clk,Clr,Enable;
+    wire [7:0] Q;
+    counter_8_bit TB(.Clk(Clk),.Clr(Clr),.Enable(Enable),.Q(Q));
+    initial begin
+        Clk = 0;
+        forever begin
+            #10 Clk = 1;
+            #10 Clk = 0;
+        end
+    end
+    initial begin
+        Clr = 1;
+        #5 Clr = 0;
+        #5 Clr = 1;
+    end
+    initial begin
+        Enable = 0;
+        #20 Enable = 1;
+        #100 Enable = 0;
+        #150 Enable = 1;
+    end
+endmodule
+</code></pre>
+<h3 id="2-4-4-bit_1">2-4. 4-bit 递减计数器</h3>
+<p>​ 有些情况下，你可能要求计数器从非 0 的地方开始计数增或计数减，要求计数器到达指定值时停下。这是一个 4-bit 计数器的例子，它从 10 开始计数递减到 0。当计数值到 0 时，它会重新初始化到 10。在任何时候，如果使能信号是低电平，计数器会暂停计数，直到使能信号恢复。假定在计数开始前，载入信号就生效来载入预设值。</p>
+<pre><code class="language-verilog">reg [3:0] count;
+wire cnt_done;
+assign cnt_done = ~| count;
+assign Q = count;
+always @(posedge Clock)
+if (Clear)
+ count &lt;= 0;
+else if (Enable)
+if (Load | cnt_done)
+ count &lt;= 4'b1010; // decimal 10
+else
+ count &lt;= count - 1;
+</code></pre>
+<h4 id="_32">实验目的</h4>
+<p>​ 参考上面的代码，设计一个 4-bit 递减计数器，包含同步载入、使能和清除。编写测试用例并验证功能。分配 Clock input, Clear,Enable, Load 和 Q。实现设计并在硬件上验证功能。</p>
+<h4 id="_33">参考步骤</h4>
+<ol>
+<li>打开 Vivado，创建一个工程命名为 lab6_2_3.</li>
+<li>创建并添加 Verilog module 以提供所需的功能。</li>
+<li>编写一个测试用例，并验证设计。测试用例输入信号的编写参考下面的波形：</li>
+</ol>
+<p><img alt="" src="images/complex_timing/1563683217154.png" /></p>
+<ol>
+<li>添加开发板相对应的 XDC 文件，编辑 XDC 文件，加入相关的引脚。注意：你可能需要为你选择的拨码开关的 Clk pin 加入 CLOCK_DEDITCATED_ROUTE 特性（property）。</li>
+<li>综合你的设计并在 Synthesized Design 查看原理图（schematic）。</li>
+<li>实现你的设计。</li>
+<li>生成比特流文件，将其下载到 Nexys4 DDR 开发板，并验证功能。</li>
+</ol>
+<h4 id="_34">参考代码</h4>
+<pre><code class="language-verilog">module counter_decline(
+ input Clock,
+    input Clear,
+    input Enable, 
+    input Load,
+    output [3:0] Q
+);
+    reg [3:0] count;
+ wire cnt_done;
+ assign cnt_done = ~ | count; //count是否递减到0
+ assign Q = count;
+ always @(posedge Clock)
+ if (Clear)
+  count &lt;= 0;
+ else if (Enable)
+  if (Load | cnt_done)
+   count &lt;= 4'b1010; // decimal 10
+  else
+   count &lt;= count - 1;
+endmodule
+</code></pre>
+<h2 id="3-fpga_1">3. FPGA 工具中的常用电路</h2>
+<p>​ 现在的 Xilinx FPGA 包含了比基本的 LUT,CLB,IOB 和布线更多的资源。与胶合逻辑发明时相比，现在 FPGA 被用来实现更复杂的数字电路。一些复杂的架构资源，例如时钟，必须利用配置和实例化，而不是自己实现。FPGA 工具也提供经常使用的复杂电路，例如 ReedSolomon 译码器，使得开发者不需要“重新设计轮子”。本次实验介绍架构向导，和可以通过 IP 目录获得的 IP 生成工具。</p>
+<h3 id="3-1_1">3-1.  时钟约束向导</h3>
+<p>​ 通过对 FPGA 提供的工具的正确配置和实例化，而不是亲自实现，可以有效的使用专业和高级的架构。所使用的 FPGA 系列不同，所提供的架构的数量和种类也不同。在 Artix-7 系列中，提供了时钟、SelectIO，软错误缓解和 XADC 资源。可以在 IP Catalog 工具的 FPGA Features andDesign 文件夹下访问这些资源。</p>
+<p>​ 在 Nexys4 DDR 板上，可以使用 100 MHz 时钟源，它连接到 Nexys4 DDR 的 E3 引脚。该时钟源可用于产生多个不同频率和相移的时钟。这是通过使用称为 Artix-7 系列 FPGA 的数字时钟管理器（DCM）和锁相环（PLL）的架构资源来完成的。可以通过双击 IP Catalog 的 FPGA Feature and Design 文件夹的 Clocking 子文件夹下的 Clocking Wizard 条目来调用时钟源生成器。</p>
+<p><img alt="" src="images/complex_timing/1563720971518.png" /></p>
+<p>​ 该向导可以轻松的为你定制的时钟电路创建源代码封装器。该向导将指导你为时钟原语设置适当的属性，并允许你更改任何向导计算的参数。除了提供用于实现所需时钟电路的 HDL 包装器之外，时钟向导还提供由 Xilinx 时序工具为电路生成的时序参数汇总。该向导的主要功能包括：</p>
+<ol>
+<li>每个时钟网络最多可接受两个输入时钟和七个输出时钟；</li>
+<li>自动为所选设备选择正确的时钟原语；</li>
+<li>根据用户选择的时钟功能自动配置时钟原语；</li>
+<li>自动实现支持相移和占空比要求的整体配置；</li>
+<li>可选择缓冲时钟信号。</li>
+</ol>
+<p>时钟生成部件核心的功能如下图：</p>
+<p><img alt="" src="images/complex_timing/1563721124688.png" /></p>
+<p>假设我们想要生成一个与 100 MHz 输入时钟同相的 5MHz 时钟。请按照以下步骤实现：</p>
+<p>双击 Clocking Wizard 条目，向导打开后，你会看到有五个选项。</p>
+<p><img alt="" src="images/complex_timing/1563721348108.png" /></p>
+<ol>
+<li>第一项标题为 Clocking Options。这里有与输入时钟，时钟参数，输入频率和范围相关的参数。由于实际的时钟频率就是 100MHz，所以我们保持默认值就行。</li>
+<li>第二项标题为 Output Clocks。可以设置输出时钟和所需频率相关的参数。设置输出频率为 1.000MHz。<strong>注意：如果频率显示为红色的表明存在错误。</strong>由于此时频率显示为红色，存在错误。将鼠标移到该位置可以看到弹出提示“此设备的实际频率范围为 4.678MHz 至 800MHz”。现将其改为 5.000MHz。在输出时钟中取消勾选 RESET 选项，然后我们创建一个异步复位。</li>
+</ol>
+<p><img alt="" src="images/complex_timing/1563722138731.png" /></p>
+<ol>
+<li>第三项标题为 Port Renaming，允许你更改端口名。我们将使用默认的端口名。</li>
+<li>第四项标题为 MMCM Setting，用于显示计算设置。只要你知道他们都是做什么的或者它们是怎样影响设计的，你就可以检查并更改他们。我们希望看到时钟是稳定的。</li>
+<li>最后的第五项标题为 Summary，显示你设置的摘要。</li>
+</ol>
+<p>点击 OK 然后点击 Generate 生成用于综合，实现和仿真的文件。</p>
+<p>​ 可以通过“IP 源”选项卡访问文件（包括实例化文件）。以下是.veo 文件内容的示例。</p>
+<pre><code class="language-verilog">clk_5MHz instance_name
+(// Clock in ports
+.clk_in1(CLK_IN1), // IN
+// Clock out ports
+.clk_out1(CLK_OUT1), // OUT
+// Status and control signals
+.reset(RESET), // IN
+.locked(LOCKED)); // OUT
+</code></pre>
+<h4 id="_35">实验目的</h4>
+<p>​ 设计一个一秒脉冲发生器。使用时钟向导生成 5MHz 时钟，通过时钟分频器（以行为建模编写）进一步分频，以生成一个以一秒为周期信号。上述使用时钟向导（以及生成的实例化模板）的步骤可用于本练习。使用 100 MHz 的板载时钟源，BTNU 按钮复位电路，SW0 作为使能信号，LED0 作为输出信号，Q 为生成的秒周期信号。LED15 用于输出 DCM 锁定信号。完成设计流程，生成比特流，并将其下载到 Nexys4 DDR 板。验证功能。</p>
+<h4 id="_36">参考代码</h4>
+<pre><code class="language-verilog">module clk_instance(
+    input clk100mhz,
+    input reset,
+    output reg led
+    );
+    wire clk5mhz;
+    wire locked;
+    reg [20:0]counter;
+    clk_wiz_0 clk_wiz_0(.reset(reset),.clk_in1(clk100mhz),.clk_out1(clk5mhz),.locked(locked));
+    always@(posedge clk100mhz or negedge locked)begin
+        if(~locked)begin
+            counter &lt;= 0;
+        end
+        else if(counter &lt; 500000) begin
+            counter &lt;= counter + 1;
+        end
+        else begin
+            counter &lt;= 0;
+            led &lt;= ~led;
+        end
+    end
+endmodule
+</code></pre>
+<h3 id="3-2-ip_1">3-2. IP 目录</h3>
+<p>​ Vivado 工具的 IP 目录允许你配置和生成各种功能的核。在 IP 目录中，根据核心功能进行分组，这些核心包括从简单的基本核（如加法器）到非常复杂的和（如 MicroBlaze 处理器）。它还涵盖了从汽车到图像处理等各个领域所需核。配置和生成核心的过程与架构向导类似。核心将根据需要使用各种资源，包括 LUT，CLB，DSP48，BRAM 等。让我们看看如何配置和生成计数器核。二进制计数器核可以通过双击位于 IP catalog 下的 Basic Elements 分支下的 Counters 子文件夹下的 Binary Counter 来开始生成。</p>
+<p><img alt="" src="images/complex_timing/1563975225313.png" />
+ ​</p>
+<p>​ 调用时，您将看到两个项配置。第一项标题为 Basic，其上的核心配置参数包括：Implement Using: Fabric or DSP48Output WidthIncrement Value Loadable, Restrict Count, Count Mode (Up, Down, UPDPWN),Threshold
+第二项标题为 Control，配置参数包括：Synchronous Clear, Clock Enable and various other settings.设计人员可以选择想要的功能然后点击 OK 来生成 IP 核。</p>
+<h4 id="_37">实验目的</h4>
+<p>​ 使用 IP 目录生成一个简单的 4 位计数器内核，从 0 计数到 9（提示：配置计数器核时使用 Threshold output）将其实例化两次以创建已创建一个两位数的 BCD 计数器，每秒计数一次。利用架构向导生成一个 5MHz 的时钟，然后使用行为建模生成 1Hz 的周期信号来驱动计数器。将结果显示在两个 7 段数码管上。设计的输入使用 100MHz 的时钟源，使用 BTNU 按钮作为复位信号，使用 SW0 作为使能信号。使用 Basys3 或 Nexys4 DDR 板验证硬件设计功能。</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://vlab.ustc.edu.cn/" target="_blank" rel="noopener" title="vlab.ustc.edu.cn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.78 8.75a9.64 9.64 0 0 0 1.363 4.177c.255.426.542.832.857 1.215.245-.296.551-.705.857-1.215A9.64 9.64 0 0 0 10.22 8.75Zm4.44-1.5a9.64 9.64 0 0 0-1.363-4.177c-.307-.51-.612-.919-.857-1.215a9.927 9.927 0 0 0-.857 1.215A9.64 9.64 0 0 0 5.78 7.25Zm-5.944 1.5H1.543a6.507 6.507 0 0 0 4.666 5.5c-.123-.181-.24-.365-.352-.552-.715-1.192-1.437-2.874-1.581-4.948Zm-2.733-1.5h2.733c.144-2.074.866-3.756 1.58-4.948.12-.197.237-.381.353-.552a6.507 6.507 0 0 0-4.666 5.5Zm10.181 1.5c-.144 2.074-.866 3.756-1.58 4.948-.12.197-.237.381-.353.552a6.507 6.507 0 0 0 4.666-5.5Zm2.733-1.5a6.507 6.507 0 0 0-4.666-5.5c.123.181.24.365.353.552.714 1.192 1.436 2.874 1.58 4.948Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/USTC-vlab" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.sections", "navigation.top"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+    
+  </body>
+</html>

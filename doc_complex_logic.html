@@ -1,0 +1,1628 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="USTC Vlab">
+      
+      
+        <link rel="canonical" href="https://vlab.ustc.edu.cn/guide/doc_complex_logic.html">
+      
+      
+        <link rel="prev" href="doc_simple_logic.html">
+      
+      
+        <link rel="next" href="doc_simple_timing.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24">
+    
+    
+      
+        <title>复杂组合逻辑电路 - 数字电路教程</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","UA-115907213-3"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","UA-115907213-3",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=UA-115907213-3",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="index.html" title="数字电路教程" class="md-header__button md-logo" aria-label="数字电路教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            数字电路教程
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              复杂组合逻辑电路
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="light-blue"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="数字电路教程" class="md-nav__button md-logo" aria-label="数字电路教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12Z"/></svg>
+
+    </a>
+    数字电路教程
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    课程介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_logisim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LogiSim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_verilog.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verilog 语法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_fpga.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FPGA 原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_nexys.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nexys4DDR 开发板
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_vivado.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vivado 介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_testbench.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TestBench 编写及仿真
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="coding_convention.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    代码风格规范
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    一些例子
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            一些例子
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_basic_logic.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基本逻辑门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_simple_logic.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简单组合逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    复杂组合逻辑电路
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="doc_complex_logic.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    复杂组合逻辑电路
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      编码器，译码器和存储器介绍
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目标
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-8-sw2-sw0-led7-led0" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计一个 3-8 译码器。以 SW2-SW0 为输入，LED7-LED0 为输出；使用数据流建模结构
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计一个 3-8 译码器。以 SW2-SW0 为输入，LED7-LED0 为输出；使用数据流建模结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      多输出译码电路
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ic-74138-1-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计实现一个流行 IC 74138，使用数据流建模和你在 1-1 中使用的译码器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计实现一个流行 IC 74138，使用数据流建模和你在 1-1 中使用的译码器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#74138" class="md-nav__link">
+    <span class="md-ellipsis">
+      74138 译码器
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码和分析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计一个 8-3 编码器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计一个 8-3 编码器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      多输出编码电路
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      8-3 编码器真值表
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码和分析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-2-bit-a-b-rom-readmemb" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计一个 2 位比较器，用于比较两个 2-bit 的数字，并输出字 A 的十进制值大于、小于或者等于 B。你要模拟 ROM 并会用到$readmemb 函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计一个 2 位比较器，用于比较两个 2-bit 的数字，并输出字 A 的十进制值大于、小于或者等于 B。你要模拟 ROM 并会用到$readmemb 函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      只读存储器
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verilog-readmemb-readmemh" class="md-nav__link">
+    <span class="md-ellipsis">
+      verilog 中$readmemb 和$readmemh 的使用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码和分析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      扩展实验内容
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="扩展实验内容">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rom-2-2-led" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用 ROM 实现一个 2 位乘 2 位的乘法器，将结果以二进制形式输出到四个 LED 灯上
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="使用 ROM 实现一个 2 位乘 2 位的乘法器，将结果以二进制形式输出到四个 LED 灯上">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      具体要求
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab1-3-8-4-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用在两个 lab1 中设计的 3-8 译码器扩展成一个 4-16 的译码器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="使用在两个 lab1 中设计的 3-8 译码器扩展成一个 4-16 的译码器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      具体要求
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_simple_timing.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简单时序逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_complex_timing.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    复杂时序逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_finite_state_machine.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    有限状态机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      编码器，译码器和存储器介绍
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目标
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-8-sw2-sw0-led7-led0" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计一个 3-8 译码器。以 SW2-SW0 为输入，LED7-LED0 为输出；使用数据流建模结构
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计一个 3-8 译码器。以 SW2-SW0 为输入，LED7-LED0 为输出；使用数据流建模结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      多输出译码电路
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ic-74138-1-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计实现一个流行 IC 74138，使用数据流建模和你在 1-1 中使用的译码器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计实现一个流行 IC 74138，使用数据流建模和你在 1-1 中使用的译码器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#74138" class="md-nav__link">
+    <span class="md-ellipsis">
+      74138 译码器
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码和分析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计一个 8-3 编码器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计一个 8-3 编码器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      多输出编码电路
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      8-3 编码器真值表
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码和分析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-2-bit-a-b-rom-readmemb" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计一个 2 位比较器，用于比较两个 2-bit 的数字，并输出字 A 的十进制值大于、小于或者等于 B。你要模拟 ROM 并会用到$readmemb 函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计一个 2 位比较器，用于比较两个 2-bit 的数字，并输出字 A 的十进制值大于、小于或者等于 B。你要模拟 ROM 并会用到$readmemb 函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      只读存储器
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verilog-readmemb-readmemh" class="md-nav__link">
+    <span class="md-ellipsis">
+      verilog 中$readmemb 和$readmemh 的使用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码和分析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      扩展实验内容
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="扩展实验内容">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rom-2-2-led" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用 ROM 实现一个 2 位乘 2 位的乘法器，将结果以二进制形式输出到四个 LED 灯上
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="使用 ROM 实现一个 2 位乘 2 位的乘法器，将结果以二进制形式输出到四个 LED 灯上">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      具体要求
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab1-3-8-4-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用在两个 lab1 中设计的 3-8 译码器扩展成一个 4-16 的译码器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="使用在两个 lab1 中设计的 3-8 译码器扩展成一个 4-16 的译码器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      具体要求
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="_1">复杂组合逻辑电路</h1>
+<h2 id="_2">编码器，译码器和存储器介绍</h2>
+<p>布尔表达式可以用以输出多变量布尔函数值，像 assign 这样的数据流构造可以用来模拟这样的布尔函数。存在多输入和多输出的电路，在这个实验中要求你参照关于如何使用 Vivado 工具创建工程和验证数字电路的教程，设计编码器，译码器和只读存储器。</p>
+<h2 id="_3">实验目标</h2>
+<ul>
+<li>利用行为建模设计多输出译码器  </li>
+<li>利用行为建模设计编码器  </li>
+<li>利用 Verilog 提供的 reg 数据类型和$readmemb 系统函数设计只读存储器  </li>
+</ul>
+<h2 id="3-8-sw2-sw0-led7-led0">设计一个 3-8 译码器。以 SW2-SW0 为输入，LED7-LED0 为输出；使用数据流建模结构</h2>
+<h3 id="_4">多输出译码电路</h3>
+<p>译码器是拥有多个输出的组合逻辑电路。它们被广泛用于存储芯片中，用来选择输入地址所寻址的一个字。例如一个 8 字宽的内存会拥有 3 位地址输入。译码器解码 3 位的输入地址产生一个选择信号，从 8 个字中选择地址相应的字。3-8 译码器的符号以及真值表如下：  </p>
+<p><img alt="" src="images/complex_logic/1.png" /></p>
+<p>这样的电路也称为二进制译码器，并且由于每个输出都有唯一的输入组合，所以可以使用数据流语句建模。</p>
+<h3 id="_5">实验步骤</h3>
+<ol>
+<li>
+<p>打开 Vivado 并创建一个空工程并命名为 lab3_1。</p>
+</li>
+<li>
+<p>创建并添加一个 Verilog 模块，命名为 decoder.3to8.dataflow.v，然后定义译码器的三位输入 x 和 8 位输出 y。使用数据流建模。</p>
+</li>
+<li>
+<p>编写仿真文件来验证代码的正确</p>
+</li>
+<li>
+<p>在工程中添加适当的管脚约束的 XDC 文件，并加入相关联的管脚，将 x 分配给 SW2-
+SW0，将 y 分配给 LED7-LED0。注意对于一个给定的输入组合，只有一个 LED 会亮。</p>
+</li>
+<li>
+<p>综合，实现设计。</p>
+</li>
+<li>
+<p>生成比特流文件，下载到 Nexys4 开发板上，验证功能。</p>
+</li>
+</ol>
+<h3 id="_6">参考代码</h3>
+<p>module decoder_3to8_dataflow(
+     input [2:0]x,
+     output reg [7:0]y
+     );
+     always@(*)
+         case(x)
+         3'b000: y=8'b0000_0001;
+         3'b001: y=8'b0000_0010;
+         3'b010: y=8'b0000_0100;
+         3'b011: y=8'b0000_1000;
+         3'b100: y=8'b0001_0000;
+         3'b101: y=8'b0010_0000;
+         3'b110: y=8'b0100_0000;
+         3'b111: y=8'b1000_0000;
+     endcase
+ endmodule</p>
+<h2 id="ic-74138-1-1">设计实现一个流行 IC 74138，使用数据流建模和你在 1-1 中使用的译码器</h2>
+<h3 id="74138">74138 译码器</h3>
+<p>集成三线—八线译码器 74138 除了 3 线到 8 线的基本译码输入输出端外，为便于扩展成更多位的译码电路和实现数据分配功能，74138 还有三个输入使能端 EN1，EN2A 和 EN2B。74138 真值表和内部逻辑图如下图：</p>
+<p><img alt="" src="images/complex_logic/2.jpg" /></p>
+<p><img alt="" src="images/complex_logic/3.jpg" /></p>
+<p>所示符号图中，输入输出低电平有效用极性指示符表示，同时极性指示符又标明了信号方向。74138 的三个输入使能 (又称选通 ST) 信号之间是与逻辑关系，EN1 高电平有效，EN2A 和 EN2B 低电平有效。只有在所有使能端都为有效电平 (EN1EN2AEN2B=100) 时，74138 才对输入进行译码，相应输出端为低电平，即输出信号为低电平有效。在 EN1EN2AEN2B ≠100 时，译码器停止译码，输出无效电平 (高电平)。<br />
+这和你在 1 中创建的非常相似，它只是增加了控制（使能）信号 G1，/G2A，/G2B。这使得在有些系统中的解码更加简单。</p>
+<h3 id="_7">实验步骤</h3>
+<ol>
+<li>
+<p>打开 Vivado 创建一个空工程，命名为 lab3_2.</p>
+</li>
+<li>
+<p>创建并添加 Verilog 模块，命名为 decoder_74138_dataflow，实例化你在 1-1 中开发的模块。添加额外的逻辑，使用数据流建模结构建模所设计的功能。</p>
+</li>
+<li>
+<p>编写仿真文件来验证代码的正确</p>
+</li>
+<li>
+<p>将你在 1 中使用的 XDC 文件添加到工程。修改 XDC 文件，将 g1 分配给 SW7，g2a_n 分配给 SW6，g2b_n 分配给 SW5。</p>
+</li>
+<li>
+<p>综合实现你的设计。</p>
+</li>
+<li>
+<p>生成比特流文件，下载到 Nexys4 开发板上，验证功能。</p>
+</li>
+</ol>
+<h3 id="_8">参考代码和分析</h3>
+<p>首先，修改 lab1 的 decoder_3to8_dataflow 模块，在其中加入 enable 信号</p>
+<p>module decoder_3to8_dataflow(
+     input enable,
+     input [2:0]x,
+     output reg [7:0]y
+     );
+     always@(*)
+     if(enable)
+         case(x)
+         3'b000: y=8'b0000_0001;
+         3'b001: y=8'b0000_0010;
+         3'b010: y=8'b0000_0100;
+         3'b011: y=8'b0000_1000;
+         3'b100: y=8'b0001_0000;
+         3'b101: y=8'b0010_0000;
+         3'b110: y=8'b0100_0000;
+         3'b111: y=8'b1000_0000;
+     endcase
+     else y=8'b0000_0000;
+ endmodule</p>
+<p>之后，decoder_74138_dataflow 模块的具体实现：</p>
+<p>module decoder_74138_dataflow(
+     input g1,
+     input g2a_n,
+     input g2b_n,
+     input [2:0]x,
+     output [7:0]y
+     );
+     reg enable;
+     always@(*)
+     begin
+         if(g1==1&amp;&amp;g2a_n==0&amp;&amp;g2b_n==0)
+         enable=1;
+         else enable=0;
+     end
+     decoder_3to8_dataflow A(enable,x,y);
+ endmodule</p>
+<h2 id="8-3">设计一个 8-3 编码器</h2>
+<h3 id="_9">多输出编码电路</h3>
+<p>编码器电路是出于对标准化，速度，保密性，安全性或者通过缩小尺寸来节省空间的考虑，将信息从一种形式（编码）转换为另一种形式（编码）的电路。在数字电路中，编码信息可以减小信息存储所用的空间，确定功能的优先级。广泛使用的编码电路的例子有，优先编码器，哈弗曼编码器等</p>
+<h3 id="8-3_1">8-3 编码器真值表</h3>
+<p><img alt="" src="images/complex_logic/4.png" /></p>
+<h3 id="_10">实验步骤</h3>
+<ol>
+<li>
+<p>打开 Vivado 创建一个名为 lab3_3 的空工程。</p>
+</li>
+<li>
+<p>创建并添加以 v 和 enable_in_n 为输入，以 y，enable_out 和 gs 为输出的 Verilog 模块。v 是一个 8 位的输入（表中标为 0 到 7），输入 en_in 只有一位（E1），输出 y 为 3 位（A2，A1，A0），en_out 为一位（E0），gs 为一位（GS）。</p>
+</li>
+<li>
+<p>在工程中添加适当的管脚约束的 XDC 文件，并加入相关联的管脚约束。将输入 v 分配给 SW7-SW0，enable.in.n 分配给 SW15，y 分配给 LED2-LED0，enable_out 分配给 LED7，gs 分配给 LED6。</p>
+</li>
+<li>
+<p>综合实现此设计。</p>
+</li>
+<li>
+<p>生成比特流文件，下载到 Nexys4 开发板上，验证功能。</p>
+</li>
+</ol>
+<h3 id="_11">参考代码和分析</h3>
+<p>module lab3_3(
+     input enable_in_n,
+     input [7:0]v,
+     output reg [2:0]y,
+     output reg enable_out,
+     output reg gs
+     );
+     always@(*)
+     begin
+         if(enable_in_n)
+         {y[2:0],gs,enable_out}=5'b11111;
+         else if(v[7]==0)
+         {y[2:0],gs,enable_out}=5'b00001;
+         else if(v[6]==0)
+         {y[2:0],gs,enable_out}=5'b00101;
+         else if(v[5]==0)
+         {y[2:0],gs,enable_out}=5'b01001;
+         else if(v[4]==0)
+         {y[2:0],gs,enable_out}=5'b01101;
+         else if(v[3]==0)
+         {y[2:0],gs,enable_out}=5'b10001;
+         else if(v[2]==0)
+         {y[2:0],gs,enable_out}=5'b10101;
+         else if(v[1]==0)
+         {y[2:0],gs,enable_out}=5'b11001;
+         else if(v[0]==0)
+         {y[2:0],gs,enable_out}=5'b11101;
+         else
+         {y[2:0],gs,enable_out}=5'b11110;
+     end
+ endmodule</p>
+<h2 id="2-2-bit-a-b-rom-readmemb">设计一个 2 位比较器，用于比较两个 2-bit 的数字，并输出字 A 的十进制值大于、小于或者等于 B。你要模拟 ROM 并会用到$readmemb 函数</h2>
+<h3 id="_12">只读存储器</h3>
+<p>只读存储器（ROM）由互联阵列组成，由于存储二进制信息数组。它一旦存储了二进制信息，可以随时读取，但不能更改。大型的 ROM 通常用于存储不能被系统中其他电路更改的程序或者数据，小型的 ROM 可以用来实现组合电路。ROM 使用类似于 1-1 中的译码器来寻址特定的存储位置。<br />
+一个拥有 m 个地址输入引脚和 n 个数据输出引脚的 ROM 可以存储个字，每个字为 n 位。当给出一个地址访问这一存储器时，地址相应位置的字通过输出引脚读出。<br />
+在 Verilog 语言中，存储器可以使用 reg 数据类型的二维数组定义，如下：  </p>
+<p>reg [3:0] MY_ROM [ 15:0];  </p>
+<p>上面代码中 reg 是数据类型，MY_ROM 是一个 16×4 的内存，拥有 16 个地址，每个地址的宽度为 4bit。如果满足下面两个条件，这块内存就是只读的：（i）这块内存只能被读，不能被写入；（ii）内存应该以期望的数据初始化。Verilog 语言提供一个系统函数$readmemb 可以使用特定内容初始化内存。下面是定义并使用一个 4×2 的 ROM 的例子。</p>
+<p>module ROM_4x2 (ROM_data, ROM_addr);
+ output [1:0] ROM_data;
+ input [1:0] ROM_addr;
+ reg [1:0] ROM [3:0]; // defining 4x2 ROM
+ assign ROM_data = ROM[ROM_addr];
+ // reading ROM content at the address ROM_addr
+ initial $readmemb (“ROM_data.txt”, ROM, 0, 3);
+ // load ROM content from ROM_data.txt file
+ endmodule</p>
+<p>在此例中，ROM_data.txt 文件应该与 verilog 模块放在同一目录下（因为引用时没有使用绝对路径），并且文件中可以有 8 行或者更少，比如：</p>
+<p>10
+ 0x
+ 11
+ 00</p>
+<p>注意，如果行数少于 ROM 的大小，则未指定的位置将会用 0 初始化，另外还有另一个系统函数$readmembh 允许数据文件使用十六进制编写。</p>
+<h3 id="verilog-readmemb-readmemh">verilog 中$readmemb 和$readmemh 的使用</h3>
+<p>因为之前自己学习 verilog 中编写 readme 的文件，不是很懂是怎么写的，所以菜菜的我还去查了查用法，方便大家学习。（请你们不要嘲笑菜菜的助教啦）
+在 Verilog 语法中，一共有以下六种用法：  </p>
+<ol>
+<li>$readmemb("&lt;数据文件名&gt;",&lt;存储器名&gt;);  </li>
+<li>$readmemb("&lt;数据文件名&gt;",&lt;存储器名&gt;,&lt;起始地址&gt;);  </li>
+<li>$readmemb("&lt;数据文件名&gt;",&lt;存储器名&gt;,&lt;起始地址&gt;,&lt;终止地址&gt;);</li>
+<li>$readmemh("&lt;数据文件名&gt;",&lt;存储器名&gt;);  </li>
+<li>$readmemh("&lt;数据文件名&gt;",&lt;存储器名&gt;,&lt;起始地址&gt;);  </li>
+<li>$readmemh("&lt;数据文件名&gt;",&lt;存储器名&gt;,&lt;起始地址&gt;,&lt;终止地址&gt;);<br />
+示例：<br />
+$readmemb 的使用先在 Verilog 代码目录下准备一个文件 file1.txt，存入数据：1111 1010 0101 1x1z 1_1 1111    或者 11111010 0101 1x1z 1_1_1_111 存在一行每个用空格隔开，跟分行存，输出结果是一样的，但是若在一行中不用空格隔开会出错，编译器会试图把一整行数据存在一个四位的存储单元中。<br />
+这些在你们之后初始化 rom 或者 ram 的 memory 都是很常用的啦（可能要到 cod 的时候吧）</li>
+</ol>
+<h3 id="_13">实验步骤</h3>
+<ol>
+<li>
+<p>打开 Vivado 并创建一个名为 lab3_4 的工程。</p>
+</li>
+<li>
+<p>使用 ROM 和$readmemb 系统函数创建并添加一个 Verilog 模块，该模块拥有两个输入（a，b）和三个输出（lt，gt 和 eq）。</p>
+</li>
+<li>
+<p>在工程中添加适当的管脚约束的 XDC 文件，并加入相关联的管脚约束。将 a 分配给 SW3 到 SW2，b 分配给 SW1 到 SW0，lt 分配给 LED2，gt 分配给 LED1，eq 分配给 LED0。</p>
+</li>
+<li>
+<p>创建并添加描述设计输出的文本文件</p>
+</li>
+</ol>
+<p>上表列出了 b 与 a 比较前两项，继续这样的比较直到 b 和 a 都达到 11 为止。</p>
+<p>|a|b|lt|gt|eq|
+|:----:|:----:|:----:|:----:|
+|00|00|0|0|1|
+|00|01|1|0|0|
+|00|10|1|0|0|
+|00|11|1|0|0|
+|01|00|0|1|0|
+|01|01|0|0|1|
+|01|10|1|0|0|
+|01|11|1|0|0|
+|10|00|0|1|0|
+|10|01|0|1|0|
+|10|10|0|0|1|
+|10|11|1|0|0|
+|11|00|0|1|0|
+|11|01|0|1|0|
+|11|10|0|1|0|
+|11|11|0|0|1|</p>
+<p>​
+将上表的比较结果保存在一个.txt 文件中，然后点击位于 Flow Navigator 下的 Add Sources 按钮。选择 Add or create design sources 并点击 next。点击绿色的 plus 按钮然后点击 add file。添加你所创建的.txt 文件然后点击 finish.</p>
+<ol>
+<li>
+<p>综合实现此设计。</p>
+</li>
+<li>
+<p>生成比特流文件，下载到 Nexys4 开发板上，验证功能。</p>
+</li>
+</ol>
+<h3 id="_14">参考代码和分析</h3>
+<p>module lab3_4(
+     input [1:0]a,
+     input [1:0]b,
+     output lt,
+     output gt,
+     output eq
+     );
+     reg [2:0] rom [15:0];</p>
+<pre><code> initial $readmemb ("compare.mem", rom);
+ assign {lt,gt,eq}=rom[{a,b}];
+</code></pre>
+<p>endmodule</p>
+<p>可以采用相对路径或者绝对路径的方式写入 readme txt 文件，但是之前文档介绍的 add source 的方法 vivado 不支持 txt 格式，所以我们在这里采用添加 mem 文件的方法加入文件，这样的方法更加简单一点。<br />
+comare.mem 文件具体内容：  </p>
+<p>001
+ 100
+ 100
+ 100
+ 010
+ 001
+ 100
+ 100
+ 010
+ 010
+ 001
+ 100
+ 010
+ 010
+ 010
+ 001</p>
+<h2 id="_15">扩展实验内容</h2>
+<h3 id="rom-2-2-led">使用 ROM 实现一个 2 位乘 2 位的乘法器，将结果以二进制形式输出到四个 LED 灯上</h3>
+<h4 id="_16">具体要求</h4>
+<ol>
+<li>
+<p>打开 Vivado 并创建一个名为 lab3_kuozhan1 的空工程。</p>
+</li>
+<li>
+<p>使用 ROM 和$readmemb 系统函数创建并添加一个拥有两个两位输入（a，b）和一个四位输出（product）的 Verilog 模块。</p>
+</li>
+<li>
+<p>在工程中添加适当的管脚约束的 XDC 文件，并加入相关联的管脚约束。将 a 分配给 SW3-SW2，b 分配给 SW1-SW0，product 分配给 LED3-LED0。</p>
+</li>
+<li>
+<p>创建并添加描述设计输出的文本文件。</p>
+</li>
+<li>
+<p>综合实现此设计。</p>
+</li>
+<li>
+<p>生成比特流文件，下载到 Nexys4 开发板上验证功能。</p>
+</li>
+</ol>
+<h3 id="lab1-3-8-4-16">使用在两个 lab1 中设计的 3-8 译码器扩展成一个 4-16 的译码器</h3>
+<ol>
+<li>
+<p>打开 Vivado 并创建一个空工程并命名为 lab3_kuozhan2。</p>
+</li>
+<li>
+<p>创建并添加 Verilog 模块，定义译码器的四位输入 x 和 16 位输出 y.</p>
+</li>
+<li>
+<p>编写仿真文件来验证代码的正确</p>
+</li>
+<li>
+<p>在工程中添加适当的管脚约束的 XDC 文件，并加入相关联的管脚，将 x 分配给 SW3-
+SW0，将 y 分配给 LED15-LED0。注意对于一个给定的输入组合，只有一个 LED 会亮。</p>
+</li>
+<li>
+<p>综合，实现设计。</p>
+</li>
+<li>
+<p>生成比特流文件，下载到 Nexys4 开发板上，验证功能。</p>
+</li>
+</ol>
+<h4 id="_17">具体要求</h4>
+<h2 id="_18">总结</h2>
+<p>在本次试验中，你学到了如何对多输出电路如译码器、编码器和 ROM 建模；你也学到了如何使用系统函数$readmemb 对 ROM 进行初始化。Verilog 还支持很多系统函数，你将在下一个实验中学习另外一些。</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://vlab.ustc.edu.cn/" target="_blank" rel="noopener" title="vlab.ustc.edu.cn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.78 8.75a9.64 9.64 0 0 0 1.363 4.177c.255.426.542.832.857 1.215.245-.296.551-.705.857-1.215A9.64 9.64 0 0 0 10.22 8.75Zm4.44-1.5a9.64 9.64 0 0 0-1.363-4.177c-.307-.51-.612-.919-.857-1.215a9.927 9.927 0 0 0-.857 1.215A9.64 9.64 0 0 0 5.78 7.25Zm-5.944 1.5H1.543a6.507 6.507 0 0 0 4.666 5.5c-.123-.181-.24-.365-.352-.552-.715-1.192-1.437-2.874-1.581-4.948Zm-2.733-1.5h2.733c.144-2.074.866-3.756 1.58-4.948.12-.197.237-.381.353-.552a6.507 6.507 0 0 0-4.666 5.5Zm10.181 1.5c-.144 2.074-.866 3.756-1.58 4.948-.12.197-.237.381-.353.552a6.507 6.507 0 0 0 4.666-5.5Zm2.733-1.5a6.507 6.507 0 0 0-4.666-5.5c.123.181.24.365.353.552.714 1.192 1.436 2.874 1.58 4.948Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/USTC-vlab" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.sections", "navigation.top"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+    
+  </body>
+</html>

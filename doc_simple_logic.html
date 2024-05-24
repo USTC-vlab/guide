@@ -1,0 +1,1961 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="USTC Vlab">
+      
+      
+        <link rel="canonical" href="https://vlab.ustc.edu.cn/guide/doc_simple_logic.html">
+      
+      
+        <link rel="prev" href="doc_basic_logic.html">
+      
+      
+        <link rel="next" href="doc_complex_logic.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24">
+    
+    
+      
+        <title>简单组合逻辑电路 - 数字电路教程</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","UA-115907213-3"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","UA-115907213-3",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=UA-115907213-3",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="index.html" title="数字电路教程" class="md-header__button md-logo" aria-label="数字电路教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            数字电路教程
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              简单组合逻辑电路
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="light-blue"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="数字电路教程" class="md-nav__button md-logo" aria-label="数字电路教程" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12Z"/></svg>
+
+    </a>
+    数字电路教程
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    课程介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_logisim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LogiSim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_verilog.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Verilog 语法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_fpga.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FPGA 原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_nexys.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nexys4DDR 开发板
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_vivado.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vivado 介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_testbench.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TestBench 编写及仿真
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="coding_convention.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    代码风格规范
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    一些例子
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            一些例子
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_basic_logic.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基本逻辑门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    简单组合逻辑电路
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="doc_simple_logic.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    简单组合逻辑电路
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#verilog" class="md-nav__link">
+    <span class="md-ellipsis">
+      verilog 中的数字表示
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目标
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bcd-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计一个 BCD 码到 7 段数码管的译码器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计一个 BCD 码到 7 段数码管的译码器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      数码管原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-2-bcd-led" class="md-nav__link">
+    <span class="md-ellipsis">
+      将 4 比特的输入转化为相应的 2 位十进制数（BCD 码）后输出到 LED 灯（最高位）和最右边的七段数码管（更低位）上
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="将 4 比特的输入转化为相应的 2 位十进制数（BCD 码）后输出到 LED 灯（最高位）和最右边的七段数码管（更低位）上">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      原理介绍
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      模块调用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="模块调用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      模块
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verilog_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verilog 模块调用端口的连接规则
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Verilog 模块调用端口的连接规则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      具体端口连接规则
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码及讲解
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      仅使用数据流级建模创建一个 4 比特波纹进位加法器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="仅使用数据流级建模创建一个 4 比特波纹进位加法器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      执行加法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码及讲解
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="参考代码及讲解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      仿真代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      扩展实验内容
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="扩展实验内容">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      扩展实验 1
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="扩展实验 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      具体要求
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      扩展实验 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="扩展实验 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验简介
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      具体要求
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_complex_logic.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    复杂组合逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_simple_timing.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    简单时序逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_complex_timing.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    复杂时序逻辑电路
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc_finite_state_machine.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    有限状态机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#verilog" class="md-nav__link">
+    <span class="md-ellipsis">
+      verilog 中的数字表示
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验目标
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bcd-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计一个 BCD 码到 7 段数码管的译码器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="设计一个 BCD 码到 7 段数码管的译码器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      数码管原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-2-bcd-led" class="md-nav__link">
+    <span class="md-ellipsis">
+      将 4 比特的输入转化为相应的 2 位十进制数（BCD 码）后输出到 LED 灯（最高位）和最右边的七段数码管（更低位）上
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="将 4 比特的输入转化为相应的 2 位十进制数（BCD 码）后输出到 LED 灯（最高位）和最右边的七段数码管（更低位）上">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      原理介绍
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      模块调用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="模块调用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      模块
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verilog_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verilog 模块调用端口的连接规则
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Verilog 模块调用端口的连接规则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      具体端口连接规则
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码及讲解
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      仅使用数据流级建模创建一个 4 比特波纹进位加法器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="仅使用数据流级建模创建一个 4 比特波纹进位加法器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      执行加法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验步骤
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考代码及讲解
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="参考代码及讲解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      仿真代码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      扩展实验内容
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="扩展实验内容">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      扩展实验 1
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="扩展实验 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      具体要求
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      扩展实验 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="扩展实验 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验简介
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      具体要求
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="_1">简单组合逻辑电路</h1>
+<h2 id="verilog">verilog 中的数字表示</h2>
+<p>在 Verilog HDL 中一个信号可能有如下四种基本的值：<br />
+i.0：逻辑 0 或假<br />
+ii.1：逻辑 1 或真<br />
+iii.x：未知<br />
+iv.z：高阻态（三态）<br />
+在门电路的输入端或是表达式中的 z  值通常会被译为一个 x 值（待确定）。通常情况下，Verilog HDL 是区分大小写的，但是作为值来表示时是不区分大小写的。  </p>
+<p>在 Verilog HDL 中有三种常量类型：(i) 整型，(ii) 实型，和 (iii) 字符串。在整型常量和实型常量中可以使用下划线（_）来增加可读性。但它不能出现在第一个和最后一个字符的位置上。  </p>
+<p>整数可以写成 (i) 简单的十进制数或者是 (ii) 带进制格式。一个写成简单十进制形式的整数由一个可省略的 + 或是一个 - 和一串数字组成。比如，<br />
+15<br />
+-32<br />
+其中 15 可以被写成 5 比特格  式的二进制数 01111，-32 可以写成 6 比特格式的 100000。简单的十进制数在硬件中最终会占用 32 比特。</p>
+<p>一个数也可以被表示为进制格式，语法格式如下： [size]’base value
+其中 size 代表数的比特数，base（基）是 o 或者 O（代表八进制 octal），b 或者 B（代表二进制 Binary），d 或者 D（代表十进制 Decimal），h 或者 H（代表十六进制 hexadecimal）中的一个。Value 是一个在该进制下有效的数字的序列。Value 必须是无符号的。比如，wire [4:0] 5'O37 //5 比特八进制表示
+reg [3:0] 4'B1x_01 //4 比特二进制
+wire [3:0] 4'd-4 //不合法，value 不能是负数
+wire [11:0] 7'Hx //7 比特 x 扩展到 xxxxxxx
+如果 size 设定得比设定的常数的值的大小要大，这个数会被用 0 扩展到左边，除非最左边的比特是 x 或 z，此时也会相应地用 x 或 z 扩展。如果 size 设定得更小，那左边的多余的位会被忽略。如果 size 未设定，那么就会使用 32 比特。</p>
+<h2 id="_2">实验目标</h2>
+<p>完成本次实验后，你将能做到：  </p>
+<ul>
+<li>定义不同进制的数  </li>
+<li>设计能将数据从一个进制转化到另一个的组合电路  </li>
+<li>设计能实现简单的加法操作的组合电路  </li>
+<li>学到一个能提高加法操作速度的技巧  </li>
+</ul>
+<h2 id="bcd-7">设计一个 BCD 码到 7 段数码管的译码器</h2>
+<h3 id="_3">数码管原理</h3>
+<p>7 段数码管显示器包含 7 段，编号从 a 到 g，可以用来显示一个字符。根据不同的输入类型，可能需要做类型转换。如果需要显示 4bit 的 BCD 码，则需要一个 BCD 码到 7 段数码管的译码器。下表展示了你要显示一个数字的 bit 图样。
+(需要注意的是，你如果需要点亮某一段，则要输出逻辑 0 到这一段，并且这个显示器的阳极需要用板上的逻辑 0 驱动)。  </p>
+<p><img alt="" src="images/simple_logic/1.png" /></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">输入</th>
+<th style="text-align: center;">a</th>
+<th style="text-align: center;">b</th>
+<th style="text-align: center;">c</th>
+<th style="text-align: center;">d</th>
+<th style="text-align: center;">e</th>
+<th style="text-align: center;">f</th>
+<th style="text-align: center;">g</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0000</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">0001</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">0010</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">0011</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">0100</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">0101</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">0110</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">0111</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">1001</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">1010 到 1111</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+</tbody>
+</table>
+<p>Nexys4 DDR 开发板包含两个 4 位 7 段数码管 LED 显示器。每个模块中 4 位的每 1 位都由 7 段组成，每一段都嵌入了一颗 LED，顺序如下图。每段的 LED 可以被单独点亮。因而通过点亮特定的段，熄灭其他段，全部 128 种图样都可以在 1 位上实现。在这 128 种图样中，10 种数字的图样最有用。</p>
+<p><img alt="" src="images/simple_logic/2.png" /></p>
+<p><img alt="" src="images/simple_logic/3.png" /></p>
+<p>组成每一位的 7 颗 LED 的阳极被连接在一起，称为“共阳极”的电路节点，但 LED 的阴极是独立的。共阳极节点的信号可以被获取作为 4 位显示器的使能信号。不同位，相同段的阴极信号分别接到 7 个电路节点，从 CA 到 CG (比如上图中 4 位的“D”笔画的阴极被连接到一起，连接到“CD”这个电路节点)。这 7 个阴极节点信号可以被获取作为 4 位显示器的输入信号。这种信号连接的方案支持了多路复用的显示，虽然每个笔 画的阴极信号是 4 位共用的，但它们只能点亮阳极信号生效的位上的笔画。  </p>
+<p><img alt="" src="images/simple_logic/4.png" /></p>
+<p>扫描显示控制器电路可以用来控制这个显示器显示一个 4 位数。这个电路根据阴极图样，以高于人眼可分辨地频率，对每一位的阳极信号进行重复地、持续地、接连地驱动。如果它的更新或“刷新”率降到大约 45 Hz 时，大多数人能看出显示在闪烁。从 Lab 8（体系结构向导和知识产权目录）开始你将设计和使用一个扫描电路。</p>
+<h3 id="_4">实验步骤</h3>
+<ol>
+<li>
+<p>打开 Vivado，创建一个名为 lab2.1 的空白工程（project）。</p>
+</li>
+<li>
+<p>创建一个顶层 Verilog module，命名为 bcdto7segment_dataflow，按数据流建模风格添加 4-bit data
+输入 (x[3:0]),阳极使能输出信号 (an[3:0])，7-bit 输出 (seg[6:0]) 。
+(提示：你必须在纸上推导 7 个段的七个表达式。). 对 an[3:0] 输出合适的信号使得只有最右边的一位显示。</p>
+</li>
+<li>
+<p>添加对应开发板的 XDC 文件到工程。编辑 XDC 文件，将 SW3-SW0 赋给 x[3:0]，CA, CB, CC, CD, CE, CF, CG 给 seg[0]到 seg[6]，J17, J18, T9,J14, P14, T14, K2, U13 给 an7, an6, an5, an4,an3,
+an2, an1, an0 (Nexys4 DDR 开发板)</p>
+</li>
+<li>综合你的设计。</li>
+<li>实现你的设计。</li>
+<li>生成比特流文件，将其下载到 Basys3 或 Nexys4 DDR 开发板，并验证功能。</li>
+</ol>
+<h3 id="_5">参考代码</h3>
+<p>module lab2_1(
+     input [3:0]x,
+     output reg [7:0]seg,
+     output  [7:0]an
+     );
+     assign an=8'b1111_1110;
+  always@(*)
+    case(x)
+        0: seg= 8'b 1100_0000;
+        1: seg= 8'b 1111_1001;
+        2:seg= 8'b 1010_0100;
+        3: seg= 8'b 1011_0000;
+        4: seg= 8'b 1001_1001;
+        5: seg= 8'b 1001_0010;
+        6: seg= 8'b 1000_0010;
+        7: seg= 8'b 1111_1000;
+        8: seg= 8'b 1000_0000;
+        9:seg= 8'b 1001_0000;
+       default seg=8'bxxxx_xxxx;
+        endcase
+ endmodule</p>
+<p>修改对应的 xdc 文件段落，大致如下图：</p>
+<p>​ set_property -dict { PACKAGE_PIN T10   IOSTANDARD LVCMOS33 } [get_ports { seg[0] }]; #IO_L24N_T3_A00_D16_14 Sch=ca
+ ​ set_property -dict { PACKAGE_PIN R10   IOSTANDARD LVCMOS33 } [get_ports { seg[1] }]; #IO_25_14 Sch=cb
+ ​ set_property -dict { PACKAGE_PIN K16   IOSTANDARD LVCMOS33 } [get_ports { seg[2] }]; #IO_25_15 Sch=cc
+ ​ set_property -dict { PACKAGE_PIN K13   IOSTANDARD LVCMOS33 } [get_ports { seg[3] }]; #IO_L17P_T2_A26_15 Sch=cd
+ ​ set_property -dict { PACKAGE_PIN P15   IOSTANDARD LVCMOS33 } [get_ports { seg[4] }]; #IO_L13P_T2_MRCC_14 Sch=ce
+ ​ set_property -dict { PACKAGE_PIN T11   IOSTANDARD LVCMOS33 } [get_ports { seg[5] }]; #IO_L19P_T3_A10_D26_14 Sch=cf
+ ​ set_property -dict { PACKAGE_PIN L18   IOSTANDARD LVCMOS33 } [get_ports { seg[6] }]; #IO_L4P_T0_D04_14 Sch=cg
+​</p>
+<p>set_property -dict { PACKAGE_PIN H15   IOSTANDARD LVCMOS33 } [get_ports { seg[7] }]; #IO_L19N_T3_A21_VREF_15 Sch=dp</p>
+<p>set_property -dict { PACKAGE_PIN J17   IOSTANDARD LVCMOS33 } [get_ports { an[0] }]; #IO_L23P_T3_FOE_B_15 Sch=an[0]
+ set_property -dict { PACKAGE_PIN J18   IOSTANDARD LVCMOS33 } [get_ports { an[1] }]; #IO_L23N_T3_FWE_B_15 Sch=an[1]
+ set_property -dict { PACKAGE_PIN T9    IOSTANDARD LVCMOS33 } [get_ports { an[2] }]; #IO_L24P_T3_A01_D17_14 Sch=an[2]
+ set_property -dict { PACKAGE_PIN J14   IOSTANDARD LVCMOS33 } [get_ports { an[3] }]; #IO_L19P_T3_A22_15 Sch=an[3]
+  set_property -dict { PACKAGE_PIN P14   IOSTANDARD LVCMOS33 } [get_ports { an[4] }]; #IO_L8N_T1_D12_14 Sch=an[4]
+  set_property -dict { PACKAGE_PIN T14   IOSTANDARD LVCMOS33 } [get_ports { an[5] }]; #IO_L14P_T2_SRCC_14 Sch=an[5]
+  set_property -dict { PACKAGE_PIN K2    IOSTANDARD LVCMOS33 } [get_ports { an[6] }]; #IO_L23P_T3_35 Sch=an[6]
+  set_property -dict { PACKAGE_PIN U13   IOSTANDARD LVCMOS33 } [get_ports { an[7] }]; #IO_L23N_T3_A02_D18_14 Sch=an[7]</p>
+<h2 id="4-2-bcd-led">将 4 比特的输入转化为相应的 2 位十进制数（BCD 码）后输出到 LED 灯（最高位）和最右边的七段数码管（更低位）上</h2>
+<h3 id="_6">原理介绍</h3>
+<p>设计一个能将 4 比特的二进制数 v 转换到它相应的 2 位十进制数，z 和 m。由于正确的输入范围是 0 到 15，最高位可以只使用一个 LED 等来显示。下表显示了要求的输出值。下图中给出了设计框图。它包含一个检查 v 值是否大于 9 的比较器（comparator），并使用比较器的输出来控制七段数码管的显示。提示：只要 v 大于二进制的 1001，m3 就会是 0。</p>
+<table>
+<thead>
+<tr>
+<th>v[3:0]</th>
+<th>z</th>
+<th>m[3:0]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0000</td>
+<td>0</td>
+<td>0000</td>
+</tr>
+<tr>
+<td>0001</td>
+<td>0</td>
+<td>0001</td>
+</tr>
+<tr>
+<td>0010</td>
+<td>0</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>0011</td>
+<td>0</td>
+<td>0011</td>
+</tr>
+<tr>
+<td>0100</td>
+<td>0</td>
+<td>0100</td>
+</tr>
+<tr>
+<td>0101</td>
+<td>0</td>
+<td>0101</td>
+</tr>
+<tr>
+<td>0110</td>
+<td>0</td>
+<td>0110</td>
+</tr>
+<tr>
+<td>0111</td>
+<td>0</td>
+<td>0111</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>0</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>1001</td>
+<td>0</td>
+<td>1001</td>
+</tr>
+<tr>
+<td>1010</td>
+<td>1</td>
+<td>0000</td>
+</tr>
+<tr>
+<td>1011</td>
+<td>1</td>
+<td>0001</td>
+</tr>
+<tr>
+<td>1100</td>
+<td>1</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>1101</td>
+<td>1</td>
+<td>0011</td>
+</tr>
+<tr>
+<td>1110</td>
+<td>1</td>
+<td>0100</td>
+</tr>
+<tr>
+<td>1111</td>
+<td>1</td>
+<td>0101</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="" src="images/simple_logic/5.png" /></p>
+<h3 id="_7">模块调用</h3>
+<h4 id="_8">模块</h4>
+<p>Verilog HDL 程序是由模块构成的。每个模块的内容都是嵌在 module 和 endmodule 两个语句之间。每个模块实现特定的功能。模块可以进行层次嵌套。<br />
+每个模块要进行端口定义，并说明输入输出口，然后对模块的功能进行行为逻辑描述。<br />
+Verilog HDL 程序的书写格式自由，一行可以写几个语句，一个语句也可以分写多行。<br />
+除了 endmodule 语句外，每个语句和数据定义的最后必须有分号。<br />
+可以用/…../和//…….对 Verilog HDL 程序的任何部分作注释。一个好的，有使
+用价值的源程序都应当加上必要的注释，以增强程序的可读性和可维护性。</p>
+<h4 id="verilog_1">Verilog 模块调用端口的连接规则</h4>
+<p>在 verilog 中，所有的端口隐含地声明 wire 类型；如果输出类型的端口需要保存数值，则必须将其显式地声明为 reg 数据类型。<br />
+不能将 input 和 inout 类型的端口声明为 reg 数据类型，因为 reg 类型的变量是用于保存数值的，而输入端口只反映与其相连的外部信号的变化。<br />
+在 verilog 中，有两种端口声明风格：  </p>
+<p><img alt="" src="images/simple_logic/8.jpg" /></p>
+<h5 id="_9">具体端口连接规则</h5>
+<p><img alt="" src="images/simple_logic/9.jpg" /></p>
+<p><img alt="" src="images/simple_logic/10.jpg" /></p>
+<p>端口连接规则 将一个端口看成由相互链接的两个部分组成，一部分位于模块内部，另一部分位于模块外部。当在一个模块中调用（实例引用）另一个模块时，端口之间的连接必须遵守一些规则。</p>
+<ol>
+<li>输入端口：从模块内部来讲，输入端口必须为线网数据类型，从模块外部来看，输入端口可以连接到线网或者 reg 数据类型的变量。</li>
+<li>输出端口：从模块内部来讲，输出端口可以是线网或者 reg 数据类型，从模块外部来看，输出必须连接到线网类型的变量（显式，隐式），而不能连接到 reg 类型的变量。</li>
+<li>输入/输出端口（必须为 wire）从模块内部来讲，输入/输出端口必须为线网数据类型；从模块外部来看，输入/输出端口也必须连接到线网类型的变量。</li>
+</ol>
+<h3 id="_10">实验步骤</h3>
+<ol>
+<li>
+<p>打开 Vivado，创建一个名为 lab2_2_1 的空白工程。</p>
+</li>
+<li>
+<p>创建并添加一个 Verilog 模块（命名为 lab2.2）以 v[3:0]为输入，z 和 m[3:0] 作为输出。创建并添加模块，使用数据流结构（dataflow constructs）来完成比较器数据流（comparator_dataflow），lab2 的电路 A 的数据流（lab2_circuitA_dataflow），实例化 2-to-1 多路选择器（Lab1 的），并将它们按上图连接起来。</p>
+</li>
+<li>
+<p>创建一个包含 bcdto7segment_dataflow decoder（你在 Lab1 中开发的）的顶层模块（lab2.1）并提供一个 7 比特的输出 seg0 而不是 m。</p>
+</li>
+<li>
+<p>将与开发板对应的 XDF 文件添加到工程中，编辑文件添加相关的端口。将输入 v 赋给 SW3 到 SW0，z 赋给 LED0，seg0 赋给七段数码管显示阴极 CA 到 CG，将 an 赋给端口 J17，J18，T9，J14，P14，T14，K2，U13（对于 Nexys4 DDR）或是 U2，U4，V4，W4（对于 Basys3）。</p>
+</li>
+<li>
+<p>综合（Synthesize）并实现（implement）设计。</p>
+</li>
+<li>
+<p>生成比特流（bitstream），将它下载到 Basys3 或是 Nexys4 DDR 开发板上，并验证它的功能。</p>
+</li>
+</ol>
+<h3 id="_11">参考代码及讲解</h3>
+<p>由对应关系：</p>
+<table>
+<thead>
+<tr>
+<th>v[3:0]</th>
+<th>z</th>
+<th>m[3:0]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0000</td>
+<td>0</td>
+<td>0000</td>
+</tr>
+<tr>
+<td>0001</td>
+<td>0</td>
+<td>0001</td>
+</tr>
+<tr>
+<td>0010</td>
+<td>0</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>0011</td>
+<td>0</td>
+<td>0011</td>
+</tr>
+<tr>
+<td>0100</td>
+<td>0</td>
+<td>0100</td>
+</tr>
+<tr>
+<td>0101</td>
+<td>0</td>
+<td>0101</td>
+</tr>
+<tr>
+<td>0110</td>
+<td>0</td>
+<td>0110</td>
+</tr>
+<tr>
+<td>0111</td>
+<td>0</td>
+<td>0111</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>0</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>1001</td>
+<td>0</td>
+<td>1001</td>
+</tr>
+<tr>
+<td>1010</td>
+<td>1</td>
+<td>0000</td>
+</tr>
+<tr>
+<td>1011</td>
+<td>1</td>
+<td>0001</td>
+</tr>
+<tr>
+<td>1100</td>
+<td>1</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>1101</td>
+<td>1</td>
+<td>0011</td>
+</tr>
+<tr>
+<td>1110</td>
+<td>1</td>
+<td>0100</td>
+</tr>
+<tr>
+<td>1111</td>
+<td>1</td>
+<td>0101</td>
+</tr>
+</tbody>
+</table>
+<p>我们可以首先写出输入 m 与输出 m 与 z 的关系，使用数据流的模式来实现</p>
+<pre><code>reg  [3:0]m;
+always@(*)
+begin
+    case(v)
+    4'b0000: begin z=0; m=4'b0000;  end
+    4'b0001: begin z=0; m=4'b0001;  end
+    4'b0010: begin z=0; m=4'b0010;  end
+    4'b0011: begin z=0; m=4'b0011;  end 
+    4'b0100: begin z=0; m=4'b0100;  end
+    4'b0101: begin z=0; m=4'b0101;  end
+    4'b0110: begin z=1; m=4'b0000;  end 
+    4'b0111: begin z=1; m=4'b0001;  end
+    4'b1000: begin z=1; m=4'b0010;  end
+    4'b1001: begin z=1; m=4'b0011;  end
+    4'b1010: begin z=1; m=4'b0100;  end
+    4'b1011: begin z=1; m=4'b0101;  end
+    4'b1100: begin z=1; m=4'b0110;  end
+    4'b1101: begin z=1; m=4'b0111;  end
+    4'b1110: begin z=1; m=4'b1000;  end
+    4'b1111: begin z=1; m=4'b1001;  end
+    endcase
+</code></pre>
+<p>添加我们在 lab1 中的代码：</p>
+<p><img alt="" src="images/simple_logic/6.png" /></p>
+<p>在这里选择添加，也可以使用快捷键 ALT+A</p>
+<p><img alt="" src="images/simple_logic/7.png" /></p>
+<p>选择 add desgin source 并且选择你的 lab1 文件 source 中的代码  </p>
+<p>在 lab2.2 函数中写入这个函数，并且实例化它  </p>
+<p>综上所述，具体的代码如下：</p>
+<p>module lab2_2(
+     input [3:0]v,
+     output reg z,
+     output  [7:0]seg,
+     output [7:0]an
+     );
+     reg  [3:0]m;
+     always@(*)
+     begin
+         case(v)
+         4'b0000: begin z=0; m=4'b0000;  end
+         4'b0001: begin z=0; m=4'b0001;  end
+         4'b0010: begin z=0; m=4'b0010;  end
+         4'b0011: begin z=0; m=4'b0011;  end
+         4'b0100: begin z=0; m=4'b0100;  end
+         4'b0101: begin z=0; m=4'b0101;  end
+         4'b0110: begin z=0; m=4'b0110;  end
+         4'b0111: begin z=0; m=4'b0111;  end
+         4'b1000: begin z=0; m=4'b1000;  end
+         4'b1001: begin z=0; m=4'b1001;  end
+         4'b1010: begin z=1; m=4'b0000;  end
+         4'b1011: begin z=1; m=4'b0001;  end
+         4'b1100: begin z=1; m=4'b0010;  end
+         4'b1101: begin z=1; m=4'b0011;  end
+         4'b1110: begin z=1; m=4'b0100;  end
+         4'b1111: begin z=1; m=4'b0101;  end
+         endcase
+     end
+     lab2_1 A(m,seg,an);  //A 是实例化的名称
+ endmodule</p>
+<p>在你具体在函数中写入调用函数时，会自动生成两个函数之间的调用关系，这是你可以看到 lab2_2 函数成为了顶层模块。</p>
+<h2 id="4">仅使用数据流级建模创建一个 4 比特波纹进位加法器</h2>
+<h3 id="_12">执行加法</h3>
+<p>当两个 1 比特的数相加时，它们可能会产生一个 2 比特的输出。比如，1 + 1 = 10（都是二
+进制）。当你将三个 1 比特的数相加是，结果也会是 2 比特，比如，1 + 1 = 11。这种简单的操作可以被视为将两个比特与一个更低位的操作的进位输入相加，结果产生一个和与一个进位输出——左边的比特是进位输出，右边的比特是和。下图显示了一个 4 比特的加法器。由于进位是像波纹一样从最低比特位 (cin) 向最高比特位传递的，这样的加法器也叫波纹进位加法器（待确定）。</p>
+<p><img alt="" src="images/simple_logic/11.png" /></p>
+<h3 id="_13">实验步骤</h3>
+<ol>
+<li>
+<p>打开 Vivado 并创建一个名为 lab2.3 的空白工程。</p>
+</li>
+<li>
+<p>创建并使用数据流级建模添加一个有三个输入（a, b, cin）和两个输出（s 和 cout）的名为 fulladder_dataflow 的 Verilog module。所有的输入和输出都应该是 1 比特位宽的。</p>
+</li>
+<li>
+<p>在工程中创建并添加一个有三个输入（a, b, cin）和两个输出（s 和 cout）的 Verilog module（名为 rca_dataflow），实例化全加器（FA）四次，并将它们按所需连接起来。这里的 a，b，和 s 应该是一个 4 比特的向量，cin 和 cout 应该是 1 比特位宽。</p>
+</li>
+<li>
+<p>对设计进行仿真（行为仿真）80ns 并验证功能。</p>
+</li>
+<li>
+<p>将与开发板对应的 XDF 文件添加到工程中，编辑文件添加相关的端口。将 SW4 到 SW7 赋给 a，将 SW0 到 SW3 赋给 b，LED3 到 LED0 赋给 s，SW15 赋给 cin，LED15 赋给 cout。</p>
+</li>
+<li>
+<p>综合（Synthesize）并实现（implement）设计。</p>
+</li>
+</ol>
+<h3 id="_14">参考代码及讲解</h3>
+<p>首先，我们需要编写一个一位的加法，具体原理请看前面的讲解：  </p>
+<p>module one_bit_add(
+     input a,
+     input b,
+     input cin,
+     output s,
+     output reg cout
+     );
+     assign s=a^b^cin;
+     always@(*)
+     begin
+         if(a&amp;b|a&amp;cin|b&amp;cin)
+         cout=1;
+         else
+         cout=0;
+     end</p>
+<p>endmodule</p>
+<p>在 lab2.3 的工程中重复调用这个模块，来实现我们的四位加法器，具体代码如下：  </p>
+<p>module lab2_3(
+     input [3:0]a,
+     input [3:0]b,
+     output [3:0]s,
+     input cin,
+     output cout
+     );
+     wire temp0,temp1,temp2;
+     one_bit_add A(a[0],b[0],cin,s[0],temp0);
+     one_bit_add B(a[1],b[1],temp0,s[1],temp1);
+     one_bit_add C(a[2],b[2],temp1,s[2],temp2);
+     one_bit_add D(a[3],b[3],temp2,s[3],cout);
+ endmodule</p>
+<h4 id="_15">仿真代码</h4>
+<p>因为对参数中的变量手动一次次修改对于比较大的数字较为麻烦，所以在这里使用了循环语句。</p>
+<p>module lab2_3_tb(</p>
+<pre><code> );
+ reg [3:0]a;
+ reg [3:0]b;
+ wire [3:0]s;
+ reg cin;
+ wire cout;
+ integer k;
+ lab2_3 dut(a,b,s,cin,cout);
+ initial
+ begin
+ a=0; b=0; cin=0;
+     for(k=0;k&lt;20;k=k+1)
+     begin
+      #10   if(k&lt;10)
+            a=a+1;
+            else
+            b=b+1;
+            if(k==10)
+            cin=1;            
+     end
+ end
+</code></pre>
+<p>endmodule</p>
+<p>查看仿真代码，确定自己的代码是否正确：</p>
+<p><img alt="" src="images/simple_logic/13.png" /></p>
+<h2 id="_16">扩展实验内容</h2>
+<h3 id="1">扩展实验 1</h3>
+<p>修改 3 中的工程，将 4 比特的输入看作 BCD 码完成加法，生成 BCD 码的结果并在 LED0 和最右边的七段数码管上显示出来。使用开关来输入两个 4 比特 BCD 数并用 SW15 输入进位。根据需求复用 2 和 3 中开发的模型。使用数据流级建模。</p>
+<h4 id="_17">具体要求</h4>
+<ol>
+<li>打开 Vivado 并创建一个名为 lab2.kuozhan1 的空白工程。</li>
+<li>
+<p>按需求修改 3 中的工程，使之能完成需求的功能并将结果输出到 LED0 和最右边的七段数码管上显示</p>
+</li>
+<li>
+<p>将与开发板对应的 XDF 文件添加到工程中，编辑文件添加相关的端口。使用开关
+SW72-SW0 来给两个 4 比特的 BCD 提供输入，SW15 给进位。</p>
+</li>
+<li>综合（Synthesize）并实现（implement）设计。</li>
+<li>生成比特流（bitstream），将它下载到 Basys3 或是 Nexys4 DDR 开发板上，并验证它的功能。</li>
+</ol>
+<h3 id="2">扩展实验 2</h3>
+<p>通过修改 3 中的工程并使用数据流级建模创建一个超前进位加法器电路</p>
+<h4 id="_18">实验简介</h4>
+<p>波纹进位加法器在处理两个很大的数（比如 8 比特，16 比特，32 比特）的加法时会花很长时间运算。为了降低运算时间，可以使用另一个结构，超前进位加法器。它的工作方式是，基于以下轻轻为每个比特位分别创建两个信号（P 和  G）：进位信号是否会从较低比特位传播过来（即至少有一个输入是 1），进位信号是否由此比特位生成（即两个输入均为 1），或者进位信号是否会被此比特位消灭（两个输入均为 0）。P 和 G 生成后，每个比特位的进位信号也生成了。</p>
+<p><img alt="" src="images/simple_logic/11.png" /></p>
+<p>此处𝑃𝑖 = 𝐴𝑖 + 𝐵𝑖，𝐺𝑖 = 𝐴𝑖𝐵𝑖。在超前进位单元内，𝐶𝑖+1 = 𝐺𝑖 + 𝑃𝑖𝐶𝑖。这个加速是通过使
+𝐶𝑖和相应的第 i 为一起生成而达到的。</p>
+<h4 id="_19">具体要求</h4>
+<ol>
+<li>
+<p>打开 Vivado 并打开你在 3 中创建的工程。</p>
+</li>
+<li>
+<p>按需修改 3 中的工程，来使用超前进位结构完成两个 4 比特的数的加法并将结果输出到 LED 灯上。有由 SW15 提供进位。提示：你只需要将全加器修改为输出𝑃𝑖和
+𝐺𝑖，然后创建并添加另一个超前进位（CLA）模块来完成超前进位功能（即输入𝑐0 和
+𝑝𝑖𝑔𝑖（i = 0 到 3）并输出𝑐4、𝑝𝑔和𝑔𝑔。</p>
+</li>
+<li>
+<p>修改 XDF 文件来通过 SW3-SW0 提供输入 b，通过 SW7-SW4 提供输入 a，SW15
+输入 cin。通过 LED15 输出 cout，LED3-LED0 输出 sum。</p>
+</li>
+<li>综合（Synthesize）并实现（implement）设计。</li>
+<li>生成比特流（bitstream），将它下载到 Basys3 或是 Nexys4 DDR 开发板上，并验证它的功能。</li>
+</ol>
+<h2 id="_20">总结</h2>
+<p>在这个实验中，你会学到如何定义不同进制的数。你还会使用数据流设计不同的转换数字的电路。你还会学习到一个提高加法速度的技能。</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://vlab.ustc.edu.cn/" target="_blank" rel="noopener" title="vlab.ustc.edu.cn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.78 8.75a9.64 9.64 0 0 0 1.363 4.177c.255.426.542.832.857 1.215.245-.296.551-.705.857-1.215A9.64 9.64 0 0 0 10.22 8.75Zm4.44-1.5a9.64 9.64 0 0 0-1.363-4.177c-.307-.51-.612-.919-.857-1.215a9.927 9.927 0 0 0-.857 1.215A9.64 9.64 0 0 0 5.78 7.25Zm-5.944 1.5H1.543a6.507 6.507 0 0 0 4.666 5.5c-.123-.181-.24-.365-.352-.552-.715-1.192-1.437-2.874-1.581-4.948Zm-2.733-1.5h2.733c.144-2.074.866-3.756 1.58-4.948.12-.197.237-.381.353-.552a6.507 6.507 0 0 0-4.666 5.5Zm10.181 1.5c-.144 2.074-.866 3.756-1.58 4.948-.12.197-.237.381-.353.552a6.507 6.507 0 0 0 4.666-5.5Zm2.733-1.5a6.507 6.507 0 0 0-4.666-5.5c.123.181.24.365.353.552.714 1.192 1.436 2.874 1.58 4.948Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/USTC-vlab" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.sections", "navigation.top"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+    
+  </body>
+</html>
