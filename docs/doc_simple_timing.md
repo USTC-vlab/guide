@@ -301,7 +301,7 @@ endmodule
 
 ​  若使用供参考的 Testbench，得到的波形应该如下：
 
-![](images/simple_timing/1563422019450)
+![](images/simple_timing/1563422019450.png)
 
 ​ **4.** 将适当的板相关主 XDC 文件添加到项目中并编辑它以包括相关引脚，将 D 分配给 SW0，reset 为 SW1，ce 分配给 SW2，Clk 分配给 SW15，Q 分配给 LED0。
 

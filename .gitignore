@@ -1,13 +1,1 @@
-_pdf
-_site
-
-.DS_Store
-.idea
-.jekyll-cache
-.jekyll-metadata
-.sass-cache
-.vscode
-
-Gemfile.lock
-vendor/
-.bundle/
+/site/
