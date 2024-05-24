@@ -1465,9 +1465,9 @@ $readmemb 的使用先在 Verilog 代码目录下准备一个文件 file1.txt，
      output eq
      );
      reg [2:0] rom [15:0];</p>
-<pre><code> initial $readmemb ("compare.mem", rom);
+<div class="highlight"><pre><span></span><code> initial $readmemb (&quot;compare.mem&quot;, rom);
  assign {lt,gt,eq}=rom[{a,b}];
-</code></pre>
+</code></pre></div>
 <p>endmodule</p>
 <p>可以采用相对路径或者绝对路径的方式写入 readme txt 文件，但是之前文档介绍的 add source 的方法 vivado 不支持 txt 格式，所以我们在这里采用添加 mem 文件的方法加入文件，这样的方法更加简单一点。<br />
 comare.mem 文件具体内容：  </p>
@@ -1541,9 +1541,6 @@ SW0，将 y 分配给 LED15-LED0。注意对于一个给定的输入组合，只
 
 
 
-
-  
-  
 
 
 

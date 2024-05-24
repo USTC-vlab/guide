@@ -990,12 +990,12 @@
 <p>上图是综合工具生成的电路图，大家可以自行化简上述电路，看是否等价。</p>
 <h3 id="12-bit">1.2 多 bit 逻辑门</h3>
 <p>对于下面 5 个逻辑表达式</p>
-<pre><code class="language-verilog">y1 = a &amp; b;
-y2 = a | b;
-y3 = a ^ b;
-y4 = ~(a &amp; b);
-y5 = ~(a | b);
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">y1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="n">y2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="n">y3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="n">y4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="n">y5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+</code></pre></div>
 <p>其电路图如下所示：</p>
 <p><img alt="" src="images/verilog/6.png" /></p>
 <p>Verilog 代码为：</p>
@@ -1013,8 +1013,8 @@ y5 = ~(a | b);
 </dl>
 <h3 id="13">1.3  八输入与门</h3>
 <p>对于逻辑表达式</p>
-<pre><code class="language-verilog">y = a[7] &amp; a[6] &amp; a[5] &amp; a[4] &amp; a[3] &amp; a[2] &amp; a[1] &amp; a[0];
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mh">7</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mh">6</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mh">5</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mh">4</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mh">3</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mh">2</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mh">0</span><span class="p">];</span>
+</code></pre></div>
 <p>其电路图为：</p>
 <p><img alt="" src="images/verilog/8.png" /></p>
 <p>Verilog 代码：</p>
@@ -1032,8 +1032,8 @@ y5 = ~(a | b);
 </dl>
 <h3 id="14">1.4  一位全加器</h3>
 <p>对于表达式</p>
-<pre><code class="language-verilog">{cout, s} = a + b + cin;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="n">cout</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cin</span><span class="p">;</span>
+</code></pre></div>
 <p>其电路图为：</p>
 <p><img alt="" src="images/verilog/10.png" /></p>
 <p>Verilog 代码</p>
@@ -1083,8 +1083,8 @@ y5 = ~(a | b);
 <dt>位拼接</dt>
 <dd>
 <p>可将一个或多个信号的指定位，拼接成一个新的信号，对于上述表达式，如果 y 是一 12 bit 的信号，则其各位的值为：</p>
-<p><code>verilog
-a[2] a[1] b[0] b[0] b[0] a[0] 1 0 0 0 1 0</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">a</span><span class="p">[</span><span class="mh">2</span><span class="p">]</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="mh">0</span>
+</code></pre></div>
 </dd>
 <dt>下划线</dt>
 <dd>
@@ -1241,15 +1241,15 @@ a[2] a[1] b[0] b[0] b[0] a[0] 1 0 0 0 1 0</code></p>
 <p>构造一时钟信号</p>
 <p>在时钟的上升沿，将一个向量赋值给被测模块输入端，并在时钟的下降沿对被测模块输出与期望输出结果进行对比，如果不相同，则记录下该向量，至此向量全部测试完毕。</p>
 <p>向量测试文件（<code>example.tv</code>）包含 <code>a</code>、<code>b</code>、<code>c</code> 以及 <code>y_expected</code></p>
-<pre><code class="language-verilog">000_1
-001_0
-010_0
-011_0
-100_1
-101_1
-110_0
-111_0
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="mh">000</span><span class="n">_1</span>
+<span class="mh">001</span><span class="n">_0</span>
+<span class="mh">010</span><span class="n">_0</span>
+<span class="mh">011</span><span class="n">_0</span>
+<span class="mh">100</span><span class="n">_1</span>
+<span class="mh">101</span><span class="n">_1</span>
+<span class="mh">110</span><span class="n">_0</span>
+<span class="mh">111</span><span class="n">_0</span>
+</code></pre></div>
 <p>测试文件</p>
 <p><img alt="" src="images/verilog/41.png" /></p>
 <p>前面介绍了三种测试方法，三种方法各有其优缺点。</p>

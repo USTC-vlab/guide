@@ -2099,32 +2099,32 @@ $$</p>
 <p>​ <strong>计数器</strong>是广泛使用的时序电路。在本次实验中，你将用几种方法设计寄存器和计数器。请参考 Vivado 教程上关于如何使用 Vivado 创建工程和验证电路。</p>
 <h3 id="2-1">2-1. 可同步重置、载入信号的寄存器</h3>
 <p>​ 在计算机系统中，相关信息常常在同时被存储。寄存器（register）以这样的方式存储信息比特，即系统可以在同一时间写入或读出所有的比特。寄存器的例子包含数据、地址、控制和状态。简单的寄存器数据的输入引脚和输出引脚分开，但它们用相同的时钟源。一个简单寄存器的设计如下。</p>
-<pre><code class="language-verilog">module Register (input [3:0] D, input Clk, output reg [3:0] Q);
- always @(posedge Clk)
-  Q &lt;= D;
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">Register</span><span class="w"> </span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">);</span>
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">  </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <p>​ 这个简单的寄存器会在每个时钟周期工作，保存需要的信息。然而，在有的情况下，需要只有在特定条件发生时，寄存器内容才被更新。比如，在计算机系统中的状态寄存器只在特定的指令执行时才更新。在这种情况下，寄存器的时钟需要用一个控制信号控制。这样的寄存器需要包含一个时钟使能引脚。下面是这种寄存器的设计。</p>
-<pre><code class="language-verilog">module Register_with_synch_load_behavior(input [3:0] D, input Clk, 
-                                         input load, output reg [3:0] Q);
- always @(posedge Clk)
-  if (load)
-   Q &lt;= D;
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">Register_with_synch_load_behavior</span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                         </span><span class="k">input</span><span class="w"> </span><span class="n">load</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">);</span>
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">load</span><span class="p">)</span>
+<span class="w">   </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <p>​ 另一个希望寄存器包含的特性是，当特定条件发生时，寄存器会重置存储的内容。下面是一个包含同步的
 （synchronous）重置和载入信号（重置的优先级高于载入）的简单寄存器的设计。</p>
-<pre><code class="language-verilog">module Register_with_synch_reset_load(input [3:0] D, input Clk,input reset, 
-                                      input load, output reg [3:0] Q);
- always @(posedge Clk)
-        if (reset) begin
-   Q &lt;= 4'b0;
-  end 
-     else if (load) begin
-   Q &lt;= D;
-  end
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">Register_with_synch_reset_load</span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="k">input</span><span class="w"> </span><span class="n">reset</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                      </span><span class="k">input</span><span class="w"> </span><span class="n">load</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">);</span>
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">reset</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">   </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">end</span><span class="w"> </span>
+<span class="w">     </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">load</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">   </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+<span class="w">  </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h4 id="_2">实验目的</h4>
 <p>​ 用上面的例子，设计一个 4-bit 寄存器，包含同步的重置和载入信号。编写一个测试用例并对你的设计仿真。对 Clk, D input, reset, load，和 output Q 赋值。在硬件中验证你的设计。</p>
 <h4 id="_3">参考步骤</h4>
@@ -2160,42 +2160,42 @@ endmodule
 </li>
 </ol>
 <h4 id="_4">参考代码</h4>
-<pre><code class="language-verilog">寄存器的实现代码参考例子即可
-下面是Testbench的参考代码
-module Register1_tb();
-    reg Clk, reset, load;
-    reg [3:0] D;
-    wire [3:0] Q;
-    Register_with_synch_reset_load TB(.Clk(Clk),.load(load),.reset(reset),.D(D),.Q(Q));
-    initial begin
-        Clk = 0;
-        forever begin
-            #10 Clk = 1;
-            #10 Clk = 0;
-        end
-    end
-    initial begin
-        load = 0;
-        #60 load = 1;
-        #20 load = 0;
-        #40 load = 1;
-        #20 load = 0;
-        #55 load = 1;
-        #20 load = 0;
-        #65 load = 1;
-    end
-    initial begin
-        reset = 0;
-        #155 reset = 1;
-        #85 reset = 0;
-    end
-    initial begin
-        D = 4'b0000;
-        #20 D = 4'b0101;
-        #60 D = 4'b1001;
-    end
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="err">寄存器的实现代码参考例子即可</span>
+<span class="err">下面是</span><span class="n">Testbench的参考代码</span>
+<span class="k">module</span><span class="w"> </span><span class="n">Register1_tb</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span><span class="n">reset</span><span class="p">,</span><span class="w"> </span><span class="n">load</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Register_with_synch_reset_load</span><span class="w"> </span><span class="n">TB</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">load</span><span class="p">(</span><span class="n">load</span><span class="p">),.</span><span class="n">reset</span><span class="p">(</span><span class="n">reset</span><span class="p">),.</span><span class="n">D</span><span class="p">(</span><span class="n">D</span><span class="p">),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">));</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">forever</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">60</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">40</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">55</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">65</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">155</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">85</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b0000</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b0101</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">60</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b1001</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h3 id="2-2">2-2. 可同步重置、同步置位、载入信号的寄存器</h3>
 <p>​ 在一些仿真中，有必要把寄存器设置到一个预设值。对于这种情况，需要使用另一个控制信号，称为设置 set。一般情况下，在这种寄存器中，重置信号会比设置信号拥有更高优先级，而设置信号比载入信号拥有更高优先级。</p>
 <h4 id="_5">实验目的</h4>
@@ -2229,79 +2229,79 @@ endmodule
 </li>
 </ol>
 <h4 id="_7">参考代码</h4>
-<pre><code class="language-verilog">module Register_with_synch_reset_load_behavior(input [3:0] D, input Clk,input set,
-                                               input reset, input load, output reg [3:0] Q);
-    always @(posedge Clk)
-        if (reset) begin
-            Q &lt;= 4'b0;
-        end 
-        else if (set) begin
-            Q &lt;= 4'b1111;
-        end
-        else if (load) begin
-            Q &lt;= D;
-        end
-endmodule
-</code></pre>
-<pre><code class="language-verilog">module Register1_tb();
-    reg Clk, reset, set, load;
-    reg [3:0] D;
-    wire [3:0] Q;
-    Register_with_synch_reset_load_behavior TB(.Clk(Clk),.set(set),.load(load),.reset(reset),.D(D),.Q(Q));
-    initial begin
-        Clk = 0;
-        forever begin
-            #10 Clk = 1;
-            #10 Clk = 0;
-        end
-    end
-    initial begin
-        load = 0;
-        #60 load = 1;
-        #20 load = 0;
-        #40 load = 1;
-        #20 load = 0;
-        #55 load = 1;
-        #20 load = 0;
-        #65 load = 1;
-    end
-    initial begin
-        reset = 0;
-        #155 reset = 1;
-        #85 reset = 0;
-    end
-    initial begin
-        set = 0;
-        #220  set = 1;
-        #50 set = 0;
-    end
-    initial begin
-        D = 4'b0000;
-        #20 D = 4'b0101;
-        #60 D = 4'b1001;
-    end
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">Register_with_synch_reset_load_behavior</span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="k">input</span><span class="w"> </span><span class="n">set</span><span class="p">,</span>
+<span class="w">                                               </span><span class="k">input</span><span class="w"> </span><span class="n">reset</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">load</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">);</span>
+<span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">reset</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span><span class="w"> </span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">set</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b1111</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">load</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">Register1_tb</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span><span class="n">reset</span><span class="p">,</span><span class="w"> </span><span class="n">set</span><span class="p">,</span><span class="w"> </span><span class="n">load</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Register_with_synch_reset_load_behavior</span><span class="w"> </span><span class="n">TB</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">set</span><span class="p">(</span><span class="n">set</span><span class="p">),.</span><span class="n">load</span><span class="p">(</span><span class="n">load</span><span class="p">),.</span><span class="n">reset</span><span class="p">(</span><span class="n">reset</span><span class="p">),.</span><span class="n">D</span><span class="p">(</span><span class="n">D</span><span class="p">),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">));</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">forever</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">60</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">40</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">55</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">65</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">155</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">85</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">220</span><span class="w">  </span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">50</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b0000</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b0101</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">60</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b1001</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h3 id="2-3-4-bit">2-3. 4-bit 并行输入并行输出移位寄存器</h3>
 <p>​ 还有一种寄存器称为移位寄存器。移位寄存器是当控制信号生效时，存储的二进制数据会左移或右移的寄存器。移位寄存器可以被进一步分类为并行载入串行输出，串行载入并行输出和串行载入串行输出。它们可能有也可能没有重置信号。</p>
 <p>​ 在 Xilinx FPGA，LUT 可以被用作串行移位寄存器；如果代码写对的话，1 个 LUT 就可以用作 1bit 输入 1bit 输出的 SRL32，因而可以提供非常经济的设计（而不是串联 32 个触发器）。它可以有也可以没有使能信号。当使能信号生效时，内部存储的数据会移位 1bit，1bit 新的数据也会移入。</p>
 <p>​ 下面是一个简单的没有使能信号的 1bit 串行移入移出寄存器的设计。在这个设计中移入的 bit 需要经过 32 个时钟周期移出。这个设计可以用来实现一个延迟线。</p>
-<pre><code class="language-verilog">module simple_one_bit_serial_shift_register_behavior(input Clk, input
-              ShiftIn, output ShiftOut);
- reg [31:0] shift_reg;
- always @(posedge Clk)
-  shift_reg &lt;= {shift_reg[30:0], ShiftIn};
- assign ShiftOut = shift_reg[31];
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">simple_one_bit_serial_shift_register_behavior</span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span><span class="k">input</span>
+<span class="w">              </span><span class="n">ShiftIn</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="n">ShiftOut</span><span class="p">);</span>
+<span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">;</span>
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">  </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">{</span><span class="n">shift_reg</span><span class="p">[</span><span class="mh">30</span><span class="o">:</span><span class="mh">0</span><span class="p">],</span><span class="w"> </span><span class="n">ShiftIn</span><span class="p">};</span>
+<span class="w"> </span><span class="k">assign</span><span class="w"> </span><span class="n">ShiftOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">[</span><span class="mh">31</span><span class="p">];</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <p>​ 如果我们要实现一个少于 32 个时钟周期的延迟线，可以修改上面这个设计。下面是一个 3 时钟周期的延迟线。</p>
-<pre><code class="language-verilog">module delay_line3_behavior(input Clk, input ShiftIn, output ShiftOut);
- reg [2:0] shift_reg;
- always @(posedge Clk)
-  shift_reg &lt;= {shift_reg[1:0], ShiftIn};
- assign ShiftOut = shift_reg[2];
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">delay_line3_behavior</span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">ShiftIn</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="n">ShiftOut</span><span class="p">);</span>
+<span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">;</span>
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">  </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">{</span><span class="n">shift_reg</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">],</span><span class="w"> </span><span class="n">ShiftIn</span><span class="p">};</span>
+<span class="w"> </span><span class="k">assign</span><span class="w"> </span><span class="n">ShiftOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">[</span><span class="mh">2</span><span class="p">];</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h4 id="_8">实验目的</h4>
 <p>​ 设计一个 4-bit 并行输入的向左移位寄存器。使用下图的信号刺激，编写一个测试用例并对你的设计仿真。
 分配 Clk, ParallelIn, load, ShiftEn, ShiftIn, RegContent 和 ShiftOut.。在硬件上验证功能。</p>
@@ -2335,19 +2335,19 @@ endmodule
 </li>
 </ol>
 <h4 id="_10">参考代码</h4>
-<pre><code class="language-verilog">module Parallelin_serialout_load_enable(input Clk, input ShiftIn,input [3:0] ParallelIn,            input load, input ShiftEn, output ShiftOut,            output [3:0] RegContent);
- reg [3:0] shift_reg;
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">Parallelin_serialout_load_enable</span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">ShiftIn</span><span class="p">,</span><span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">ParallelIn</span><span class="p">,</span><span class="w">            </span><span class="k">input</span><span class="w"> </span><span class="n">load</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">ShiftEn</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="n">ShiftOut</span><span class="p">,</span><span class="w">            </span><span class="k">output</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">RegContent</span><span class="p">);</span>
+<span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">;</span>
 
- always @(posedge Clk)
-  if(load)
-   shift_reg &lt;= ParallelIn;
-  else if (ShiftEn)
-   shift_reg &lt;= {shift_reg[2:0], ShiftIn};
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">load</span><span class="p">)</span>
+<span class="w">   </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">ParallelIn</span><span class="p">;</span>
+<span class="w">  </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ShiftEn</span><span class="p">)</span>
+<span class="w">   </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">{</span><span class="n">shift_reg</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">],</span><span class="w"> </span><span class="n">ShiftIn</span><span class="p">};</span>
 
- assign ShiftOut = shift_reg[3];
- assign RegContent = shift_reg;
-endmodule
-</code></pre>
+<span class="w"> </span><span class="k">assign</span><span class="w"> </span><span class="n">ShiftOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">[</span><span class="mh">3</span><span class="p">];</span>
+<span class="w"> </span><span class="k">assign</span><span class="w"> </span><span class="n">RegContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">;</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h3 id="2-4-8-bit">2-4. 8-bit 计数器</h3>
 <p>​ 计数器可以是异步的也可以是同步的。异步计数器只使用事件信号来对事件计数。而同步计数器，使用共有的时钟信号，因而当多个触发器必须改变状态时，状态的改变同时发生。二进制计数器是一种简单的计数器，当使能信号生效时会计数，当重置信号生效时会重置。当然，重置信号比使能信号的优先级高。</p>
 <p>​ 下面的电路图展示了这样的计数器。需要注意的是，清除信号是异步低电平生效的，而使能信号是同步高电平生效的。</p>
@@ -2385,77 +2385,77 @@ endmodule
 </li>
 </ol>
 <h4 id="_13">参考代码</h4>
-<pre><code class="language-verilog">module T_ff_clear_behavior(
-    input T,
-    input Clk,
-    input Clr,
-    output reg Q
-    );
-    always@(posedge Clk or negedge Clr)begin
-        if(~Clr)begin
-            Q &lt;= 0;
-        end
-        else if(T) begin
-            Q &lt;= ~Q;
-        end
-    end
-endmodule
-</code></pre>
-<pre><code class="language-verilog">module counter_8_bit(
-    input Clk,
-    input Clr,
-    input Enable,
-    output [7:0] Q
-    );
-    T_ff_clear_behavior A1(.Clk(Clk),.Clr(Clr),.T(Enable),.Q(Q[0]));
-    T_ff_clear_behavior A2(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0]),.Q(Q[1]));
-    T_ff_clear_behavior A3(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1]),.Q(Q[2]));
-    T_ff_clear_behavior A4(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2]),.Q(Q[3]));
-    T_ff_clear_behavior A5(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp;          Q[3]),.Q(Q[4]));
-    T_ff_clear_behavior A6(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp; Q[3] &amp;         Q[4]),.Q(Q[5]));
-    T_ff_clear_behavior A7(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp; Q[3] &amp;         Q[4] &amp; Q[5]),.Q(Q[6]));
-    T_ff_clear_behavior A8(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp; Q[3] &amp;         Q[4] &amp; Q[5] &amp; Q[6]),.Q(Q[7]));
-endmodule
-</code></pre>
-<pre><code class="language-verilog">module counter_8_bit_tb();
-    reg Clk,Clr,Enable;
-    wire [7:0] Q;
-    counter_8_bit TB(.Clk(Clk),.Clr(Clr),.Enable(Enable),.Q(Q));
-    initial begin
-        Clk = 0;
-        forever begin
-            #10 Clk = 1;
-            #10 Clk = 0;
-        end
-    end
-    initial begin
-        Clr = 1;
-        #5 Clr = 0;
-        #5 Clr = 1;
-    end
-    initial begin
-        Enable = 0;
-        #20 Enable = 1;
-        #100 Enable = 0;
-        #150 Enable = 1;
-    end
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">T_ff_clear_behavior</span><span class="p">(</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">T</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Clr</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="n">Q</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="k">always</span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">Clr</span><span class="p">)</span><span class="k">begin</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">Clr</span><span class="p">)</span><span class="k">begin</span>
+<span class="w">            </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="o">~</span><span class="n">Q</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">counter_8_bit</span><span class="p">(</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Clr</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Enable</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A1</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="p">),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A2</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A3</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">2</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A4</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">2</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">3</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A5</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">2</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w">          </span><span class="n">Q</span><span class="p">[</span><span class="mh">3</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">4</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A6</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">2</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">3</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w">         </span><span class="n">Q</span><span class="p">[</span><span class="mh">4</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">5</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A7</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">2</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">3</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w">         </span><span class="n">Q</span><span class="p">[</span><span class="mh">4</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">5</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">6</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A8</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">2</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">3</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w">         </span><span class="n">Q</span><span class="p">[</span><span class="mh">4</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">5</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">6</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">7</span><span class="p">]));</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">counter_8_bit_tb</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="n">Clr</span><span class="p">,</span><span class="n">Enable</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">;</span>
+<span class="w">    </span><span class="n">counter_8_bit</span><span class="w"> </span><span class="n">TB</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">Enable</span><span class="p">(</span><span class="n">Enable</span><span class="p">),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">));</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">forever</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">Clr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">5</span><span class="w"> </span><span class="n">Clr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">5</span><span class="w"> </span><span class="n">Clr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">Enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">Enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">100</span><span class="w"> </span><span class="n">Enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">150</span><span class="w"> </span><span class="n">Enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h3 id="2-4-4-bit">2-4. 4-bit 递减计数器</h3>
 <p>​ 有些情况下，你可能要求计数器从非 0 的地方开始计数增或计数减，要求计数器到达指定值时停下。这是一个 4-bit 计数器的例子，它从 10 开始计数递减到 0。当计数值到 0 时，它会重新初始化到 10。在任何时候，如果使能信号是低电平，计数器会暂停计数，直到使能信号恢复。假定在计数开始前，载入信号就生效来载入预设值。</p>
-<pre><code class="language-verilog">reg [3:0] count;
-wire cnt_done;
-assign cnt_done = ~| count;
-assign Q = count;
-always @(posedge Clock)
-if (Clear)
- count &lt;= 0;
-else if (Enable)
-if (Load | cnt_done)
- count &lt;= 4'b1010; // decimal 10
-else
- count &lt;= count - 1;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="kt">wire</span><span class="w"> </span><span class="n">cnt_done</span><span class="p">;</span>
+<span class="k">assign</span><span class="w"> </span><span class="n">cnt_done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~|</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="k">assign</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clock</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Clear</span><span class="p">)</span>
+<span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Enable</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Load</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">cnt_done</span><span class="p">)</span>
+<span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b1010</span><span class="p">;</span><span class="w"> </span><span class="c1">// decimal 10</span>
+<span class="k">else</span>
+<span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+</code></pre></div>
 <h4 id="_14">实验目的</h4>
 <p>​ 参考上面的代码，设计一个 4-bit 递减计数器，包含同步载入、使能和清除。编写测试用例并验证功能。分配 Clock input, Clear,Enable, Load 和 Q。实现设计并在硬件上验证功能。</p>
 <h4 id="_15">参考步骤</h4>
@@ -2472,27 +2472,27 @@ else
 <li>生成比特流文件，将其下载到 Nexys4 DDR 开发板，并验证功能。</li>
 </ol>
 <h4 id="_16">参考代码</h4>
-<pre><code class="language-verilog">module counter_decline(
- input Clock,
-    input Clear,
-    input Enable, 
-    input Load,
-    output [3:0] Q
-);
-    reg [3:0] count;
- wire cnt_done;
- assign cnt_done = ~ | count; //count是否递减到0
- assign Q = count;
- always @(posedge Clock)
- if (Clear)
-  count &lt;= 0;
- else if (Enable)
-  if (Load | cnt_done)
-   count &lt;= 4'b1010; // decimal 10
-  else
-   count &lt;= count - 1;
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">counter_decline</span><span class="p">(</span>
+<span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">Clock</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Clear</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Enable</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Load</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span>
+<span class="p">);</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="w"> </span><span class="kt">wire</span><span class="w"> </span><span class="n">cnt_done</span><span class="p">;</span>
+<span class="w"> </span><span class="k">assign</span><span class="w"> </span><span class="n">cnt_done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">count</span><span class="p">;</span><span class="w"> </span><span class="c1">//count是否递减到0</span>
+<span class="w"> </span><span class="k">assign</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clock</span><span class="p">)</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Clear</span><span class="p">)</span>
+<span class="w">  </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Enable</span><span class="p">)</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Load</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">cnt_done</span><span class="p">)</span>
+<span class="w">   </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b1010</span><span class="p">;</span><span class="w"> </span><span class="c1">// decimal 10</span>
+<span class="w">  </span><span class="k">else</span>
+<span class="w">   </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h2 id="3-fpga">3. FPGA 工具中的常用电路</h2>
 <p>​ 现在的 Xilinx FPGA 包含了比基本的 LUT,CLB,IOB 和布线更多的资源。与胶合逻辑发明时相比，现在 FPGA 被用来实现更复杂的数字电路。一些复杂的架构资源，例如时钟，必须利用配置和实例化，而不是自己实现。FPGA 工具也提供经常使用的复杂电路，例如 ReedSolomon 译码器，使得开发者不需要“重新设计轮子”。本次实验介绍架构向导，和可以通过 IP 目录获得的 IP 生成工具。</p>
 <h3 id="3-1">3-1.  时钟约束向导</h3>
@@ -2524,41 +2524,41 @@ endmodule
 </ol>
 <p>点击 OK 然后点击 Generate 生成用于综合，实现和仿真的文件。</p>
 <p>​ 可以通过“IP 源”选项卡访问文件（包括实例化文件）。以下是.veo 文件内容的示例。</p>
-<pre><code class="language-verilog">clk_5MHz instance_name
-(// Clock in ports
-.clk_in1(CLK_IN1), // IN
-// Clock out ports
-.clk_out1(CLK_OUT1), // OUT
-// Status and control signals
-.reset(RESET), // IN
-.locked(LOCKED)); // OUT
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">clk_5MHz</span><span class="w"> </span><span class="n">instance_name</span>
+<span class="p">(</span><span class="c1">// Clock in ports</span>
+<span class="p">.</span><span class="n">clk_in1</span><span class="p">(</span><span class="n">CLK_IN1</span><span class="p">),</span><span class="w"> </span><span class="c1">// IN</span>
+<span class="c1">// Clock out ports</span>
+<span class="p">.</span><span class="n">clk_out1</span><span class="p">(</span><span class="n">CLK_OUT1</span><span class="p">),</span><span class="w"> </span><span class="c1">// OUT</span>
+<span class="c1">// Status and control signals</span>
+<span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="n">RESET</span><span class="p">),</span><span class="w"> </span><span class="c1">// IN</span>
+<span class="p">.</span><span class="n">locked</span><span class="p">(</span><span class="n">LOCKED</span><span class="p">));</span><span class="w"> </span><span class="c1">// OUT</span>
+</code></pre></div>
 <h4 id="_17">实验目的</h4>
 <p>​ 设计一个一秒脉冲发生器。使用时钟向导生成 5MHz 时钟，通过时钟分频器（以行为建模编写）进一步分频，以生成一个以一秒为周期信号。上述使用时钟向导（以及生成的实例化模板）的步骤可用于本练习。使用 100 MHz 的板载时钟源，BTNU 按钮复位电路，SW0 作为使能信号，LED0 作为输出信号，Q 为生成的秒周期信号。LED15 用于输出 DCM 锁定信号。完成设计流程，生成比特流，并将其下载到 Nexys4 DDR 板。验证功能。</p>
 <h4 id="_18">参考代码</h4>
-<pre><code class="language-verilog">module clk_instance(
-    input clk100mhz,
-    input reset,
-    output reg led
-    );
-    wire clk5mhz;
-    wire locked;
-    reg [20:0]counter;
-    clk_wiz_0 clk_wiz_0(.reset(reset),.clk_in1(clk100mhz),.clk_out1(clk5mhz),.locked(locked));
-    always@(posedge clk100mhz or negedge locked)begin
-        if(~locked)begin
-            counter &lt;= 0;
-        end
-        else if(counter &lt; 500000) begin
-            counter &lt;= counter + 1;
-        end
-        else begin
-            counter &lt;= 0;
-            led &lt;= ~led;
-        end
-    end
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">clk_instance</span><span class="p">(</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">clk100mhz</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">reset</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="n">led</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="n">clk5mhz</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="n">locked</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">20</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="n">counter</span><span class="p">;</span>
+<span class="w">    </span><span class="n">clk_wiz_0</span><span class="w"> </span><span class="n">clk_wiz_0</span><span class="p">(.</span><span class="n">reset</span><span class="p">(</span><span class="n">reset</span><span class="p">),.</span><span class="n">clk_in1</span><span class="p">(</span><span class="n">clk100mhz</span><span class="p">),.</span><span class="n">clk_out1</span><span class="p">(</span><span class="n">clk5mhz</span><span class="p">),.</span><span class="n">locked</span><span class="p">(</span><span class="n">locked</span><span class="p">));</span>
+<span class="w">    </span><span class="k">always</span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk100mhz</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">locked</span><span class="p">)</span><span class="k">begin</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">locked</span><span class="p">)</span><span class="k">begin</span>
+<span class="w">            </span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mh">500000</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">led</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="o">~</span><span class="n">led</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h3 id="3-2-ip">3-2. IP 目录</h3>
 <p>​ Vivado 工具的 IP 目录允许你配置和生成各种功能的核。在 IP 目录中，根据核心功能进行分组，这些核心包括从简单的基本核（如加法器）到非常复杂的和（如 MicroBlaze 处理器）。它还涵盖了从汽车到图像处理等各个领域所需核。配置和生成核心的过程与架构向导类似。核心将根据需要使用各种资源，包括 LUT，CLB，DSP48，BRAM 等。让我们看看如何配置和生成计数器核。二进制计数器核可以通过双击位于 IP catalog 下的 Basic Elements 分支下的 Counters 子文件夹下的 Binary Counter 来开始生成。</p>
 <p><img alt="" src="images/complex_timing/1563975225313.png" />
@@ -2714,32 +2714,32 @@ $$</p>
 <p>​ <strong>计数器</strong>是广泛使用的时序电路。在本次实验中，你将用几种方法设计寄存器和计数器。请参考 Vivado 教程上关于如何使用 Vivado 创建工程和验证电路。</p>
 <h3 id="2-1_1">2-1. 可同步重置、载入信号的寄存器</h3>
 <p>​ 在计算机系统中，相关信息常常在同时被存储。寄存器（register）以这样的方式存储信息比特，即系统可以在同一时间写入或读出所有的比特。寄存器的例子包含数据、地址、控制和状态。简单的寄存器数据的输入引脚和输出引脚分开，但它们用相同的时钟源。一个简单寄存器的设计如下。</p>
-<pre><code class="language-verilog">module Register (input [3:0] D, input Clk, output reg [3:0] Q);
- always @(posedge Clk)
-  Q &lt;= D;
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">Register</span><span class="w"> </span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">);</span>
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">  </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <p>​ 这个简单的寄存器会在每个时钟周期工作，保存需要的信息。然而，在有的情况下，需要只有在特定条件发生时，寄存器内容才被更新。比如，在计算机系统中的状态寄存器只在特定的指令执行时才更新。在这种情况下，寄存器的时钟需要用一个控制信号控制。这样的寄存器需要包含一个时钟使能引脚。下面是这种寄存器的设计。</p>
-<pre><code class="language-verilog">module Register_with_synch_load_behavior(input [3:0] D, input Clk, 
-                                         input load, output reg [3:0] Q);
- always @(posedge Clk)
-  if (load)
-   Q &lt;= D;
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">Register_with_synch_load_behavior</span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                         </span><span class="k">input</span><span class="w"> </span><span class="n">load</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">);</span>
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">load</span><span class="p">)</span>
+<span class="w">   </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <p>​ 另一个希望寄存器包含的特性是，当特定条件发生时，寄存器会重置存储的内容。下面是一个包含同步的
 （synchronous）重置和载入信号（重置的优先级高于载入）的简单寄存器的设计。</p>
-<pre><code class="language-verilog">module Register_with_synch_reset_load(input [3:0] D, input Clk,input reset, 
-                                      input load, output reg [3:0] Q);
- always @(posedge Clk)
-        if (reset) begin
-   Q &lt;= 4'b0;
-  end 
-     else if (load) begin
-   Q &lt;= D;
-  end
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">Register_with_synch_reset_load</span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="k">input</span><span class="w"> </span><span class="n">reset</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                      </span><span class="k">input</span><span class="w"> </span><span class="n">load</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">);</span>
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">reset</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">   </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">end</span><span class="w"> </span>
+<span class="w">     </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">load</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">   </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+<span class="w">  </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h4 id="_20">实验目的</h4>
 <p>​ 用上面的例子，设计一个 4-bit 寄存器，包含同步的重置和载入信号。编写一个测试用例并对你的设计仿真。对 Clk, D input, reset, load，和 output Q 赋值。在硬件中验证你的设计。</p>
 <h4 id="_21">参考步骤</h4>
@@ -2775,42 +2775,42 @@ endmodule
 </li>
 </ol>
 <h4 id="_22">参考代码</h4>
-<pre><code class="language-verilog">寄存器的实现代码参考例子即可
-下面是Testbench的参考代码
-module Register1_tb();
-    reg Clk, reset, load;
-    reg [3:0] D;
-    wire [3:0] Q;
-    Register_with_synch_reset_load TB(.Clk(Clk),.load(load),.reset(reset),.D(D),.Q(Q));
-    initial begin
-        Clk = 0;
-        forever begin
-            #10 Clk = 1;
-            #10 Clk = 0;
-        end
-    end
-    initial begin
-        load = 0;
-        #60 load = 1;
-        #20 load = 0;
-        #40 load = 1;
-        #20 load = 0;
-        #55 load = 1;
-        #20 load = 0;
-        #65 load = 1;
-    end
-    initial begin
-        reset = 0;
-        #155 reset = 1;
-        #85 reset = 0;
-    end
-    initial begin
-        D = 4'b0000;
-        #20 D = 4'b0101;
-        #60 D = 4'b1001;
-    end
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="err">寄存器的实现代码参考例子即可</span>
+<span class="err">下面是</span><span class="n">Testbench的参考代码</span>
+<span class="k">module</span><span class="w"> </span><span class="n">Register1_tb</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span><span class="n">reset</span><span class="p">,</span><span class="w"> </span><span class="n">load</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Register_with_synch_reset_load</span><span class="w"> </span><span class="n">TB</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">load</span><span class="p">(</span><span class="n">load</span><span class="p">),.</span><span class="n">reset</span><span class="p">(</span><span class="n">reset</span><span class="p">),.</span><span class="n">D</span><span class="p">(</span><span class="n">D</span><span class="p">),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">));</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">forever</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">60</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">40</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">55</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">65</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">155</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">85</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b0000</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b0101</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">60</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b1001</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h3 id="2-2_1">2-2. 可同步重置、同步置位、载入信号的寄存器</h3>
 <p>​ 在一些仿真中，有必要把寄存器设置到一个预设值。对于这种情况，需要使用另一个控制信号，称为设置 set。一般情况下，在这种寄存器中，重置信号会比设置信号拥有更高优先级，而设置信号比载入信号拥有更高优先级。</p>
 <h4 id="_23">实验目的</h4>
@@ -2844,79 +2844,79 @@ endmodule
 </li>
 </ol>
 <h4 id="_25">参考代码</h4>
-<pre><code class="language-verilog">module Register_with_synch_reset_load_behavior(input [3:0] D, input Clk,input set,
-                                               input reset, input load, output reg [3:0] Q);
-    always @(posedge Clk)
-        if (reset) begin
-            Q &lt;= 4'b0;
-        end 
-        else if (set) begin
-            Q &lt;= 4'b1111;
-        end
-        else if (load) begin
-            Q &lt;= D;
-        end
-endmodule
-</code></pre>
-<pre><code class="language-verilog">module Register1_tb();
-    reg Clk, reset, set, load;
-    reg [3:0] D;
-    wire [3:0] Q;
-    Register_with_synch_reset_load_behavior TB(.Clk(Clk),.set(set),.load(load),.reset(reset),.D(D),.Q(Q));
-    initial begin
-        Clk = 0;
-        forever begin
-            #10 Clk = 1;
-            #10 Clk = 0;
-        end
-    end
-    initial begin
-        load = 0;
-        #60 load = 1;
-        #20 load = 0;
-        #40 load = 1;
-        #20 load = 0;
-        #55 load = 1;
-        #20 load = 0;
-        #65 load = 1;
-    end
-    initial begin
-        reset = 0;
-        #155 reset = 1;
-        #85 reset = 0;
-    end
-    initial begin
-        set = 0;
-        #220  set = 1;
-        #50 set = 0;
-    end
-    initial begin
-        D = 4'b0000;
-        #20 D = 4'b0101;
-        #60 D = 4'b1001;
-    end
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">Register_with_synch_reset_load_behavior</span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="k">input</span><span class="w"> </span><span class="n">set</span><span class="p">,</span>
+<span class="w">                                               </span><span class="k">input</span><span class="w"> </span><span class="n">reset</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">load</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">);</span>
+<span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">reset</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span><span class="w"> </span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">set</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b1111</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">load</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">Register1_tb</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span><span class="n">reset</span><span class="p">,</span><span class="w"> </span><span class="n">set</span><span class="p">,</span><span class="w"> </span><span class="n">load</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">D</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Register_with_synch_reset_load_behavior</span><span class="w"> </span><span class="n">TB</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">set</span><span class="p">(</span><span class="n">set</span><span class="p">),.</span><span class="n">load</span><span class="p">(</span><span class="n">load</span><span class="p">),.</span><span class="n">reset</span><span class="p">(</span><span class="n">reset</span><span class="p">),.</span><span class="n">D</span><span class="p">(</span><span class="n">D</span><span class="p">),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">));</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">forever</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">60</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">40</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">55</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">65</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">155</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">85</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">220</span><span class="w">  </span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">50</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b0000</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b0101</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">60</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b1001</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h3 id="2-3-4-bit_1">2-3. 4-bit 并行输入并行输出移位寄存器</h3>
 <p>​ 还有一种寄存器称为移位寄存器。移位寄存器是当控制信号生效时，存储的二进制数据会左移或右移的寄存器。移位寄存器可以被进一步分类为并行载入串行输出，串行载入并行输出和串行载入串行输出。它们可能有也可能没有重置信号。</p>
 <p>​ 在 Xilinx FPGA，LUT 可以被用作串行移位寄存器；如果代码写对的话，1 个 LUT 就可以用作 1bit 输入 1bit 输出的 SRL32，因而可以提供非常经济的设计（而不是串联 32 个触发器）。它可以有也可以没有使能信号。当使能信号生效时，内部存储的数据会移位 1bit，1bit 新的数据也会移入。</p>
 <p>​ 下面是一个简单的没有使能信号的 1bit 串行移入移出寄存器的设计。在这个设计中移入的 bit 需要经过 32 个时钟周期移出。这个设计可以用来实现一个延迟线。</p>
-<pre><code class="language-verilog">module simple_one_bit_serial_shift_register_behavior(input Clk, input
-              ShiftIn, output ShiftOut);
- reg [31:0] shift_reg;
- always @(posedge Clk)
-  shift_reg &lt;= {shift_reg[30:0], ShiftIn};
- assign ShiftOut = shift_reg[31];
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">simple_one_bit_serial_shift_register_behavior</span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span><span class="k">input</span>
+<span class="w">              </span><span class="n">ShiftIn</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="n">ShiftOut</span><span class="p">);</span>
+<span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">;</span>
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">  </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">{</span><span class="n">shift_reg</span><span class="p">[</span><span class="mh">30</span><span class="o">:</span><span class="mh">0</span><span class="p">],</span><span class="w"> </span><span class="n">ShiftIn</span><span class="p">};</span>
+<span class="w"> </span><span class="k">assign</span><span class="w"> </span><span class="n">ShiftOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">[</span><span class="mh">31</span><span class="p">];</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <p>​ 如果我们要实现一个少于 32 个时钟周期的延迟线，可以修改上面这个设计。下面是一个 3 时钟周期的延迟线。</p>
-<pre><code class="language-verilog">module delay_line3_behavior(input Clk, input ShiftIn, output ShiftOut);
- reg [2:0] shift_reg;
- always @(posedge Clk)
-  shift_reg &lt;= {shift_reg[1:0], ShiftIn};
- assign ShiftOut = shift_reg[2];
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">delay_line3_behavior</span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">ShiftIn</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="n">ShiftOut</span><span class="p">);</span>
+<span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">;</span>
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">  </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">{</span><span class="n">shift_reg</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">],</span><span class="w"> </span><span class="n">ShiftIn</span><span class="p">};</span>
+<span class="w"> </span><span class="k">assign</span><span class="w"> </span><span class="n">ShiftOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">[</span><span class="mh">2</span><span class="p">];</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h4 id="_26">实验目的</h4>
 <p>​ 设计一个 4-bit 并行输入的向左移位寄存器。使用下图的信号刺激，编写一个测试用例并对你的设计仿真。
 分配 Clk, ParallelIn, load, ShiftEn, ShiftIn, RegContent 和 ShiftOut.。在硬件上验证功能。</p>
@@ -2950,19 +2950,19 @@ endmodule
 </li>
 </ol>
 <h4 id="_28">参考代码</h4>
-<pre><code class="language-verilog">module Parallelin_serialout_load_enable(input Clk, input ShiftIn,input [3:0] ParallelIn,            input load, input ShiftEn, output ShiftOut,            output [3:0] RegContent);
- reg [3:0] shift_reg;
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">Parallelin_serialout_load_enable</span><span class="p">(</span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">ShiftIn</span><span class="p">,</span><span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">ParallelIn</span><span class="p">,</span><span class="w">            </span><span class="k">input</span><span class="w"> </span><span class="n">load</span><span class="p">,</span><span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">ShiftEn</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="n">ShiftOut</span><span class="p">,</span><span class="w">            </span><span class="k">output</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">RegContent</span><span class="p">);</span>
+<span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">;</span>
 
- always @(posedge Clk)
-  if(load)
-   shift_reg &lt;= ParallelIn;
-  else if (ShiftEn)
-   shift_reg &lt;= {shift_reg[2:0], ShiftIn};
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="p">)</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">load</span><span class="p">)</span>
+<span class="w">   </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">ParallelIn</span><span class="p">;</span>
+<span class="w">  </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ShiftEn</span><span class="p">)</span>
+<span class="w">   </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">{</span><span class="n">shift_reg</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">],</span><span class="w"> </span><span class="n">ShiftIn</span><span class="p">};</span>
 
- assign ShiftOut = shift_reg[3];
- assign RegContent = shift_reg;
-endmodule
-</code></pre>
+<span class="w"> </span><span class="k">assign</span><span class="w"> </span><span class="n">ShiftOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">[</span><span class="mh">3</span><span class="p">];</span>
+<span class="w"> </span><span class="k">assign</span><span class="w"> </span><span class="n">RegContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">;</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h3 id="2-4-8-bit_1">2-4. 8-bit 计数器</h3>
 <p>​ 计数器可以是异步的也可以是同步的。异步计数器只使用事件信号来对事件计数。而同步计数器，使用共有的时钟信号，因而当多个触发器必须改变状态时，状态的改变同时发生。二进制计数器是一种简单的计数器，当使能信号生效时会计数，当重置信号生效时会重置。当然，重置信号比使能信号的优先级高。</p>
 <p>​ 下面的电路图展示了这样的计数器。需要注意的是，清除信号是异步低电平生效的，而使能信号是同步高电平生效的。</p>
@@ -3000,77 +3000,77 @@ endmodule
 </li>
 </ol>
 <h4 id="_31">参考代码</h4>
-<pre><code class="language-verilog">module T_ff_clear_behavior(
-    input T,
-    input Clk,
-    input Clr,
-    output reg Q
-    );
-    always@(posedge Clk or negedge Clr)begin
-        if(~Clr)begin
-            Q &lt;= 0;
-        end
-        else if(T) begin
-            Q &lt;= ~Q;
-        end
-    end
-endmodule
-</code></pre>
-<pre><code class="language-verilog">module counter_8_bit(
-    input Clk,
-    input Clr,
-    input Enable,
-    output [7:0] Q
-    );
-    T_ff_clear_behavior A1(.Clk(Clk),.Clr(Clr),.T(Enable),.Q(Q[0]));
-    T_ff_clear_behavior A2(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0]),.Q(Q[1]));
-    T_ff_clear_behavior A3(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1]),.Q(Q[2]));
-    T_ff_clear_behavior A4(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2]),.Q(Q[3]));
-    T_ff_clear_behavior A5(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp;          Q[3]),.Q(Q[4]));
-    T_ff_clear_behavior A6(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp; Q[3] &amp;         Q[4]),.Q(Q[5]));
-    T_ff_clear_behavior A7(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp; Q[3] &amp;         Q[4] &amp; Q[5]),.Q(Q[6]));
-    T_ff_clear_behavior A8(.Clk(Clk),.Clr(Clr),.T(Enable &amp; Q[0] &amp; Q[1] &amp; Q[2] &amp; Q[3] &amp;         Q[4] &amp; Q[5] &amp; Q[6]),.Q(Q[7]));
-endmodule
-</code></pre>
-<pre><code class="language-verilog">module counter_8_bit_tb();
-    reg Clk,Clr,Enable;
-    wire [7:0] Q;
-    counter_8_bit TB(.Clk(Clk),.Clr(Clr),.Enable(Enable),.Q(Q));
-    initial begin
-        Clk = 0;
-        forever begin
-            #10 Clk = 1;
-            #10 Clk = 0;
-        end
-    end
-    initial begin
-        Clr = 1;
-        #5 Clr = 0;
-        #5 Clr = 1;
-    end
-    initial begin
-        Enable = 0;
-        #20 Enable = 1;
-        #100 Enable = 0;
-        #150 Enable = 1;
-    end
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">T_ff_clear_behavior</span><span class="p">(</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">T</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Clr</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="n">Q</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="k">always</span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">Clr</span><span class="p">)</span><span class="k">begin</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">Clr</span><span class="p">)</span><span class="k">begin</span>
+<span class="w">            </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="o">~</span><span class="n">Q</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">counter_8_bit</span><span class="p">(</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Clr</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Enable</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A1</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="p">),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A2</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A3</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">2</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A4</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">2</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">3</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A5</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">2</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w">          </span><span class="n">Q</span><span class="p">[</span><span class="mh">3</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">4</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A6</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">2</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">3</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w">         </span><span class="n">Q</span><span class="p">[</span><span class="mh">4</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">5</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A7</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">2</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">3</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w">         </span><span class="n">Q</span><span class="p">[</span><span class="mh">4</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">5</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">6</span><span class="p">]));</span>
+<span class="w">    </span><span class="n">T_ff_clear_behavior</span><span class="w"> </span><span class="n">A8</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">T</span><span class="p">(</span><span class="n">Enable</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">1</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">2</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">3</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w">         </span><span class="n">Q</span><span class="p">[</span><span class="mh">4</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">5</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Q</span><span class="p">[</span><span class="mh">6</span><span class="p">]),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="mh">7</span><span class="p">]));</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">counter_8_bit_tb</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="n">Clk</span><span class="p">,</span><span class="n">Clr</span><span class="p">,</span><span class="n">Enable</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span><span class="p">;</span>
+<span class="w">    </span><span class="n">counter_8_bit</span><span class="w"> </span><span class="n">TB</span><span class="p">(.</span><span class="n">Clk</span><span class="p">(</span><span class="n">Clk</span><span class="p">),.</span><span class="n">Clr</span><span class="p">(</span><span class="n">Clr</span><span class="p">),.</span><span class="n">Enable</span><span class="p">(</span><span class="n">Enable</span><span class="p">),.</span><span class="n">Q</span><span class="p">(</span><span class="n">Q</span><span class="p">));</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">forever</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">Clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">Clr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">5</span><span class="w"> </span><span class="n">Clr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">5</span><span class="w"> </span><span class="n">Clr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">Enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">Enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">100</span><span class="w"> </span><span class="n">Enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">150</span><span class="w"> </span><span class="n">Enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h3 id="2-4-4-bit_1">2-4. 4-bit 递减计数器</h3>
 <p>​ 有些情况下，你可能要求计数器从非 0 的地方开始计数增或计数减，要求计数器到达指定值时停下。这是一个 4-bit 计数器的例子，它从 10 开始计数递减到 0。当计数值到 0 时，它会重新初始化到 10。在任何时候，如果使能信号是低电平，计数器会暂停计数，直到使能信号恢复。假定在计数开始前，载入信号就生效来载入预设值。</p>
-<pre><code class="language-verilog">reg [3:0] count;
-wire cnt_done;
-assign cnt_done = ~| count;
-assign Q = count;
-always @(posedge Clock)
-if (Clear)
- count &lt;= 0;
-else if (Enable)
-if (Load | cnt_done)
- count &lt;= 4'b1010; // decimal 10
-else
- count &lt;= count - 1;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="kt">wire</span><span class="w"> </span><span class="n">cnt_done</span><span class="p">;</span>
+<span class="k">assign</span><span class="w"> </span><span class="n">cnt_done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~|</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="k">assign</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clock</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Clear</span><span class="p">)</span>
+<span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Enable</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Load</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">cnt_done</span><span class="p">)</span>
+<span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b1010</span><span class="p">;</span><span class="w"> </span><span class="c1">// decimal 10</span>
+<span class="k">else</span>
+<span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+</code></pre></div>
 <h4 id="_32">实验目的</h4>
 <p>​ 参考上面的代码，设计一个 4-bit 递减计数器，包含同步载入、使能和清除。编写测试用例并验证功能。分配 Clock input, Clear,Enable, Load 和 Q。实现设计并在硬件上验证功能。</p>
 <h4 id="_33">参考步骤</h4>
@@ -3087,27 +3087,27 @@ else
 <li>生成比特流文件，将其下载到 Nexys4 DDR 开发板，并验证功能。</li>
 </ol>
 <h4 id="_34">参考代码</h4>
-<pre><code class="language-verilog">module counter_decline(
- input Clock,
-    input Clear,
-    input Enable, 
-    input Load,
-    output [3:0] Q
-);
-    reg [3:0] count;
- wire cnt_done;
- assign cnt_done = ~ | count; //count是否递减到0
- assign Q = count;
- always @(posedge Clock)
- if (Clear)
-  count &lt;= 0;
- else if (Enable)
-  if (Load | cnt_done)
-   count &lt;= 4'b1010; // decimal 10
-  else
-   count &lt;= count - 1;
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">counter_decline</span><span class="p">(</span>
+<span class="w"> </span><span class="k">input</span><span class="w"> </span><span class="n">Clock</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Clear</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Enable</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">Load</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span>
+<span class="p">);</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="w"> </span><span class="kt">wire</span><span class="w"> </span><span class="n">cnt_done</span><span class="p">;</span>
+<span class="w"> </span><span class="k">assign</span><span class="w"> </span><span class="n">cnt_done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">count</span><span class="p">;</span><span class="w"> </span><span class="c1">//count是否递减到0</span>
+<span class="w"> </span><span class="k">assign</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="w"> </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">Clock</span><span class="p">)</span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Clear</span><span class="p">)</span>
+<span class="w">  </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Enable</span><span class="p">)</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Load</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">cnt_done</span><span class="p">)</span>
+<span class="w">   </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">4</span><span class="mb">&#39;b1010</span><span class="p">;</span><span class="w"> </span><span class="c1">// decimal 10</span>
+<span class="w">  </span><span class="k">else</span>
+<span class="w">   </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h2 id="3-fpga_1">3. FPGA 工具中的常用电路</h2>
 <p>​ 现在的 Xilinx FPGA 包含了比基本的 LUT,CLB,IOB 和布线更多的资源。与胶合逻辑发明时相比，现在 FPGA 被用来实现更复杂的数字电路。一些复杂的架构资源，例如时钟，必须利用配置和实例化，而不是自己实现。FPGA 工具也提供经常使用的复杂电路，例如 ReedSolomon 译码器，使得开发者不需要“重新设计轮子”。本次实验介绍架构向导，和可以通过 IP 目录获得的 IP 生成工具。</p>
 <h3 id="3-1_1">3-1.  时钟约束向导</h3>
@@ -3139,41 +3139,41 @@ endmodule
 </ol>
 <p>点击 OK 然后点击 Generate 生成用于综合，实现和仿真的文件。</p>
 <p>​ 可以通过“IP 源”选项卡访问文件（包括实例化文件）。以下是.veo 文件内容的示例。</p>
-<pre><code class="language-verilog">clk_5MHz instance_name
-(// Clock in ports
-.clk_in1(CLK_IN1), // IN
-// Clock out ports
-.clk_out1(CLK_OUT1), // OUT
-// Status and control signals
-.reset(RESET), // IN
-.locked(LOCKED)); // OUT
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">clk_5MHz</span><span class="w"> </span><span class="n">instance_name</span>
+<span class="p">(</span><span class="c1">// Clock in ports</span>
+<span class="p">.</span><span class="n">clk_in1</span><span class="p">(</span><span class="n">CLK_IN1</span><span class="p">),</span><span class="w"> </span><span class="c1">// IN</span>
+<span class="c1">// Clock out ports</span>
+<span class="p">.</span><span class="n">clk_out1</span><span class="p">(</span><span class="n">CLK_OUT1</span><span class="p">),</span><span class="w"> </span><span class="c1">// OUT</span>
+<span class="c1">// Status and control signals</span>
+<span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="n">RESET</span><span class="p">),</span><span class="w"> </span><span class="c1">// IN</span>
+<span class="p">.</span><span class="n">locked</span><span class="p">(</span><span class="n">LOCKED</span><span class="p">));</span><span class="w"> </span><span class="c1">// OUT</span>
+</code></pre></div>
 <h4 id="_35">实验目的</h4>
 <p>​ 设计一个一秒脉冲发生器。使用时钟向导生成 5MHz 时钟，通过时钟分频器（以行为建模编写）进一步分频，以生成一个以一秒为周期信号。上述使用时钟向导（以及生成的实例化模板）的步骤可用于本练习。使用 100 MHz 的板载时钟源，BTNU 按钮复位电路，SW0 作为使能信号，LED0 作为输出信号，Q 为生成的秒周期信号。LED15 用于输出 DCM 锁定信号。完成设计流程，生成比特流，并将其下载到 Nexys4 DDR 板。验证功能。</p>
 <h4 id="_36">参考代码</h4>
-<pre><code class="language-verilog">module clk_instance(
-    input clk100mhz,
-    input reset,
-    output reg led
-    );
-    wire clk5mhz;
-    wire locked;
-    reg [20:0]counter;
-    clk_wiz_0 clk_wiz_0(.reset(reset),.clk_in1(clk100mhz),.clk_out1(clk5mhz),.locked(locked));
-    always@(posedge clk100mhz or negedge locked)begin
-        if(~locked)begin
-            counter &lt;= 0;
-        end
-        else if(counter &lt; 500000) begin
-            counter &lt;= counter + 1;
-        end
-        else begin
-            counter &lt;= 0;
-            led &lt;= ~led;
-        end
-    end
-endmodule
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">clk_instance</span><span class="p">(</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">clk100mhz</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w"> </span><span class="n">reset</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="n">led</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="n">clk5mhz</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="n">locked</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">20</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="n">counter</span><span class="p">;</span>
+<span class="w">    </span><span class="n">clk_wiz_0</span><span class="w"> </span><span class="n">clk_wiz_0</span><span class="p">(.</span><span class="n">reset</span><span class="p">(</span><span class="n">reset</span><span class="p">),.</span><span class="n">clk_in1</span><span class="p">(</span><span class="n">clk100mhz</span><span class="p">),.</span><span class="n">clk_out1</span><span class="p">(</span><span class="n">clk5mhz</span><span class="p">),.</span><span class="n">locked</span><span class="p">(</span><span class="n">locked</span><span class="p">));</span>
+<span class="w">    </span><span class="k">always</span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk100mhz</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">locked</span><span class="p">)</span><span class="k">begin</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">locked</span><span class="p">)</span><span class="k">begin</span>
+<span class="w">            </span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mh">500000</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">led</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="o">~</span><span class="n">led</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
 <h3 id="3-2-ip_1">3-2. IP 目录</h3>
 <p>​ Vivado 工具的 IP 目录允许你配置和生成各种功能的核。在 IP 目录中，根据核心功能进行分组，这些核心包括从简单的基本核（如加法器）到非常复杂的和（如 MicroBlaze 处理器）。它还涵盖了从汽车到图像处理等各个领域所需核。配置和生成核心的过程与架构向导类似。核心将根据需要使用各种资源，包括 LUT，CLB，DSP48，BRAM 等。让我们看看如何配置和生成计数器核。二进制计数器核可以通过双击位于 IP catalog 下的 Basic Elements 分支下的 Counters 子文件夹下的 Binary Counter 来开始生成。</p>
 <p><img alt="" src="images/complex_timing/1563975225313.png" />
@@ -3188,9 +3188,6 @@ endmodule
 
 
 
-
-  
-  
 
 
 

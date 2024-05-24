@@ -1141,7 +1141,7 @@ Mealy 型状态机的一般模型由组合过程电路和状态寄存器组成�
              count&lt;=count+1;
          end
      end</p>
-<pre><code> always@(*)
+<div class="highlight"><pre><span></span><code> always@(*)
  begin
      yout=0;
      case(state)
@@ -1169,7 +1169,7 @@ Mealy 型状态机的一般模型由组合过程电路和状态寄存器组成�
      nextstate=s2;
      endcase
  end
-</code></pre>
+</code></pre></div>
 <p>endmodule
 米利型的输出是和当前状态以及输入都相关的，所以这里是这样的情况。但是如果是摩尔型的话输入只与当前状态相关，之后也会有介绍。</p>
 <h2 id="moore-fsm">Moore FSM（摩尔型有限状态机）</h2>
@@ -1301,9 +1301,6 @@ Moore 状态机有两个输入（ain [1:0]）和一个输出（yout）。除非�
 
 
 
-
-  
-  
 
 
 
