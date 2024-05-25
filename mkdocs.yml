@@ -32,8 +32,19 @@ theme:
 markdown_extensions:
   - attr_list
   - def_list
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.highlight
   - pymdownx.superfences
+  - pymdownx.tilde
+
+extra_javascript:
+  - katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+extra_css:
+  - https://unpkg.com/katex@0/dist/katex.min.css
 
 extra:
   social:
