@@ -2,6 +2,7 @@ site_name: 数字电路教程
 site_author: USTC Vlab
 site_url: https://vlab.ustc.edu.cn/guide/
 repo_name: USTC-vlab/guide
+repo_url: https://github.com/USTC-vlab/guide
 use_directory_urls: false
 
 theme:
