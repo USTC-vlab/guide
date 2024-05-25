@@ -50,6 +50,8 @@
       
     
     
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1325,7 +1327,7 @@ set_property<span class="w"> </span>-dict<span class="w"> </span><span class="o"
 <span class="n">m</span><span class="o">=</span><span class="n">x</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="_10">仿真（测试文件）</h2>
-<p>要测试我们设计的模块功能是否正常，最直接的办法就是烧写到 FPGA 芯片中进行验证，但是这种方式往往结果并不直观，且出现问题后也不容易定位。为提高工作效率，我们可通过电脑仿真的方式进行功能验证，待仿真通过后，再烧写到 FPGA 中，这样可以快速排除电路中存在的绝大多数 bug。在电脑上进行仿真，除了我们设计的功能模块之外，还需要另一模块——testbench，用于产生被测模块所需的激励信号。由于 testbench 只是用于电脑端的仿真，而不需要最终综合成电路，因此其写法更加灵活，可以使用 verilog 语法中的一些不可综合的语句，如 initial、#、$display、$readmemb、forever 等。<br />
+<p>要测试我们设计的模块功能是否正常，最直接的办法就是烧写到 FPGA 芯片中进行验证，但是这种方式往往结果并不直观，且出现问题后也不容易定位。为提高工作效率，我们可通过电脑仿真的方式进行功能验证，待仿真通过后，再烧写到 FPGA 中，这样可以快速排除电路中存在的绝大多数 bug。在电脑上进行仿真，除了我们设计的功能模块之外，还需要另一模块——testbench，用于产生被测模块所需的激励信号。由于 testbench 只是用于电脑端的仿真，而不需要最终综合成电路，因此其写法更加灵活，可以使用 verilog 语法中的一些不可综合的语句，如 initial、#、<span class="arithmatex">\(display、\)</span>readmemb、forever 等。<br />
 假设我们的被测模块完成以下功能  </p>
 <p><img alt="" src="images/basic_logic/1.png" /></p>
 <p>其 verilog 代码为：</p>
@@ -1532,6 +1534,12 @@ initial：通过 initial 块构造输入信号的波形，同一 initial 块内�
     
     
       <script src="assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+        <script src="katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
       
     
   </body>

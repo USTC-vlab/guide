@@ -50,6 +50,8 @@
       
     
     
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -862,7 +864,7 @@
 <p><img alt="" src="images/nexys/11.png" /></p>
 <p><img alt="" src="images/nexys/12.png" /></p>
 <p>其中引脚图的两个 COM 端连在一起，是公共端，共阴数码管要将其接地，共阳数码管将其接正电源。一个八段数码管称为一位，多个数码管并列在一起可构成多位数码管，它们的段选线（即 a,b,c,d,e,f,g,dp）连在一起，而各自的公共端称为位选线。显示时，都从段选线送入字符编码，而选中哪个位选线，那个数码管便会被点亮。数码管的 8 段，对应一个字节的 8 位，a 对应最低位，dp 对应最高位。所以如果想让数码管显示数字 0，那么共阴数码管的字符编码为 00111111，即 0x3f；共阳数码管的字符编码为 11000000，即 0xc0。可以看出两个编码的各位正好相反。</p>
-<p>一位数码管要显示字符 0\~F，则对应的编码如下所示：</p>
+<p>一位数码管要显示字符 0~F，则对应的编码如下所示：</p>
 <p><img alt="" src="images/nexys/13.png" /></p>
 <p>数码管本质上也是由 LED 构成的，因此在实际使用中，需要串接限流电阻，以共阳极数码管为例来说：</p>
 <p><img alt="" src="images/nexys/14.png" /></p>
@@ -1278,6 +1280,12 @@
     
     
       <script src="assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+        <script src="katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
       
     
   </body>
